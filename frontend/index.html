@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarePhysio - AI Call Assistant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="clinic-name">CarePhysio Clinic</h1>
+                <h2 class="assistant-title">AI Call Assistant</h2>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section class="card patient-section">
+                <h3 class="section-title">Patients Requiring Follow-up</h3>
+                <div class="table-container">
+                    <table class="patient-table">
+                        <thead>
+                            <tr>
+                                <th>Patient Name</th>
+                                <th>Phone</th>
+                                <th>DOB</th>
+                                <th>Missed days</th>
+                                <th>Provider</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="patient-table-body">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="card call-section">
+                <h3 class="section-title">Live Call Status</h3>
+                <div class="call-status-container">
+                    <div class="status-label">Call Status:</div>
+                    <div class="status-value" id="call-status">No active call</div>
+                </div>
+                <div class="transcript-container">
+                    <h4 class="transcript-title">Transcript</h4>
+                    <div class="transcript-content" id="transcript-content">
+                        <p class="transcript-placeholder">Call transcript will appear here...</p>
+                    </div>
+                </div>
+                <div class="booking-container">
+                    <div class="booking-label">Booking Status:</div>
+                    <div class="booking-value" id="booking-status">No booking</div>
+                </div>
+            </section>
+
+            <section class="card recent-calls-section">
+                <h3 class="section-title">Recent Call Logs</h3>
+                <div class="call-logs-container" id="call-logs-container">
+                    <p class="logs-placeholder">No recent calls...</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 CarePhysio Clinic. AI-Powered Patient Care.</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

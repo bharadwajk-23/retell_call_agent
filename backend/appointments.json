@@ -1,0 +1,12 @@
+[
+  {
+    "appointment_id": "APT1B7335A0",
+    "patient_name": "John Smith",
+    "provider_name": "Dr Johnson",
+    "phone": null,
+    "slot_weekday": "Wednesday",
+    "slot_time": "09:00 AM",
+    "notes": null,
+    "booked_at": "2026-05-21T20:43:50.854966"
+  }
+]
