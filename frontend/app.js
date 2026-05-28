@@ -10,7 +10,6 @@ let transcriptInterval = null;
 
 document.addEventListener('DOMContentLoaded', () => {
     loadPatients();
-    loadRecentCalls();
 });
 
 async function loadPatients() {
@@ -133,7 +132,6 @@ function startTranscriptPolling(phone) {
                     updateCallStatus('Call Completed', 'completed');
                     activeCallPhone = null;
                     renderPatients();
-                    loadRecentCalls();
                 }
             }
         } catch (error) {
@@ -144,33 +142,14 @@ function startTranscriptPolling(phone) {
 
 function simulateDemoConversation(patient) {
     const transcriptContent = document.getElementById('transcript-content');
+    if (!transcriptContent) return;
     transcriptContent.innerHTML = '';
 
     const name = patient.patient_name;
     const provider = patient.provider_name;
     const missed = patient.exercise_missed_days ?? 0;
 
-    const conversation = [
-        {
-            speaker: 'agent',
-            text: `Hi ${name}, this is CarePhysio assistant. We see ${missed} days of missed exercises. Are you facing any issue?`,
-        },
-        { speaker: 'patient', text: 'I have shoulder pain.' },
-        {
-            speaker: 'agent',
-            text: "I'm sorry to hear that. Would you like to schedule an appointment?",
-        },
-        { speaker: 'patient', text: 'Yes.' },
-        {
-            speaker: 'agent',
-            text: `${provider} has openings tomorrow at 11 AM or 4 PM. Which time works best?`,
-        },
-        { speaker: 'patient', text: '11 AM.' },
-        {
-            speaker: 'agent',
-            text: 'Your appointment has been confirmed for tomorrow at 11 AM. Thank you and take care.',
-        },
-    ];
+    const conversation = [];
 
     let delay = 0;
     conversation.forEach((line, index) => {
@@ -186,7 +165,6 @@ function simulateDemoConversation(patient) {
                     updateCallStatus('Call Completed', 'completed');
                     activeCallPhone = null;
                     renderPatients();
-                    loadRecentCalls();
                     if (transcriptInterval) {
                         clearInterval(transcriptInterval);
                     }
@@ -199,6 +177,7 @@ function simulateDemoConversation(patient) {
 
 function addTranscriptLine(speaker, text) {
     const transcriptContent = document.getElementById('transcript-content');
+    if (!transcriptContent) return;
     const placeholder = transcriptContent.querySelector('.transcript-placeholder');
     if (placeholder) {
         placeholder.remove();
@@ -213,18 +192,21 @@ function addTranscriptLine(speaker, text) {
 
 function clearTranscript() {
     const transcriptContent = document.getElementById('transcript-content');
+    if (!transcriptContent) return;
     transcriptContent.innerHTML =
         '<p class="transcript-placeholder">Call transcript will appear here...</p>';
 }
 
 function updateCallStatus(status, className) {
     const statusElement = document.getElementById('call-status');
+    if (!statusElement) return;
     statusElement.textContent = status;
     statusElement.className = `status-value ${className}`;
 }
 
 function updateBookingStatus(status, className) {
     const bookingElement = document.getElementById('booking-status');
+    if (!bookingElement) return;
     bookingElement.textContent = status;
     bookingElement.className = `booking-value ${className}`;
 }
@@ -241,6 +223,7 @@ async function loadRecentCalls() {
 
 function renderRecentCalls(calls) {
     const container = document.getElementById('call-logs-container');
+    if (!container) return;
 
     if (!calls || calls.length === 0) {
         container.innerHTML =
@@ -271,4 +254,3 @@ function showError(message) {
     alert(message);
 }
 
-setInterval(loadRecentCalls, 30000);

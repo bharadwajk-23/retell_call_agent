@@ -93368,5 +93368,4160 @@
       },
       "event_timestamp": 1779376440075
     }
+  },
+  {
+    "call_id": "call_bef55ecd62a950f74a1506d4c4f",
+    "phone": "+918688178501",
+    "patient_id": 1,
+    "patient_name": "John Smith",
+    "event": "call_started",
+    "timestamp": "2026-05-28T15:49:36.183114",
+    "mock": false
+  },
+  {
+    "call_id": null,
+    "event": "call_started",
+    "timestamp": "2026-05-28T15:49:50.944238",
+    "data": {
+      "event": "call_started",
+      "call": {
+        "call_id": "call_bef55ecd62a950f74a1506d4c4f",
+        "call_type": "phone_call",
+        "agent_id": "agent_8be0d12c6f85c0f3369c6e8742",
+        "agent_version": 14,
+        "agent_name": "Agent_1",
+        "retell_llm_dynamic_variables": {
+          "patient_name": "John Smith",
+          "doctor_name": "Dr Johnson",
+          "provider_name": "Dr Johnson",
+          "exercise_missed_days": "5",
+          "phone": "+918688178501"
+        },
+        "custom_sip_headers": {
+          "X-RetellAI-Direction": "Outbound",
+          "X-RetellAI-CallId": "call_bef55ecd62a950f74a1506d4c4f",
+          "X-RetellAI-SipTraceId": "call_bef55ecd62a950f74a1506d4c4f",
+          "X-RetellAI-OrgId": "org_5EZmi0BXnigMcyQh",
+          "Route": "<sip:18.98.16.123;lr>"
+        },
+        "call_status": "ongoing",
+        "start_timestamp": 1779963590565,
+        "latency": {},
+        "metadata": {
+          "patient_name": "John Smith",
+          "doctor_name": "Dr Johnson",
+          "provider_name": "Dr Johnson",
+          "exercise_missed_days": "5",
+          "phone": "+918688178501"
+        },
+        "call_cost": {
+          "product_costs": [],
+          "total_duration_seconds": 0,
+          "total_duration_unit_price": 0,
+          "combined_cost": 0
+        },
+        "data_storage_setting": "everything",
+        "opt_in_signed_url": false,
+        "from_number": "+12402610848",
+        "to_number": "+918688178501",
+        "direction": "outbound",
+        "telephony_identifier": {
+          "twilio_call_sid": "CAf3b2fa7e04894aa32da1f5f06d50c169"
+        }
+      },
+      "event_timestamp": 1779963590565
+    }
+  },
+  {
+    "event": "appointment_booked",
+    "timestamp": "2026-05-28T15:50:56.568188",
+    "appointment_id": "APT2709AFBC",
+    "patient_name": "John Smith",
+    "provider_name": "Dr Johnson",
+    "slot_weekday": "Monday",
+    "slot_time": "09:00 AM"
+  },
+  {
+    "call_id": null,
+    "event": "call_analyzed",
+    "timestamp": "2026-05-28T15:51:07.861606",
+    "data": {
+      "event": "call_analyzed",
+      "call": {
+        "call_id": "call_bef55ecd62a950f74a1506d4c4f",
+        "call_type": "phone_call",
+        "agent_id": "agent_8be0d12c6f85c0f3369c6e8742",
+        "agent_version": 14,
+        "agent_name": "Agent_1",
+        "retell_llm_dynamic_variables": {
+          "patient_name": "John Smith",
+          "doctor_name": "Dr Johnson",
+          "provider_name": "Dr Johnson",
+          "exercise_missed_days": "5",
+          "phone": "+918688178501"
+        },
+        "custom_sip_headers": {
+          "X-RetellAI-Direction": "Outbound",
+          "X-RetellAI-CallId": "call_bef55ecd62a950f74a1506d4c4f",
+          "X-RetellAI-SipTraceId": "call_bef55ecd62a950f74a1506d4c4f",
+          "X-RetellAI-OrgId": "org_5EZmi0BXnigMcyQh",
+          "Route": "<sip:18.98.16.123;lr>"
+        },
+        "call_status": "ended",
+        "start_timestamp": 1779963590565,
+        "end_timestamp": 1779963666078,
+        "duration_ms": 75513,
+        "transcript": "User: Hello? \nAgent: Hello, this \nUser: Hello? \nAgent: is Grace from the physiotherapy clinic calling for a quick follow-up. Hi John Smith, I noticed you may have missed your prescribed exercises for the last 5 days. Is everything okay?\nUser: I'm having hand pain. \nAgent: I'm sorry to hear you're experiencing hand pain. Since I'm a virtual assistant, I can't provide medical advice, so it's best to discuss this with Dr. Johnson. Would you like to schedule an appointment to see them?\nUser: Yes, sir. \nAgent: Dr. Johnson has several openings. Would Monday at 9:00 am or Tuesday at 10:00 am work for you?\nUser: Who's the name? \nAgent: The provider is Dr. Johnson. Would you like to book the appointment for Monday, June 1st at 9:00 am?\nUser: Yes. \nAgent: All right, your appointment with Dr. Johnson is confirmed for Monday, June 1st at 9:00 am. Thanks for speaking with me today, \nUser: Bye. \nAgent: and I hope you feel better soon. Goodbye!\n",
+        "transcript_object": [
+          {
+            "role": "user",
+            "content": "Hello? ",
+            "words": [
+              {
+                "word": "Hello? ",
+                "start": 1.2069998999999998,
+                "end": 1.527
+              }
+            ]
+          },
+          {
+            "role": "agent",
+            "content": "Hello, this ",
+            "words": [
+              {
+                "word": "Hello, ",
+                "start": 3.475,
+                "end": 3.875
+              },
+              {
+                "word": "this ",
+                "start": 3.875,
+                "end": 4.275
+              }
+            ],
+            "metadata": {
+              "response_id": 1
+            }
+          },
+          {
+            "role": "user",
+            "content": "Hello? ",
+            "words": [
+              {
+                "word": "Hello? ",
+                "start": 4.316999999999999,
+                "end": 4.717
+              }
+            ]
+          },
+          {
+            "role": "agent",
+            "content": "is Grace from the physiotherapy clinic calling for a quick follow-up. Hi John Smith, I noticed you may have missed your prescribed exercises for the last 5 days. Is everything okay?",
+            "words": [
+              {
+                "word": "is ",
+                "start": 4.275,
+                "end": 4.675
+              },
+              {
+                "word": "Grace ",
+                "start": 4.675,
+                "end": 5.075
+              },
+              {
+                "word": "from ",
+                "start": 5.075,
+                "end": 5.475
+              },
+              {
+                "word": "the ",
+                "start": 5.475,
+                "end": 5.875
+              },
+              {
+                "word": "physiotherapy ",
+                "start": 5.875,
+                "end": 6.275
+              },
+              {
+                "word": "clinic ",
+                "start": 6.275,
+                "end": 6.675
+              },
+              {
+                "word": "calling ",
+                "start": 6.675,
+                "end": 7.075
+              },
+              {
+                "word": "for ",
+                "start": 7.075,
+                "end": 7.475
+              },
+              {
+                "word": "a ",
+                "start": 7.312666748046875,
+                "end": 7.712666748046875
+              },
+              {
+                "word": "quick ",
+                "start": 7.312666748046875,
+                "end": 7.712666748046875
+              },
+              {
+                "word": "follow-up. ",
+                "start": 7.312666748046875,
+                "end": 7.712666748046875
+              },
+              {
+                "word": "Hi ",
+                "start": 7.712666748046875,
+                "end": 8.112666748046875
+              },
+              {
+                "word": "John ",
+                "start": 8.112666748046875,
+                "end": 8.512666748046875
+              },
+              {
+                "word": "Smith, ",
+                "start": 8.512666748046875,
+                "end": 8.912666748046876
+              },
+              {
+                "word": "I ",
+                "start": 8.912666748046876,
+                "end": 9.312666748046874
+              },
+              {
+                "word": "noticed ",
+                "start": 9.312666748046874,
+                "end": 9.712666748046875
+              },
+              {
+                "word": "you ",
+                "start": 9.712666748046875,
+                "end": 10.112666748046875
+              },
+              {
+                "word": "may ",
+                "start": 10.112666748046875,
+                "end": 10.512666748046875
+              },
+              {
+                "word": "have ",
+                "start": 10.512666748046875,
+                "end": 10.912666748046876
+              },
+              {
+                "word": "missed ",
+                "start": 10.912666748046876,
+                "end": 11.312666748046874
+              },
+              {
+                "word": "your ",
+                "start": 11.312666748046874,
+                "end": 11.712666748046875
+              },
+              {
+                "word": "prescribed ",
+                "start": 11.712666748046875,
+                "end": 12.112666748046875
+              },
+              {
+                "word": "exercises ",
+                "start": 12.112666748046875,
+                "end": 12.512666748046875
+              },
+              {
+                "word": "for ",
+                "start": 12.512666748046875,
+                "end": 12.912666748046876
+              },
+              {
+                "word": "the ",
+                "start": 12.572,
+                "end": 12.972
+              },
+              {
+                "word": "last ",
+                "start": 12.572,
+                "end": 12.972
+              },
+              {
+                "word": "5 ",
+                "start": 12.572,
+                "end": 12.972
+              },
+              {
+                "word": "days. ",
+                "start": 12.572,
+                "end": 12.972
+              },
+              {
+                "word": "Is ",
+                "start": 12.972,
+                "end": 13.372
+              },
+              {
+                "word": "everything ",
+                "start": 13.372,
+                "end": 13.772
+              },
+              {
+                "word": "okay?",
+                "start": 13.772,
+                "end": 14.172
+              }
+            ],
+            "metadata": {
+              "response_id": 1
+            }
+          },
+          {
+            "role": "user",
+            "content": "I'm having hand pain. ",
+            "words": [
+              {
+                "word": "I'm ",
+                "start": 21.446999,
+                "end": 21.767000000000003
+              },
+              {
+                "word": "having ",
+                "start": 21.767000000000003,
+                "end": 22.007
+              },
+              {
+                "word": "hand ",
+                "start": 22.007,
+                "end": 22.327
+              },
+              {
+                "word": "pain. ",
+                "start": 22.327,
+                "end": 23.687
+              }
+            ]
+          },
+          {
+            "role": "agent",
+            "content": "I'm sorry to hear you're experiencing hand pain. Since I'm a virtual assistant, I can't provide medical advice, so it's best to discuss this with Dr. Johnson. Would you like to schedule an appointment to see them?",
+            "words": [
+              {
+                "word": "I'm ",
+                "start": 24.513,
+                "end": 24.913
+              },
+              {
+                "word": "sorry ",
+                "start": 24.913,
+                "end": 25.313
+              },
+              {
+                "word": "to ",
+                "start": 25.313,
+                "end": 25.713
+              },
+              {
+                "word": "hear ",
+                "start": 25.713,
+                "end": 26.113
+              },
+              {
+                "word": "you're ",
+                "start": 26.113,
+                "end": 26.513
+              },
+              {
+                "word": "experiencing ",
+                "start": 26.513,
+                "end": 26.913
+              },
+              {
+                "word": "hand ",
+                "start": 26.783291748046874,
+                "end": 27.183291748046877
+              },
+              {
+                "word": "pain. ",
+                "start": 26.783291748046874,
+                "end": 27.183291748046877
+              },
+              {
+                "word": "Since ",
+                "start": 27.183291748046877,
+                "end": 27.583291748046875
+              },
+              {
+                "word": "I'm ",
+                "start": 27.583291748046875,
+                "end": 27.983291748046874
+              },
+              {
+                "word": "a ",
+                "start": 27.983291748046874,
+                "end": 28.383291748046876
+              },
+              {
+                "word": "virtual ",
+                "start": 28.383291748046876,
+                "end": 28.783291748046874
+              },
+              {
+                "word": "assistant, ",
+                "start": 28.783291748046874,
+                "end": 29.183291748046877
+              },
+              {
+                "word": "I ",
+                "start": 29.183291748046877,
+                "end": 29.583291748046875
+              },
+              {
+                "word": "can't ",
+                "start": 29.583291748046875,
+                "end": 29.983291748046874
+              },
+              {
+                "word": "provide ",
+                "start": 29.983291748046874,
+                "end": 30.383291748046876
+              },
+              {
+                "word": "medical ",
+                "start": 30.383291748046876,
+                "end": 30.783291748046874
+              },
+              {
+                "word": "advice, ",
+                "start": 30.783291748046874,
+                "end": 31.183291748046877
+              },
+              {
+                "word": "so ",
+                "start": 31.183291748046877,
+                "end": 31.583291748046875
+              },
+              {
+                "word": "it's ",
+                "start": 31.583291748046875,
+                "end": 31.983291748046874
+              },
+              {
+                "word": "best ",
+                "start": 31.983291748046874,
+                "end": 32.38329174804687
+              },
+              {
+                "word": "to ",
+                "start": 32.38329174804687,
+                "end": 32.78329174804688
+              },
+              {
+                "word": "discuss ",
+                "start": 32.553458251953124,
+                "end": 32.95345825195312
+              },
+              {
+                "word": "this ",
+                "start": 32.553458251953124,
+                "end": 32.95345825195312
+              },
+              {
+                "word": "with ",
+                "start": 32.553458251953124,
+                "end": 32.95345825195312
+              },
+              {
+                "word": "Dr. ",
+                "start": 32.553458251953124,
+                "end": 32.95345825195312
+              },
+              {
+                "word": "Johnson. ",
+                "start": 32.553458251953124,
+                "end": 32.95345825195312
+              },
+              {
+                "word": "Would ",
+                "start": 32.95345825195312,
+                "end": 33.35345825195313
+              },
+              {
+                "word": "you ",
+                "start": 33.35345825195313,
+                "end": 33.75345825195313
+              },
+              {
+                "word": "like ",
+                "start": 33.75345825195313,
+                "end": 34.153458251953126
+              },
+              {
+                "word": "to ",
+                "start": 34.153458251953126,
+                "end": 34.553458251953124
+              },
+              {
+                "word": "schedule ",
+                "start": 34.553458251953124,
+                "end": 34.95345825195312
+              },
+              {
+                "word": "an ",
+                "start": 34.87545825195313,
+                "end": 35.275458251953125
+              },
+              {
+                "word": "appointment ",
+                "start": 34.87545825195313,
+                "end": 35.275458251953125
+              },
+              {
+                "word": "to ",
+                "start": 34.87545825195313,
+                "end": 35.275458251953125
+              },
+              {
+                "word": "see ",
+                "start": 34.87545825195313,
+                "end": 35.275458251953125
+              },
+              {
+                "word": "them?",
+                "start": 34.87545825195313,
+                "end": 35.275458251953125
+              }
+            ],
+            "metadata": {
+              "response_id": 2
+            }
+          },
+          {
+            "role": "user",
+            "content": "Yes, sir. ",
+            "words": [
+              {
+                "word": "Yes, ",
+                "start": 36.166999999999994,
+                "end": 36.647
+              },
+              {
+                "word": "sir. ",
+                "start": 36.647,
+                "end": 36.726997
+              }
+            ]
+          },
+          {
+            "role": "agent",
+            "content": "Dr. Johnson has several openings. Would Monday at 9:00 am or Tuesday at 10:00 am work for you?",
+            "words": [
+              {
+                "word": "Dr. ",
+                "start": 39.105,
+                "end": 39.505
+              },
+              {
+                "word": "Johnson ",
+                "start": 39.505,
+                "end": 39.905
+              },
+              {
+                "word": "has ",
+                "start": 39.905,
+                "end": 40.305
+              },
+              {
+                "word": "several ",
+                "start": 40.305,
+                "end": 40.705
+              },
+              {
+                "word": "openings. ",
+                "start": 40.705,
+                "end": 41.105
+              },
+              {
+                "word": "Would ",
+                "start": 41.299291748046876,
+                "end": 41.699291748046875
+              },
+              {
+                "word": "Monday ",
+                "start": 41.699291748046875,
+                "end": 42.09929174804687
+              },
+              {
+                "word": "at ",
+                "start": 42.09929174804687,
+                "end": 42.49929174804687
+              },
+              {
+                "word": "9:00 ",
+                "start": 42.49929174804687,
+                "end": 42.89929174804688
+              },
+              {
+                "word": "am ",
+                "start": 42.89929174804688,
+                "end": 43.299291748046876
+              },
+              {
+                "word": "or ",
+                "start": 43.299291748046876,
+                "end": 43.699291748046875
+              },
+              {
+                "word": "Tuesday ",
+                "start": 43.699291748046875,
+                "end": 44.09929174804687
+              },
+              {
+                "word": "at ",
+                "start": 44.09929174804687,
+                "end": 44.49929174804687
+              },
+              {
+                "word": "10:00 ",
+                "start": 44.49929174804687,
+                "end": 44.89929174804688
+              },
+              {
+                "word": "am ",
+                "start": 44.88154174804688,
+                "end": 45.28154174804688
+              },
+              {
+                "word": "work ",
+                "start": 44.88154174804688,
+                "end": 45.28154174804688
+              },
+              {
+                "word": "for ",
+                "start": 44.88154174804688,
+                "end": 45.28154174804688
+              },
+              {
+                "word": "you?",
+                "start": 44.88154174804688,
+                "end": 45.28154174804688
+              }
+            ],
+            "metadata": {
+              "response_id": 3
+            }
+          },
+          {
+            "role": "user",
+            "content": "Who's the name? ",
+            "words": [
+              {
+                "word": "Who's ",
+                "start": 54.367,
+                "end": 54.766999999999996
+              },
+              {
+                "word": "the ",
+                "start": 54.766999999999996,
+                "end": 54.927
+              },
+              {
+                "word": "name? ",
+                "start": 54.927,
+                "end": 55.246998
+              }
+            ]
+          },
+          {
+            "role": "agent",
+            "content": "The provider is Dr. Johnson. Would you like to book the appointment for Monday, June 1st at 9:00 am?",
+            "words": [
+              {
+                "word": "The ",
+                "start": 56.523,
+                "end": 56.923
+              },
+              {
+                "word": "provider ",
+                "start": 56.923,
+                "end": 57.323
+              },
+              {
+                "word": "is ",
+                "start": 57.323,
+                "end": 57.723
+              },
+              {
+                "word": "Dr. ",
+                "start": 57.723,
+                "end": 58.123
+              },
+              {
+                "word": "Johnson. ",
+                "start": 58.10833325195313,
+                "end": 58.508333251953125
+              },
+              {
+                "word": "Would ",
+                "start": 58.508333251953125,
+                "end": 58.908333251953124
+              },
+              {
+                "word": "you ",
+                "start": 58.908333251953124,
+                "end": 59.30833325195312
+              },
+              {
+                "word": "like ",
+                "start": 59.30833325195312,
+                "end": 59.70833325195313
+              },
+              {
+                "word": "to ",
+                "start": 59.70833325195313,
+                "end": 60.10833325195313
+              },
+              {
+                "word": "book ",
+                "start": 60.10833325195313,
+                "end": 60.508333251953125
+              },
+              {
+                "word": "the ",
+                "start": 60.508333251953125,
+                "end": 60.908333251953124
+              },
+              {
+                "word": "appointment ",
+                "start": 60.908333251953124,
+                "end": 61.30833325195312
+              },
+              {
+                "word": "for ",
+                "start": 61.30833325195312,
+                "end": 61.70833325195313
+              },
+              {
+                "word": "Monday, ",
+                "start": 61.70833325195313,
+                "end": 62.10833325195313
+              },
+              {
+                "word": "June ",
+                "start": 61.835125,
+                "end": 62.235125
+              },
+              {
+                "word": "1st ",
+                "start": 61.835125,
+                "end": 62.235125
+              },
+              {
+                "word": "at ",
+                "start": 61.835125,
+                "end": 62.235125
+              },
+              {
+                "word": "9:00 ",
+                "start": 61.835125,
+                "end": 62.235125
+              },
+              {
+                "word": "am?",
+                "start": 61.835125,
+                "end": 62.235125
+              }
+            ],
+            "metadata": {
+              "response_id": 4
+            }
+          },
+          {
+            "role": "user",
+            "content": "Yes. ",
+            "words": [
+              {
+                "word": "Yes. ",
+                "start": 64.447,
+                "end": 64.76700000000001
+              }
+            ]
+          },
+          {
+            "role": "agent",
+            "content": "All right, your appointment with Dr. Johnson is confirmed for Monday, June 1st at 9:00 am. Thanks for speaking with me today, ",
+            "words": [
+              {
+                "word": "All ",
+                "start": 67.251,
+                "end": 67.651
+              },
+              {
+                "word": "right, ",
+                "start": 67.651,
+                "end": 68.051
+              },
+              {
+                "word": "your ",
+                "start": 68.051,
+                "end": 68.451
+              },
+              {
+                "word": "appointment ",
+                "start": 68.451,
+                "end": 68.851
+              },
+              {
+                "word": "with ",
+                "start": 68.851,
+                "end": 69.251
+              },
+              {
+                "word": "Dr. ",
+                "start": 69.251,
+                "end": 69.651
+              },
+              {
+                "word": "Johnson ",
+                "start": 69.651,
+                "end": 70.051
+              },
+              {
+                "word": "is ",
+                "start": 70.051,
+                "end": 70.451
+              },
+              {
+                "word": "confirmed ",
+                "start": 70.451,
+                "end": 70.851
+              },
+              {
+                "word": "for ",
+                "start": 70.851,
+                "end": 71.251
+              },
+              {
+                "word": "Monday, ",
+                "start": 71.251,
+                "end": 71.651
+              },
+              {
+                "word": "June ",
+                "start": 71.34408325195312,
+                "end": 71.74408325195313
+              },
+              {
+                "word": "1st ",
+                "start": 71.34408325195312,
+                "end": 71.74408325195313
+              },
+              {
+                "word": "at ",
+                "start": 71.34408325195312,
+                "end": 71.74408325195313
+              },
+              {
+                "word": "9:00 ",
+                "start": 71.34408325195312,
+                "end": 71.74408325195313
+              },
+              {
+                "word": "am. ",
+                "start": 71.34408325195312,
+                "end": 71.74408325195313
+              },
+              {
+                "word": "Thanks ",
+                "start": 71.74408325195313,
+                "end": 72.14408325195312
+              },
+              {
+                "word": "for ",
+                "start": 72.14408325195312,
+                "end": 72.54408325195313
+              },
+              {
+                "word": "speaking ",
+                "start": 72.54408325195313,
+                "end": 72.94408325195313
+              },
+              {
+                "word": "with ",
+                "start": 72.94408325195313,
+                "end": 73.34408325195312
+              },
+              {
+                "word": "me ",
+                "start": 73.34408325195312,
+                "end": 73.74408325195313
+              },
+              {
+                "word": "today, ",
+                "start": 73.74408325195313,
+                "end": 74.14408325195312
+              }
+            ],
+            "metadata": {
+              "response_id": 5
+            }
+          },
+          {
+            "role": "user",
+            "content": "Bye. ",
+            "words": [
+              {
+                "word": "Bye. ",
+                "start": 74.397,
+                "end": 74.717
+              }
+            ]
+          },
+          {
+            "role": "agent",
+            "content": "and I hope you feel better soon. Goodbye!",
+            "words": [
+              {
+                "word": "and ",
+                "start": 74.14408325195312,
+                "end": 74.54408325195313
+              },
+              {
+                "word": "I ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "hope ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "you ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "feel ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "better ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "soon. ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "Goodbye!",
+                "start": 74.66979174804688,
+                "end": 75.06979174804688
+              }
+            ],
+            "metadata": {
+              "response_id": 5
+            }
+          }
+        ],
+        "transcript_with_tool_calls": [
+          {
+            "role": "user",
+            "content": "Hello? ",
+            "words": [
+              {
+                "word": "Hello? ",
+                "start": 1.2069998999999998,
+                "end": 1.527
+              }
+            ]
+          },
+          {
+            "role": "tool_call_invocation",
+            "tool_call_id": "72820098a406baf4",
+            "name": "getpatientdetails",
+            "arguments": "{}",
+            "time_sec": 2.384,
+            "type": "custom",
+            "thought_signature": "gemini:EjQKMgEMOdbH8PlPHQYaYY7Boii92iy9yoLHLuiJsT3Yf2UX7WHQiOuInEAdk80MjKs+1+Sj"
+          },
+          {
+            "role": "tool_call_result",
+            "tool_call_id": "72820098a406baf4",
+            "successful": true,
+            "content": "[{\"id\":1,\"patient_name\":\"John Smith\",\"phone\":\"+918688178501\",\"dob\":\"1988-03-15\",\"provider_name\":\"Dr Johnson\",\"exercise_missed_days\":5}]",
+            "time_sec": 2.66
+          },
+          {
+            "role": "agent",
+            "content": "Hello, this ",
+            "words": [
+              {
+                "word": "Hello, ",
+                "start": 3.475,
+                "end": 3.875
+              },
+              {
+                "word": "this ",
+                "start": 3.875,
+                "end": 4.275
+              }
+            ],
+            "metadata": {
+              "response_id": 1
+            }
+          },
+          {
+            "role": "user",
+            "content": "Hello? ",
+            "words": [
+              {
+                "word": "Hello? ",
+                "start": 4.316999999999999,
+                "end": 4.717
+              }
+            ]
+          },
+          {
+            "role": "agent",
+            "content": "is Grace from the physiotherapy clinic calling for a quick follow-up. Hi John Smith, I noticed you may have missed your prescribed exercises for the last 5 days. Is everything okay?",
+            "words": [
+              {
+                "word": "is ",
+                "start": 4.275,
+                "end": 4.675
+              },
+              {
+                "word": "Grace ",
+                "start": 4.675,
+                "end": 5.075
+              },
+              {
+                "word": "from ",
+                "start": 5.075,
+                "end": 5.475
+              },
+              {
+                "word": "the ",
+                "start": 5.475,
+                "end": 5.875
+              },
+              {
+                "word": "physiotherapy ",
+                "start": 5.875,
+                "end": 6.275
+              },
+              {
+                "word": "clinic ",
+                "start": 6.275,
+                "end": 6.675
+              },
+              {
+                "word": "calling ",
+                "start": 6.675,
+                "end": 7.075
+              },
+              {
+                "word": "for ",
+                "start": 7.075,
+                "end": 7.475
+              },
+              {
+                "word": "a ",
+                "start": 7.312666748046875,
+                "end": 7.712666748046875
+              },
+              {
+                "word": "quick ",
+                "start": 7.312666748046875,
+                "end": 7.712666748046875
+              },
+              {
+                "word": "follow-up. ",
+                "start": 7.312666748046875,
+                "end": 7.712666748046875
+              },
+              {
+                "word": "Hi ",
+                "start": 7.712666748046875,
+                "end": 8.112666748046875
+              },
+              {
+                "word": "John ",
+                "start": 8.112666748046875,
+                "end": 8.512666748046875
+              },
+              {
+                "word": "Smith, ",
+                "start": 8.512666748046875,
+                "end": 8.912666748046876
+              },
+              {
+                "word": "I ",
+                "start": 8.912666748046876,
+                "end": 9.312666748046874
+              },
+              {
+                "word": "noticed ",
+                "start": 9.312666748046874,
+                "end": 9.712666748046875
+              },
+              {
+                "word": "you ",
+                "start": 9.712666748046875,
+                "end": 10.112666748046875
+              },
+              {
+                "word": "may ",
+                "start": 10.112666748046875,
+                "end": 10.512666748046875
+              },
+              {
+                "word": "have ",
+                "start": 10.512666748046875,
+                "end": 10.912666748046876
+              },
+              {
+                "word": "missed ",
+                "start": 10.912666748046876,
+                "end": 11.312666748046874
+              },
+              {
+                "word": "your ",
+                "start": 11.312666748046874,
+                "end": 11.712666748046875
+              },
+              {
+                "word": "prescribed ",
+                "start": 11.712666748046875,
+                "end": 12.112666748046875
+              },
+              {
+                "word": "exercises ",
+                "start": 12.112666748046875,
+                "end": 12.512666748046875
+              },
+              {
+                "word": "for ",
+                "start": 12.512666748046875,
+                "end": 12.912666748046876
+              },
+              {
+                "word": "the ",
+                "start": 12.572,
+                "end": 12.972
+              },
+              {
+                "word": "last ",
+                "start": 12.572,
+                "end": 12.972
+              },
+              {
+                "word": "5 ",
+                "start": 12.572,
+                "end": 12.972
+              },
+              {
+                "word": "days. ",
+                "start": 12.572,
+                "end": 12.972
+              },
+              {
+                "word": "Is ",
+                "start": 12.972,
+                "end": 13.372
+              },
+              {
+                "word": "everything ",
+                "start": 13.372,
+                "end": 13.772
+              },
+              {
+                "word": "okay?",
+                "start": 13.772,
+                "end": 14.172
+              }
+            ],
+            "metadata": {
+              "response_id": 1
+            }
+          },
+          {
+            "role": "user",
+            "content": "I'm having hand pain. ",
+            "words": [
+              {
+                "word": "I'm ",
+                "start": 21.446999,
+                "end": 21.767000000000003
+              },
+              {
+                "word": "having ",
+                "start": 21.767000000000003,
+                "end": 22.007
+              },
+              {
+                "word": "hand ",
+                "start": 22.007,
+                "end": 22.327
+              },
+              {
+                "word": "pain. ",
+                "start": 22.327,
+                "end": 23.687
+              }
+            ]
+          },
+          {
+            "role": "agent",
+            "content": "I'm sorry to hear you're experiencing hand pain. Since I'm a virtual assistant, I can't provide medical advice, so it's best to discuss this with Dr. Johnson. Would you like to schedule an appointment to see them?",
+            "words": [
+              {
+                "word": "I'm ",
+                "start": 24.513,
+                "end": 24.913
+              },
+              {
+                "word": "sorry ",
+                "start": 24.913,
+                "end": 25.313
+              },
+              {
+                "word": "to ",
+                "start": 25.313,
+                "end": 25.713
+              },
+              {
+                "word": "hear ",
+                "start": 25.713,
+                "end": 26.113
+              },
+              {
+                "word": "you're ",
+                "start": 26.113,
+                "end": 26.513
+              },
+              {
+                "word": "experiencing ",
+                "start": 26.513,
+                "end": 26.913
+              },
+              {
+                "word": "hand ",
+                "start": 26.783291748046874,
+                "end": 27.183291748046877
+              },
+              {
+                "word": "pain. ",
+                "start": 26.783291748046874,
+                "end": 27.183291748046877
+              },
+              {
+                "word": "Since ",
+                "start": 27.183291748046877,
+                "end": 27.583291748046875
+              },
+              {
+                "word": "I'm ",
+                "start": 27.583291748046875,
+                "end": 27.983291748046874
+              },
+              {
+                "word": "a ",
+                "start": 27.983291748046874,
+                "end": 28.383291748046876
+              },
+              {
+                "word": "virtual ",
+                "start": 28.383291748046876,
+                "end": 28.783291748046874
+              },
+              {
+                "word": "assistant, ",
+                "start": 28.783291748046874,
+                "end": 29.183291748046877
+              },
+              {
+                "word": "I ",
+                "start": 29.183291748046877,
+                "end": 29.583291748046875
+              },
+              {
+                "word": "can't ",
+                "start": 29.583291748046875,
+                "end": 29.983291748046874
+              },
+              {
+                "word": "provide ",
+                "start": 29.983291748046874,
+                "end": 30.383291748046876
+              },
+              {
+                "word": "medical ",
+                "start": 30.383291748046876,
+                "end": 30.783291748046874
+              },
+              {
+                "word": "advice, ",
+                "start": 30.783291748046874,
+                "end": 31.183291748046877
+              },
+              {
+                "word": "so ",
+                "start": 31.183291748046877,
+                "end": 31.583291748046875
+              },
+              {
+                "word": "it's ",
+                "start": 31.583291748046875,
+                "end": 31.983291748046874
+              },
+              {
+                "word": "best ",
+                "start": 31.983291748046874,
+                "end": 32.38329174804687
+              },
+              {
+                "word": "to ",
+                "start": 32.38329174804687,
+                "end": 32.78329174804688
+              },
+              {
+                "word": "discuss ",
+                "start": 32.553458251953124,
+                "end": 32.95345825195312
+              },
+              {
+                "word": "this ",
+                "start": 32.553458251953124,
+                "end": 32.95345825195312
+              },
+              {
+                "word": "with ",
+                "start": 32.553458251953124,
+                "end": 32.95345825195312
+              },
+              {
+                "word": "Dr. ",
+                "start": 32.553458251953124,
+                "end": 32.95345825195312
+              },
+              {
+                "word": "Johnson. ",
+                "start": 32.553458251953124,
+                "end": 32.95345825195312
+              },
+              {
+                "word": "Would ",
+                "start": 32.95345825195312,
+                "end": 33.35345825195313
+              },
+              {
+                "word": "you ",
+                "start": 33.35345825195313,
+                "end": 33.75345825195313
+              },
+              {
+                "word": "like ",
+                "start": 33.75345825195313,
+                "end": 34.153458251953126
+              },
+              {
+                "word": "to ",
+                "start": 34.153458251953126,
+                "end": 34.553458251953124
+              },
+              {
+                "word": "schedule ",
+                "start": 34.553458251953124,
+                "end": 34.95345825195312
+              },
+              {
+                "word": "an ",
+                "start": 34.87545825195313,
+                "end": 35.275458251953125
+              },
+              {
+                "word": "appointment ",
+                "start": 34.87545825195313,
+                "end": 35.275458251953125
+              },
+              {
+                "word": "to ",
+                "start": 34.87545825195313,
+                "end": 35.275458251953125
+              },
+              {
+                "word": "see ",
+                "start": 34.87545825195313,
+                "end": 35.275458251953125
+              },
+              {
+                "word": "them?",
+                "start": 34.87545825195313,
+                "end": 35.275458251953125
+              }
+            ],
+            "metadata": {
+              "response_id": 2
+            }
+          },
+          {
+            "role": "user",
+            "content": "Yes, sir. ",
+            "words": [
+              {
+                "word": "Yes, ",
+                "start": 36.166999999999994,
+                "end": 36.647
+              },
+              {
+                "word": "sir. ",
+                "start": 36.647,
+                "end": 36.726997
+              }
+            ]
+          },
+          {
+            "role": "tool_call_invocation",
+            "tool_call_id": "fc59a317e6d3c250",
+            "name": "getavailableslots",
+            "arguments": "{}",
+            "time_sec": 37.65,
+            "type": "custom",
+            "thought_signature": "gemini:EjQKMgEMOdbHNcshKfJ0Lwuy2gGYm7NPpdgffNeHFv6oecb/OvBIOw/zImEEZRlZmrbZcd7c"
+          },
+          {
+            "role": "tool_call_result",
+            "tool_call_id": "fc59a317e6d3c250",
+            "successful": true,
+            "content": "{\"providers\":[{\"provider_name\":\"Dr Johnson\",\"found\":true,\"free_slots\":[{\"weekday\":\"Monday\",\"time\":\"09:00 am\"},{\"weekday\":\"Monday\",\"time\":\"11:00 am\"},{\"weekday\":\"Monday\",\"time\":\"1:00 pm\"},{\"weekday\":\"Monday\",\"time\":\"2:00 pm\"},{\"weekday\":\"Monday\",\"time\":\"3:00 pm\"},{\"weekday\":\"Monday\",\"time\":\"4:00 pm\"},{\"weekday\":\"Monday\",\"time\":\"6:00 pm\"},{\"weekday\":\"Tuesday\",\"time\":\"10:00 am\"},{\"weekday\":\"Tuesday\",\"time\":\"11:00 am\"},{\"weekday\":\"Tuesday\",\"time\":\"2:00 pm\"},{\"weekday\":\"Tuesday\",\"time\":\"3:00 pm\"},{\"weekday\":\"Tuesday\",\"time\":\"5:00 pm\"},{\"weekday\":\"Wednesday\",\"time\":\"09:00 am\"},{\"weekday\":\"Wednesday\",\"time\":\"2:00 pm\"},{\"weekday\":\"Wednesday\",\"time\":\"3:00 pm\"},{\"weekday\":\"Wednesday\",\"time\":\"5:00 pm\"},{\"weekday\":\"Thursday\",\"time\":\"11:00 am\"},{\"weekday\":\"Thursday\",\"time\":\"12:00 pm\"},{\"weekday\":\"Thursday\",\"time\":\"1:00 pm\"},{\"weekday\":\"Thursday\",\"time\":\"4:00 pm\"},{\"weekday\":\"Thursday\",\"time\":\"5:00 pm\"},{\"weekday\":\"Friday\",\"time\":\"09:00 am\"},{\"weekday\":\"Friday\",\"time\":\"12:00 pm\"},{\"weekday\":\"Friday\",\"time\":\"2:00 pm\"},{\"weekday\":\"Friday\",\"time\":\"3:00 pm\"},{\"weekday\":\"Friday\",\"time\":\"6:00 pm\"},{\"weekday\":\"Saturday\",\"time\":\"10:00 am\"},{\"weekday\":\"Saturday\",\"time\":\"1:00 pm\"},{\"weekday\":\"Saturday\",\"time\":\"2:00 pm\"},{\"weekday\":\"Saturday\",\"time\":\"4:00 pm\"},{\"weekday\":\"Saturday\",\"time\":\"5:00 pm\"},{\"weekday\":\"Saturday\",\"time\":\"6:00 pm\"},{\"weekday\":\"Sunday\",\"time\":\"09:00 am\"},{\"weekday\":\"Sunday\",\"time\":\"10:00 am\"},{\"weekday\":\"Sunday\",\"time\":\"11:00 am\"},{\"weekday\":\"Sunday\",\"time\":\"3:00 pm\"},{\"weekday\":\"Sunday\",\"time\":\"5:00 pm\"}],\"message\":\"37 free slot(s) available\"},{\"provider_name\":\"Dr Williams\",\"found\":true,\"free_slots\":[{\"weekday\":\"Monday\",\"time\":\"10:00\"},{\"weekday\":\"Monday\",\"time\":\"12:00\"},{\"weekday\":\"Monday\",\"time\":\"13:00\"},{\"weekday\":\"Monday\",\"time\":\"15:00\"},{\"weekday\":\"Monday\",\"time\":\"18:00\"},{\"weekday\":\"Tuesday\",\"time\":\"09:00\"},{\"weekday\":\"Tuesday\",\"time\":\"11:00\"},{\"weekday\":\"Tuesday\",\"time\":\"14:00\"},{\"weekday\":\"Tuesday\",\"time\":\"16:00\"},{\"weekday\":\"Tuesday\",\"time\":\"17:00\"},{\"weekday\":\"Wednesday\",\"time\":\"11:00\"},{\"weekday\":\"Wednesday\",\"time\":\"12:00\"},{\"weekday\":\"Wednesday\",\"time\":\"14:00\"},{\"weekday\":\"Wednesday\",\"time\":\"15:00\"},{\"weekday\":\"Wednesday\",\"time\":\"18:00\"},{\"weekday\":\"Thursday\",\"time\":\"09:00\"},{\"weekday\":\"Thursday\",\"time\":\"10:00\"},{\"weekday\":\"Thursday\",\"time\":\"13:00\"},{\"weekday\":\"Thursday\",\"time\":\"16:00\"},{\"weekday\":\"Thursday\",\"time\":\"18:00\"},{\"weekday\":\"Friday\",\"time\":\"10:00\"},{\"weekday\":\"Friday\",\"time\":\"11:00\"},{\"weekday\":\"Friday\",\"time\":\"14:00\"},{\"weekday\":\"Friday\",\"time\":\"16:00\"},{\"weekday\":\"Friday\",\"time\":\"17:00\"},{\"weekday\":\"Saturday\",\"time\":\"09:00\"},{\"weekday\":\"Saturday\",\"time\":\"12:00\"},{\"weekday\":\"Saturday\",\"time\":\"13:00\"},{\"weekday\":\"Saturday\",\"time\":\"15:00\"},{\"weekday\":\"Saturday\",\"time\":\"18:00\"},{\"weekday\":\"Sunday\",\"time\":\"10:00\"},{\"weekday\":\"Sunday\",\"time\":\"13:00\"},{\"weekday\":\"Sunday\",\"time\":\"14:00\"},{\"weekday\":\"Sunday\",\"time\":\"16:00\"},{\"weekday\":\"Sunday\",\"time\":\"18:00\"}],\"message\":\"35 free slot(s) available\"}]}",
+            "time_sec": 38.206
+          },
+          {
+            "role": "agent",
+            "content": "Dr. Johnson has several openings. Would Monday at 9:00 am or Tuesday at 10:00 am work for you?",
+            "words": [
+              {
+                "word": "Dr. ",
+                "start": 39.105,
+                "end": 39.505
+              },
+              {
+                "word": "Johnson ",
+                "start": 39.505,
+                "end": 39.905
+              },
+              {
+                "word": "has ",
+                "start": 39.905,
+                "end": 40.305
+              },
+              {
+                "word": "several ",
+                "start": 40.305,
+                "end": 40.705
+              },
+              {
+                "word": "openings. ",
+                "start": 40.705,
+                "end": 41.105
+              },
+              {
+                "word": "Would ",
+                "start": 41.299291748046876,
+                "end": 41.699291748046875
+              },
+              {
+                "word": "Monday ",
+                "start": 41.699291748046875,
+                "end": 42.09929174804687
+              },
+              {
+                "word": "at ",
+                "start": 42.09929174804687,
+                "end": 42.49929174804687
+              },
+              {
+                "word": "9:00 ",
+                "start": 42.49929174804687,
+                "end": 42.89929174804688
+              },
+              {
+                "word": "am ",
+                "start": 42.89929174804688,
+                "end": 43.299291748046876
+              },
+              {
+                "word": "or ",
+                "start": 43.299291748046876,
+                "end": 43.699291748046875
+              },
+              {
+                "word": "Tuesday ",
+                "start": 43.699291748046875,
+                "end": 44.09929174804687
+              },
+              {
+                "word": "at ",
+                "start": 44.09929174804687,
+                "end": 44.49929174804687
+              },
+              {
+                "word": "10:00 ",
+                "start": 44.49929174804687,
+                "end": 44.89929174804688
+              },
+              {
+                "word": "am ",
+                "start": 44.88154174804688,
+                "end": 45.28154174804688
+              },
+              {
+                "word": "work ",
+                "start": 44.88154174804688,
+                "end": 45.28154174804688
+              },
+              {
+                "word": "for ",
+                "start": 44.88154174804688,
+                "end": 45.28154174804688
+              },
+              {
+                "word": "you?",
+                "start": 44.88154174804688,
+                "end": 45.28154174804688
+              }
+            ],
+            "metadata": {
+              "response_id": 3
+            }
+          },
+          {
+            "role": "user",
+            "content": "Who's the name? ",
+            "words": [
+              {
+                "word": "Who's ",
+                "start": 54.367,
+                "end": 54.766999999999996
+              },
+              {
+                "word": "the ",
+                "start": 54.766999999999996,
+                "end": 54.927
+              },
+              {
+                "word": "name? ",
+                "start": 54.927,
+                "end": 55.246998
+              }
+            ]
+          },
+          {
+            "role": "agent",
+            "content": "The provider is Dr. Johnson. Would you like to book the appointment for Monday, June 1st at 9:00 am?",
+            "words": [
+              {
+                "word": "The ",
+                "start": 56.523,
+                "end": 56.923
+              },
+              {
+                "word": "provider ",
+                "start": 56.923,
+                "end": 57.323
+              },
+              {
+                "word": "is ",
+                "start": 57.323,
+                "end": 57.723
+              },
+              {
+                "word": "Dr. ",
+                "start": 57.723,
+                "end": 58.123
+              },
+              {
+                "word": "Johnson. ",
+                "start": 58.10833325195313,
+                "end": 58.508333251953125
+              },
+              {
+                "word": "Would ",
+                "start": 58.508333251953125,
+                "end": 58.908333251953124
+              },
+              {
+                "word": "you ",
+                "start": 58.908333251953124,
+                "end": 59.30833325195312
+              },
+              {
+                "word": "like ",
+                "start": 59.30833325195312,
+                "end": 59.70833325195313
+              },
+              {
+                "word": "to ",
+                "start": 59.70833325195313,
+                "end": 60.10833325195313
+              },
+              {
+                "word": "book ",
+                "start": 60.10833325195313,
+                "end": 60.508333251953125
+              },
+              {
+                "word": "the ",
+                "start": 60.508333251953125,
+                "end": 60.908333251953124
+              },
+              {
+                "word": "appointment ",
+                "start": 60.908333251953124,
+                "end": 61.30833325195312
+              },
+              {
+                "word": "for ",
+                "start": 61.30833325195312,
+                "end": 61.70833325195313
+              },
+              {
+                "word": "Monday, ",
+                "start": 61.70833325195313,
+                "end": 62.10833325195313
+              },
+              {
+                "word": "June ",
+                "start": 61.835125,
+                "end": 62.235125
+              },
+              {
+                "word": "1st ",
+                "start": 61.835125,
+                "end": 62.235125
+              },
+              {
+                "word": "at ",
+                "start": 61.835125,
+                "end": 62.235125
+              },
+              {
+                "word": "9:00 ",
+                "start": 61.835125,
+                "end": 62.235125
+              },
+              {
+                "word": "am?",
+                "start": 61.835125,
+                "end": 62.235125
+              }
+            ],
+            "metadata": {
+              "response_id": 4
+            }
+          },
+          {
+            "role": "user",
+            "content": "Yes. ",
+            "words": [
+              {
+                "word": "Yes. ",
+                "start": 64.447,
+                "end": 64.76700000000001
+              }
+            ]
+          },
+          {
+            "role": "tool_call_invocation",
+            "tool_call_id": "1100fbe2a19c8fc5",
+            "name": "bookslot",
+            "arguments": "{\"slot_time\":\"09:00 AM\",\"patient_name\":\"John Smith\",\"slot_weekday\":\"Monday\",\"provider_name\":\"Dr Johnson\"}",
+            "time_sec": 65.65,
+            "type": "custom",
+            "thought_signature": "gemini:EjQKMgEMOdbHV2YPngDgeRlk1qT8d99e86aNO97lERB2vSaCG7qd0rI6htE+thiOXdb9OJoh"
+          },
+          {
+            "role": "tool_call_result",
+            "tool_call_id": "1100fbe2a19c8fc5",
+            "successful": true,
+            "content": "{\"status\":\"success\",\"appointment_id\":\"APT2709AFBC\",\"message\":\"Appointment confirmed for John Smith with Dr Johnson on Monday at 09:00 AM\",\"appointment\":{\"appointment_id\":\"APT2709AFBC\",\"patient_name\":\"John Smith\",\"provider_name\":\"Dr Johnson\",\"phone\":null,\"slot_weekday\":\"Monday\",\"slot_time\":\"09:00 AM\",\"notes\":null,\"booked_at\":\"2026-05-28T15:50:56.568188\"}}",
+            "time_sec": 66.334
+          },
+          {
+            "role": "agent",
+            "content": "All right, your appointment with Dr. Johnson is confirmed for Monday, June 1st at 9:00 am. Thanks for speaking with me today, ",
+            "words": [
+              {
+                "word": "All ",
+                "start": 67.251,
+                "end": 67.651
+              },
+              {
+                "word": "right, ",
+                "start": 67.651,
+                "end": 68.051
+              },
+              {
+                "word": "your ",
+                "start": 68.051,
+                "end": 68.451
+              },
+              {
+                "word": "appointment ",
+                "start": 68.451,
+                "end": 68.851
+              },
+              {
+                "word": "with ",
+                "start": 68.851,
+                "end": 69.251
+              },
+              {
+                "word": "Dr. ",
+                "start": 69.251,
+                "end": 69.651
+              },
+              {
+                "word": "Johnson ",
+                "start": 69.651,
+                "end": 70.051
+              },
+              {
+                "word": "is ",
+                "start": 70.051,
+                "end": 70.451
+              },
+              {
+                "word": "confirmed ",
+                "start": 70.451,
+                "end": 70.851
+              },
+              {
+                "word": "for ",
+                "start": 70.851,
+                "end": 71.251
+              },
+              {
+                "word": "Monday, ",
+                "start": 71.251,
+                "end": 71.651
+              },
+              {
+                "word": "June ",
+                "start": 71.34408325195312,
+                "end": 71.74408325195313
+              },
+              {
+                "word": "1st ",
+                "start": 71.34408325195312,
+                "end": 71.74408325195313
+              },
+              {
+                "word": "at ",
+                "start": 71.34408325195312,
+                "end": 71.74408325195313
+              },
+              {
+                "word": "9:00 ",
+                "start": 71.34408325195312,
+                "end": 71.74408325195313
+              },
+              {
+                "word": "am. ",
+                "start": 71.34408325195312,
+                "end": 71.74408325195313
+              },
+              {
+                "word": "Thanks ",
+                "start": 71.74408325195313,
+                "end": 72.14408325195312
+              },
+              {
+                "word": "for ",
+                "start": 72.14408325195312,
+                "end": 72.54408325195313
+              },
+              {
+                "word": "speaking ",
+                "start": 72.54408325195313,
+                "end": 72.94408325195313
+              },
+              {
+                "word": "with ",
+                "start": 72.94408325195313,
+                "end": 73.34408325195312
+              },
+              {
+                "word": "me ",
+                "start": 73.34408325195312,
+                "end": 73.74408325195313
+              },
+              {
+                "word": "today, ",
+                "start": 73.74408325195313,
+                "end": 74.14408325195312
+              }
+            ],
+            "metadata": {
+              "response_id": 5
+            }
+          },
+          {
+            "role": "user",
+            "content": "Bye. ",
+            "words": [
+              {
+                "word": "Bye. ",
+                "start": 74.397,
+                "end": 74.717
+              }
+            ]
+          },
+          {
+            "role": "agent",
+            "content": "and I hope you feel better soon. Goodbye!",
+            "words": [
+              {
+                "word": "and ",
+                "start": 74.14408325195312,
+                "end": 74.54408325195313
+              },
+              {
+                "word": "I ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "hope ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "you ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "feel ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "better ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "soon. ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "Goodbye!",
+                "start": 74.66979174804688,
+                "end": 75.06979174804688
+              }
+            ],
+            "metadata": {
+              "response_id": 5
+            }
+          },
+          {
+            "role": "tool_call_invocation",
+            "tool_call_id": "463039fc91f2754b",
+            "name": "end_call",
+            "arguments": "{\"execution_message\":\"All right, your appointment with Dr. Johnson is confirmed for Monday, June 1st at 9:00 am. Thanks for speaking with me today, and I hope you feel better soon. Goodbye!\"}",
+            "time_sec": 75.504,
+            "type": "end_call",
+            "thought_signature": "gemini:EjQKMgEMOdbHe5r1wdpfFEhmrTJmDPsnNkCAc1MgcDBK6/wAwDbVPitE2ue6d2fvoeATA7wW"
+          }
+        ],
+        "recording_url": "https://dxc03zgurdly9.cloudfront.net/de1d6d36082345179a7cb01d58614b5986869efb03df5b27931f32474211d532/recording.wav",
+        "recording_multi_channel_url": "https://dxc03zgurdly9.cloudfront.net/de1d6d36082345179a7cb01d58614b5986869efb03df5b27931f32474211d532/recording_multichannel.wav",
+        "public_log_url": "https://dxc03zgurdly9.cloudfront.net/de1d6d36082345179a7cb01d58614b5986869efb03df5b27931f32474211d532/public.log",
+        "disconnection_reason": "agent_hangup",
+        "latency": {
+          "llm": {
+            "p50": 1567,
+            "p90": 1940.6,
+            "p95": 1968.8,
+            "p99": 1991.36,
+            "min": 668,
+            "max": 1997,
+            "num": 5,
+            "sum": 6828,
+            "values": [
+              1567,
+              740,
+              1856,
+              668,
+              1997
+            ]
+          },
+          "e2e": {
+            "p50": 1948,
+            "p90": 2441.601171875,
+            "p95": 2462.8005859375,
+            "p99": 2479.7601171875,
+            "min": 826,
+            "max": 2484,
+            "num": 5,
+            "sum": 8912.0048828125,
+            "values": [
+              1948,
+              826,
+              2378.0029296875,
+              1276.001953125,
+              2484
+            ]
+          },
+          "tts": {
+            "p50": 233,
+            "p90": 241.2,
+            "p95": 242.6,
+            "p99": 243.72,
+            "min": 177,
+            "max": 244,
+            "num": 5,
+            "sum": 1085,
+            "values": [
+              233,
+              244,
+              177,
+              194,
+              237
+            ]
+          },
+          "asr": {
+            "p50": 234,
+            "p90": 332.8,
+            "p95": 337.4,
+            "p99": 341.08,
+            "min": 0,
+            "max": 342,
+            "num": 5,
+            "sum": 1015,
+            "values": [
+              120,
+              0,
+              319,
+              342,
+              234
+            ]
+          }
+        },
+        "metadata": {
+          "patient_name": "John Smith",
+          "doctor_name": "Dr Johnson",
+          "provider_name": "Dr Johnson",
+          "exercise_missed_days": "5",
+          "phone": "+918688178501"
+        },
+        "call_cost": {
+          "product_costs": [
+            {
+              "product": "retell_voice_engine",
+              "unit_price": 0.0916667,
+              "cost": 6.9666667
+            },
+            {
+              "product": "platform_tts",
+              "unit_price": 0.025,
+              "cost": 1.9
+            },
+            {
+              "product": "gemini_3_1_flash_lite",
+              "unit_price": 0.0233333,
+              "cost": 1.7733333
+            },
+            {
+              "product": "gpt_4_1_text_testing",
+              "unit_price": 1.5,
+              "cost": 1.5
+            }
+          ],
+          "total_duration_seconds": 76,
+          "total_duration_unit_price": 0.14,
+          "combined_cost": 12.14
+        },
+        "call_analysis": {
+          "call_summary": "The agent from the physiotherapy clinic contacted John Smith to follow up on missed exercises. John reported hand pain and agreed to schedule an appointment with Dr. Johnson, which the agent successfully booked for Monday at 9:00 am. The call ended positively with confirmation of the appointment.",
+          "in_voicemail": false,
+          "user_sentiment": "Neutral",
+          "call_successful": true,
+          "custom_analysis_data": {}
+        },
+        "data_storage_setting": "everything",
+        "opt_in_signed_url": false,
+        "llm_token_usage": {
+          "values": [
+            1596,
+            1676,
+            1732,
+            1792,
+            2751,
+            2791,
+            2825,
+            3006
+          ],
+          "average": 2271.125,
+          "num_requests": 8
+        },
+        "tool_calls": [
+          {
+            "tool_call_id": "72820098a406baf4",
+            "name": "getpatientdetails",
+            "type": "custom",
+            "start_time_sec": 2.384,
+            "latency_ms": 276.0000000000002,
+            "success": true
+          },
+          {
+            "tool_call_id": "fc59a317e6d3c250",
+            "name": "getavailableslots",
+            "type": "custom",
+            "start_time_sec": 37.65,
+            "latency_ms": 556.0000000000045,
+            "success": true
+          },
+          {
+            "tool_call_id": "1100fbe2a19c8fc5",
+            "name": "bookslot",
+            "type": "custom",
+            "start_time_sec": 65.65,
+            "latency_ms": 683.9999999999975,
+            "success": true
+          },
+          {
+            "tool_call_id": "463039fc91f2754b",
+            "name": "end_call",
+            "type": "end_call",
+            "start_time_sec": 75.504
+          }
+        ],
+        "from_number": "+12402610848",
+        "to_number": "+918688178501",
+        "direction": "outbound",
+        "telephony_identifier": {
+          "twilio_call_sid": "CAf3b2fa7e04894aa32da1f5f06d50c169"
+        }
+      },
+      "event_timestamp": 1779963667484
+    }
+  },
+  {
+    "call_id": null,
+    "event": "call_ended",
+    "timestamp": "2026-05-28T15:51:07.984389",
+    "data": {
+      "event": "call_ended",
+      "call": {
+        "call_id": "call_bef55ecd62a950f74a1506d4c4f",
+        "call_type": "phone_call",
+        "agent_id": "agent_8be0d12c6f85c0f3369c6e8742",
+        "agent_version": 14,
+        "agent_name": "Agent_1",
+        "retell_llm_dynamic_variables": {
+          "patient_name": "John Smith",
+          "doctor_name": "Dr Johnson",
+          "provider_name": "Dr Johnson",
+          "exercise_missed_days": "5",
+          "phone": "+918688178501"
+        },
+        "custom_sip_headers": {
+          "X-RetellAI-Direction": "Outbound",
+          "X-RetellAI-CallId": "call_bef55ecd62a950f74a1506d4c4f",
+          "X-RetellAI-SipTraceId": "call_bef55ecd62a950f74a1506d4c4f",
+          "X-RetellAI-OrgId": "org_5EZmi0BXnigMcyQh",
+          "Route": "<sip:18.98.16.123;lr>"
+        },
+        "call_status": "ended",
+        "start_timestamp": 1779963590565,
+        "end_timestamp": 1779963666078,
+        "duration_ms": 75513,
+        "transcript": "User: Hello? \nAgent: Hello, this \nUser: Hello? \nAgent: is Grace from the physiotherapy clinic calling for a quick follow-up. Hi John Smith, I noticed you may have missed your prescribed exercises for the last 5 days. Is everything okay?\nUser: I'm having hand pain. \nAgent: I'm sorry to hear you're experiencing hand pain. Since I'm a virtual assistant, I can't provide medical advice, so it's best to discuss this with Dr. Johnson. Would you like to schedule an appointment to see them?\nUser: Yes, sir. \nAgent: Dr. Johnson has several openings. Would Monday at 9:00 am or Tuesday at 10:00 am work for you?\nUser: Who's the name? \nAgent: The provider is Dr. Johnson. Would you like to book the appointment for Monday, June 1st at 9:00 am?\nUser: Yes. \nAgent: All right, your appointment with Dr. Johnson is confirmed for Monday, June 1st at 9:00 am. Thanks for speaking with me today, \nUser: Bye. \nAgent: and I hope you feel better soon. Goodbye!\n",
+        "transcript_object": [
+          {
+            "role": "user",
+            "content": "Hello? ",
+            "words": [
+              {
+                "word": "Hello? ",
+                "start": 1.2069998999999998,
+                "end": 1.527
+              }
+            ]
+          },
+          {
+            "role": "agent",
+            "content": "Hello, this ",
+            "words": [
+              {
+                "word": "Hello, ",
+                "start": 3.475,
+                "end": 3.875
+              },
+              {
+                "word": "this ",
+                "start": 3.875,
+                "end": 4.275
+              }
+            ],
+            "metadata": {
+              "response_id": 1
+            }
+          },
+          {
+            "role": "user",
+            "content": "Hello? ",
+            "words": [
+              {
+                "word": "Hello? ",
+                "start": 4.316999999999999,
+                "end": 4.717
+              }
+            ]
+          },
+          {
+            "role": "agent",
+            "content": "is Grace from the physiotherapy clinic calling for a quick follow-up. Hi John Smith, I noticed you may have missed your prescribed exercises for the last 5 days. Is everything okay?",
+            "words": [
+              {
+                "word": "is ",
+                "start": 4.275,
+                "end": 4.675
+              },
+              {
+                "word": "Grace ",
+                "start": 4.675,
+                "end": 5.075
+              },
+              {
+                "word": "from ",
+                "start": 5.075,
+                "end": 5.475
+              },
+              {
+                "word": "the ",
+                "start": 5.475,
+                "end": 5.875
+              },
+              {
+                "word": "physiotherapy ",
+                "start": 5.875,
+                "end": 6.275
+              },
+              {
+                "word": "clinic ",
+                "start": 6.275,
+                "end": 6.675
+              },
+              {
+                "word": "calling ",
+                "start": 6.675,
+                "end": 7.075
+              },
+              {
+                "word": "for ",
+                "start": 7.075,
+                "end": 7.475
+              },
+              {
+                "word": "a ",
+                "start": 7.312666748046875,
+                "end": 7.712666748046875
+              },
+              {
+                "word": "quick ",
+                "start": 7.312666748046875,
+                "end": 7.712666748046875
+              },
+              {
+                "word": "follow-up. ",
+                "start": 7.312666748046875,
+                "end": 7.712666748046875
+              },
+              {
+                "word": "Hi ",
+                "start": 7.712666748046875,
+                "end": 8.112666748046875
+              },
+              {
+                "word": "John ",
+                "start": 8.112666748046875,
+                "end": 8.512666748046875
+              },
+              {
+                "word": "Smith, ",
+                "start": 8.512666748046875,
+                "end": 8.912666748046876
+              },
+              {
+                "word": "I ",
+                "start": 8.912666748046876,
+                "end": 9.312666748046874
+              },
+              {
+                "word": "noticed ",
+                "start": 9.312666748046874,
+                "end": 9.712666748046875
+              },
+              {
+                "word": "you ",
+                "start": 9.712666748046875,
+                "end": 10.112666748046875
+              },
+              {
+                "word": "may ",
+                "start": 10.112666748046875,
+                "end": 10.512666748046875
+              },
+              {
+                "word": "have ",
+                "start": 10.512666748046875,
+                "end": 10.912666748046876
+              },
+              {
+                "word": "missed ",
+                "start": 10.912666748046876,
+                "end": 11.312666748046874
+              },
+              {
+                "word": "your ",
+                "start": 11.312666748046874,
+                "end": 11.712666748046875
+              },
+              {
+                "word": "prescribed ",
+                "start": 11.712666748046875,
+                "end": 12.112666748046875
+              },
+              {
+                "word": "exercises ",
+                "start": 12.112666748046875,
+                "end": 12.512666748046875
+              },
+              {
+                "word": "for ",
+                "start": 12.512666748046875,
+                "end": 12.912666748046876
+              },
+              {
+                "word": "the ",
+                "start": 12.572,
+                "end": 12.972
+              },
+              {
+                "word": "last ",
+                "start": 12.572,
+                "end": 12.972
+              },
+              {
+                "word": "5 ",
+                "start": 12.572,
+                "end": 12.972
+              },
+              {
+                "word": "days. ",
+                "start": 12.572,
+                "end": 12.972
+              },
+              {
+                "word": "Is ",
+                "start": 12.972,
+                "end": 13.372
+              },
+              {
+                "word": "everything ",
+                "start": 13.372,
+                "end": 13.772
+              },
+              {
+                "word": "okay?",
+                "start": 13.772,
+                "end": 14.172
+              }
+            ],
+            "metadata": {
+              "response_id": 1
+            }
+          },
+          {
+            "role": "user",
+            "content": "I'm having hand pain. ",
+            "words": [
+              {
+                "word": "I'm ",
+                "start": 21.446999,
+                "end": 21.767000000000003
+              },
+              {
+                "word": "having ",
+                "start": 21.767000000000003,
+                "end": 22.007
+              },
+              {
+                "word": "hand ",
+                "start": 22.007,
+                "end": 22.327
+              },
+              {
+                "word": "pain. ",
+                "start": 22.327,
+                "end": 23.687
+              }
+            ]
+          },
+          {
+            "role": "agent",
+            "content": "I'm sorry to hear you're experiencing hand pain. Since I'm a virtual assistant, I can't provide medical advice, so it's best to discuss this with Dr. Johnson. Would you like to schedule an appointment to see them?",
+            "words": [
+              {
+                "word": "I'm ",
+                "start": 24.513,
+                "end": 24.913
+              },
+              {
+                "word": "sorry ",
+                "start": 24.913,
+                "end": 25.313
+              },
+              {
+                "word": "to ",
+                "start": 25.313,
+                "end": 25.713
+              },
+              {
+                "word": "hear ",
+                "start": 25.713,
+                "end": 26.113
+              },
+              {
+                "word": "you're ",
+                "start": 26.113,
+                "end": 26.513
+              },
+              {
+                "word": "experiencing ",
+                "start": 26.513,
+                "end": 26.913
+              },
+              {
+                "word": "hand ",
+                "start": 26.783291748046874,
+                "end": 27.183291748046877
+              },
+              {
+                "word": "pain. ",
+                "start": 26.783291748046874,
+                "end": 27.183291748046877
+              },
+              {
+                "word": "Since ",
+                "start": 27.183291748046877,
+                "end": 27.583291748046875
+              },
+              {
+                "word": "I'm ",
+                "start": 27.583291748046875,
+                "end": 27.983291748046874
+              },
+              {
+                "word": "a ",
+                "start": 27.983291748046874,
+                "end": 28.383291748046876
+              },
+              {
+                "word": "virtual ",
+                "start": 28.383291748046876,
+                "end": 28.783291748046874
+              },
+              {
+                "word": "assistant, ",
+                "start": 28.783291748046874,
+                "end": 29.183291748046877
+              },
+              {
+                "word": "I ",
+                "start": 29.183291748046877,
+                "end": 29.583291748046875
+              },
+              {
+                "word": "can't ",
+                "start": 29.583291748046875,
+                "end": 29.983291748046874
+              },
+              {
+                "word": "provide ",
+                "start": 29.983291748046874,
+                "end": 30.383291748046876
+              },
+              {
+                "word": "medical ",
+                "start": 30.383291748046876,
+                "end": 30.783291748046874
+              },
+              {
+                "word": "advice, ",
+                "start": 30.783291748046874,
+                "end": 31.183291748046877
+              },
+              {
+                "word": "so ",
+                "start": 31.183291748046877,
+                "end": 31.583291748046875
+              },
+              {
+                "word": "it's ",
+                "start": 31.583291748046875,
+                "end": 31.983291748046874
+              },
+              {
+                "word": "best ",
+                "start": 31.983291748046874,
+                "end": 32.38329174804687
+              },
+              {
+                "word": "to ",
+                "start": 32.38329174804687,
+                "end": 32.78329174804688
+              },
+              {
+                "word": "discuss ",
+                "start": 32.553458251953124,
+                "end": 32.95345825195312
+              },
+              {
+                "word": "this ",
+                "start": 32.553458251953124,
+                "end": 32.95345825195312
+              },
+              {
+                "word": "with ",
+                "start": 32.553458251953124,
+                "end": 32.95345825195312
+              },
+              {
+                "word": "Dr. ",
+                "start": 32.553458251953124,
+                "end": 32.95345825195312
+              },
+              {
+                "word": "Johnson. ",
+                "start": 32.553458251953124,
+                "end": 32.95345825195312
+              },
+              {
+                "word": "Would ",
+                "start": 32.95345825195312,
+                "end": 33.35345825195313
+              },
+              {
+                "word": "you ",
+                "start": 33.35345825195313,
+                "end": 33.75345825195313
+              },
+              {
+                "word": "like ",
+                "start": 33.75345825195313,
+                "end": 34.153458251953126
+              },
+              {
+                "word": "to ",
+                "start": 34.153458251953126,
+                "end": 34.553458251953124
+              },
+              {
+                "word": "schedule ",
+                "start": 34.553458251953124,
+                "end": 34.95345825195312
+              },
+              {
+                "word": "an ",
+                "start": 34.87545825195313,
+                "end": 35.275458251953125
+              },
+              {
+                "word": "appointment ",
+                "start": 34.87545825195313,
+                "end": 35.275458251953125
+              },
+              {
+                "word": "to ",
+                "start": 34.87545825195313,
+                "end": 35.275458251953125
+              },
+              {
+                "word": "see ",
+                "start": 34.87545825195313,
+                "end": 35.275458251953125
+              },
+              {
+                "word": "them?",
+                "start": 34.87545825195313,
+                "end": 35.275458251953125
+              }
+            ],
+            "metadata": {
+              "response_id": 2
+            }
+          },
+          {
+            "role": "user",
+            "content": "Yes, sir. ",
+            "words": [
+              {
+                "word": "Yes, ",
+                "start": 36.166999999999994,
+                "end": 36.647
+              },
+              {
+                "word": "sir. ",
+                "start": 36.647,
+                "end": 36.726997
+              }
+            ]
+          },
+          {
+            "role": "agent",
+            "content": "Dr. Johnson has several openings. Would Monday at 9:00 am or Tuesday at 10:00 am work for you?",
+            "words": [
+              {
+                "word": "Dr. ",
+                "start": 39.105,
+                "end": 39.505
+              },
+              {
+                "word": "Johnson ",
+                "start": 39.505,
+                "end": 39.905
+              },
+              {
+                "word": "has ",
+                "start": 39.905,
+                "end": 40.305
+              },
+              {
+                "word": "several ",
+                "start": 40.305,
+                "end": 40.705
+              },
+              {
+                "word": "openings. ",
+                "start": 40.705,
+                "end": 41.105
+              },
+              {
+                "word": "Would ",
+                "start": 41.299291748046876,
+                "end": 41.699291748046875
+              },
+              {
+                "word": "Monday ",
+                "start": 41.699291748046875,
+                "end": 42.09929174804687
+              },
+              {
+                "word": "at ",
+                "start": 42.09929174804687,
+                "end": 42.49929174804687
+              },
+              {
+                "word": "9:00 ",
+                "start": 42.49929174804687,
+                "end": 42.89929174804688
+              },
+              {
+                "word": "am ",
+                "start": 42.89929174804688,
+                "end": 43.299291748046876
+              },
+              {
+                "word": "or ",
+                "start": 43.299291748046876,
+                "end": 43.699291748046875
+              },
+              {
+                "word": "Tuesday ",
+                "start": 43.699291748046875,
+                "end": 44.09929174804687
+              },
+              {
+                "word": "at ",
+                "start": 44.09929174804687,
+                "end": 44.49929174804687
+              },
+              {
+                "word": "10:00 ",
+                "start": 44.49929174804687,
+                "end": 44.89929174804688
+              },
+              {
+                "word": "am ",
+                "start": 44.88154174804688,
+                "end": 45.28154174804688
+              },
+              {
+                "word": "work ",
+                "start": 44.88154174804688,
+                "end": 45.28154174804688
+              },
+              {
+                "word": "for ",
+                "start": 44.88154174804688,
+                "end": 45.28154174804688
+              },
+              {
+                "word": "you?",
+                "start": 44.88154174804688,
+                "end": 45.28154174804688
+              }
+            ],
+            "metadata": {
+              "response_id": 3
+            }
+          },
+          {
+            "role": "user",
+            "content": "Who's the name? ",
+            "words": [
+              {
+                "word": "Who's ",
+                "start": 54.367,
+                "end": 54.766999999999996
+              },
+              {
+                "word": "the ",
+                "start": 54.766999999999996,
+                "end": 54.927
+              },
+              {
+                "word": "name? ",
+                "start": 54.927,
+                "end": 55.246998
+              }
+            ]
+          },
+          {
+            "role": "agent",
+            "content": "The provider is Dr. Johnson. Would you like to book the appointment for Monday, June 1st at 9:00 am?",
+            "words": [
+              {
+                "word": "The ",
+                "start": 56.523,
+                "end": 56.923
+              },
+              {
+                "word": "provider ",
+                "start": 56.923,
+                "end": 57.323
+              },
+              {
+                "word": "is ",
+                "start": 57.323,
+                "end": 57.723
+              },
+              {
+                "word": "Dr. ",
+                "start": 57.723,
+                "end": 58.123
+              },
+              {
+                "word": "Johnson. ",
+                "start": 58.10833325195313,
+                "end": 58.508333251953125
+              },
+              {
+                "word": "Would ",
+                "start": 58.508333251953125,
+                "end": 58.908333251953124
+              },
+              {
+                "word": "you ",
+                "start": 58.908333251953124,
+                "end": 59.30833325195312
+              },
+              {
+                "word": "like ",
+                "start": 59.30833325195312,
+                "end": 59.70833325195313
+              },
+              {
+                "word": "to ",
+                "start": 59.70833325195313,
+                "end": 60.10833325195313
+              },
+              {
+                "word": "book ",
+                "start": 60.10833325195313,
+                "end": 60.508333251953125
+              },
+              {
+                "word": "the ",
+                "start": 60.508333251953125,
+                "end": 60.908333251953124
+              },
+              {
+                "word": "appointment ",
+                "start": 60.908333251953124,
+                "end": 61.30833325195312
+              },
+              {
+                "word": "for ",
+                "start": 61.30833325195312,
+                "end": 61.70833325195313
+              },
+              {
+                "word": "Monday, ",
+                "start": 61.70833325195313,
+                "end": 62.10833325195313
+              },
+              {
+                "word": "June ",
+                "start": 61.835125,
+                "end": 62.235125
+              },
+              {
+                "word": "1st ",
+                "start": 61.835125,
+                "end": 62.235125
+              },
+              {
+                "word": "at ",
+                "start": 61.835125,
+                "end": 62.235125
+              },
+              {
+                "word": "9:00 ",
+                "start": 61.835125,
+                "end": 62.235125
+              },
+              {
+                "word": "am?",
+                "start": 61.835125,
+                "end": 62.235125
+              }
+            ],
+            "metadata": {
+              "response_id": 4
+            }
+          },
+          {
+            "role": "user",
+            "content": "Yes. ",
+            "words": [
+              {
+                "word": "Yes. ",
+                "start": 64.447,
+                "end": 64.76700000000001
+              }
+            ]
+          },
+          {
+            "role": "agent",
+            "content": "All right, your appointment with Dr. Johnson is confirmed for Monday, June 1st at 9:00 am. Thanks for speaking with me today, ",
+            "words": [
+              {
+                "word": "All ",
+                "start": 67.251,
+                "end": 67.651
+              },
+              {
+                "word": "right, ",
+                "start": 67.651,
+                "end": 68.051
+              },
+              {
+                "word": "your ",
+                "start": 68.051,
+                "end": 68.451
+              },
+              {
+                "word": "appointment ",
+                "start": 68.451,
+                "end": 68.851
+              },
+              {
+                "word": "with ",
+                "start": 68.851,
+                "end": 69.251
+              },
+              {
+                "word": "Dr. ",
+                "start": 69.251,
+                "end": 69.651
+              },
+              {
+                "word": "Johnson ",
+                "start": 69.651,
+                "end": 70.051
+              },
+              {
+                "word": "is ",
+                "start": 70.051,
+                "end": 70.451
+              },
+              {
+                "word": "confirmed ",
+                "start": 70.451,
+                "end": 70.851
+              },
+              {
+                "word": "for ",
+                "start": 70.851,
+                "end": 71.251
+              },
+              {
+                "word": "Monday, ",
+                "start": 71.251,
+                "end": 71.651
+              },
+              {
+                "word": "June ",
+                "start": 71.34408325195312,
+                "end": 71.74408325195313
+              },
+              {
+                "word": "1st ",
+                "start": 71.34408325195312,
+                "end": 71.74408325195313
+              },
+              {
+                "word": "at ",
+                "start": 71.34408325195312,
+                "end": 71.74408325195313
+              },
+              {
+                "word": "9:00 ",
+                "start": 71.34408325195312,
+                "end": 71.74408325195313
+              },
+              {
+                "word": "am. ",
+                "start": 71.34408325195312,
+                "end": 71.74408325195313
+              },
+              {
+                "word": "Thanks ",
+                "start": 71.74408325195313,
+                "end": 72.14408325195312
+              },
+              {
+                "word": "for ",
+                "start": 72.14408325195312,
+                "end": 72.54408325195313
+              },
+              {
+                "word": "speaking ",
+                "start": 72.54408325195313,
+                "end": 72.94408325195313
+              },
+              {
+                "word": "with ",
+                "start": 72.94408325195313,
+                "end": 73.34408325195312
+              },
+              {
+                "word": "me ",
+                "start": 73.34408325195312,
+                "end": 73.74408325195313
+              },
+              {
+                "word": "today, ",
+                "start": 73.74408325195313,
+                "end": 74.14408325195312
+              }
+            ],
+            "metadata": {
+              "response_id": 5
+            }
+          },
+          {
+            "role": "user",
+            "content": "Bye. ",
+            "words": [
+              {
+                "word": "Bye. ",
+                "start": 74.397,
+                "end": 74.717
+              }
+            ]
+          },
+          {
+            "role": "agent",
+            "content": "and I hope you feel better soon. Goodbye!",
+            "words": [
+              {
+                "word": "and ",
+                "start": 74.14408325195312,
+                "end": 74.54408325195313
+              },
+              {
+                "word": "I ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "hope ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "you ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "feel ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "better ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "soon. ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "Goodbye!",
+                "start": 74.66979174804688,
+                "end": 75.06979174804688
+              }
+            ],
+            "metadata": {
+              "response_id": 5
+            }
+          }
+        ],
+        "transcript_with_tool_calls": [
+          {
+            "role": "user",
+            "content": "Hello? ",
+            "words": [
+              {
+                "word": "Hello? ",
+                "start": 1.2069998999999998,
+                "end": 1.527
+              }
+            ]
+          },
+          {
+            "role": "tool_call_invocation",
+            "tool_call_id": "72820098a406baf4",
+            "name": "getpatientdetails",
+            "arguments": "{}",
+            "time_sec": 2.384,
+            "type": "custom",
+            "thought_signature": "gemini:EjQKMgEMOdbH8PlPHQYaYY7Boii92iy9yoLHLuiJsT3Yf2UX7WHQiOuInEAdk80MjKs+1+Sj"
+          },
+          {
+            "role": "tool_call_result",
+            "tool_call_id": "72820098a406baf4",
+            "successful": true,
+            "content": "[{\"id\":1,\"patient_name\":\"John Smith\",\"phone\":\"+918688178501\",\"dob\":\"1988-03-15\",\"provider_name\":\"Dr Johnson\",\"exercise_missed_days\":5}]",
+            "time_sec": 2.66
+          },
+          {
+            "role": "agent",
+            "content": "Hello, this ",
+            "words": [
+              {
+                "word": "Hello, ",
+                "start": 3.475,
+                "end": 3.875
+              },
+              {
+                "word": "this ",
+                "start": 3.875,
+                "end": 4.275
+              }
+            ],
+            "metadata": {
+              "response_id": 1
+            }
+          },
+          {
+            "role": "user",
+            "content": "Hello? ",
+            "words": [
+              {
+                "word": "Hello? ",
+                "start": 4.316999999999999,
+                "end": 4.717
+              }
+            ]
+          },
+          {
+            "role": "agent",
+            "content": "is Grace from the physiotherapy clinic calling for a quick follow-up. Hi John Smith, I noticed you may have missed your prescribed exercises for the last 5 days. Is everything okay?",
+            "words": [
+              {
+                "word": "is ",
+                "start": 4.275,
+                "end": 4.675
+              },
+              {
+                "word": "Grace ",
+                "start": 4.675,
+                "end": 5.075
+              },
+              {
+                "word": "from ",
+                "start": 5.075,
+                "end": 5.475
+              },
+              {
+                "word": "the ",
+                "start": 5.475,
+                "end": 5.875
+              },
+              {
+                "word": "physiotherapy ",
+                "start": 5.875,
+                "end": 6.275
+              },
+              {
+                "word": "clinic ",
+                "start": 6.275,
+                "end": 6.675
+              },
+              {
+                "word": "calling ",
+                "start": 6.675,
+                "end": 7.075
+              },
+              {
+                "word": "for ",
+                "start": 7.075,
+                "end": 7.475
+              },
+              {
+                "word": "a ",
+                "start": 7.312666748046875,
+                "end": 7.712666748046875
+              },
+              {
+                "word": "quick ",
+                "start": 7.312666748046875,
+                "end": 7.712666748046875
+              },
+              {
+                "word": "follow-up. ",
+                "start": 7.312666748046875,
+                "end": 7.712666748046875
+              },
+              {
+                "word": "Hi ",
+                "start": 7.712666748046875,
+                "end": 8.112666748046875
+              },
+              {
+                "word": "John ",
+                "start": 8.112666748046875,
+                "end": 8.512666748046875
+              },
+              {
+                "word": "Smith, ",
+                "start": 8.512666748046875,
+                "end": 8.912666748046876
+              },
+              {
+                "word": "I ",
+                "start": 8.912666748046876,
+                "end": 9.312666748046874
+              },
+              {
+                "word": "noticed ",
+                "start": 9.312666748046874,
+                "end": 9.712666748046875
+              },
+              {
+                "word": "you ",
+                "start": 9.712666748046875,
+                "end": 10.112666748046875
+              },
+              {
+                "word": "may ",
+                "start": 10.112666748046875,
+                "end": 10.512666748046875
+              },
+              {
+                "word": "have ",
+                "start": 10.512666748046875,
+                "end": 10.912666748046876
+              },
+              {
+                "word": "missed ",
+                "start": 10.912666748046876,
+                "end": 11.312666748046874
+              },
+              {
+                "word": "your ",
+                "start": 11.312666748046874,
+                "end": 11.712666748046875
+              },
+              {
+                "word": "prescribed ",
+                "start": 11.712666748046875,
+                "end": 12.112666748046875
+              },
+              {
+                "word": "exercises ",
+                "start": 12.112666748046875,
+                "end": 12.512666748046875
+              },
+              {
+                "word": "for ",
+                "start": 12.512666748046875,
+                "end": 12.912666748046876
+              },
+              {
+                "word": "the ",
+                "start": 12.572,
+                "end": 12.972
+              },
+              {
+                "word": "last ",
+                "start": 12.572,
+                "end": 12.972
+              },
+              {
+                "word": "5 ",
+                "start": 12.572,
+                "end": 12.972
+              },
+              {
+                "word": "days. ",
+                "start": 12.572,
+                "end": 12.972
+              },
+              {
+                "word": "Is ",
+                "start": 12.972,
+                "end": 13.372
+              },
+              {
+                "word": "everything ",
+                "start": 13.372,
+                "end": 13.772
+              },
+              {
+                "word": "okay?",
+                "start": 13.772,
+                "end": 14.172
+              }
+            ],
+            "metadata": {
+              "response_id": 1
+            }
+          },
+          {
+            "role": "user",
+            "content": "I'm having hand pain. ",
+            "words": [
+              {
+                "word": "I'm ",
+                "start": 21.446999,
+                "end": 21.767000000000003
+              },
+              {
+                "word": "having ",
+                "start": 21.767000000000003,
+                "end": 22.007
+              },
+              {
+                "word": "hand ",
+                "start": 22.007,
+                "end": 22.327
+              },
+              {
+                "word": "pain. ",
+                "start": 22.327,
+                "end": 23.687
+              }
+            ]
+          },
+          {
+            "role": "agent",
+            "content": "I'm sorry to hear you're experiencing hand pain. Since I'm a virtual assistant, I can't provide medical advice, so it's best to discuss this with Dr. Johnson. Would you like to schedule an appointment to see them?",
+            "words": [
+              {
+                "word": "I'm ",
+                "start": 24.513,
+                "end": 24.913
+              },
+              {
+                "word": "sorry ",
+                "start": 24.913,
+                "end": 25.313
+              },
+              {
+                "word": "to ",
+                "start": 25.313,
+                "end": 25.713
+              },
+              {
+                "word": "hear ",
+                "start": 25.713,
+                "end": 26.113
+              },
+              {
+                "word": "you're ",
+                "start": 26.113,
+                "end": 26.513
+              },
+              {
+                "word": "experiencing ",
+                "start": 26.513,
+                "end": 26.913
+              },
+              {
+                "word": "hand ",
+                "start": 26.783291748046874,
+                "end": 27.183291748046877
+              },
+              {
+                "word": "pain. ",
+                "start": 26.783291748046874,
+                "end": 27.183291748046877
+              },
+              {
+                "word": "Since ",
+                "start": 27.183291748046877,
+                "end": 27.583291748046875
+              },
+              {
+                "word": "I'm ",
+                "start": 27.583291748046875,
+                "end": 27.983291748046874
+              },
+              {
+                "word": "a ",
+                "start": 27.983291748046874,
+                "end": 28.383291748046876
+              },
+              {
+                "word": "virtual ",
+                "start": 28.383291748046876,
+                "end": 28.783291748046874
+              },
+              {
+                "word": "assistant, ",
+                "start": 28.783291748046874,
+                "end": 29.183291748046877
+              },
+              {
+                "word": "I ",
+                "start": 29.183291748046877,
+                "end": 29.583291748046875
+              },
+              {
+                "word": "can't ",
+                "start": 29.583291748046875,
+                "end": 29.983291748046874
+              },
+              {
+                "word": "provide ",
+                "start": 29.983291748046874,
+                "end": 30.383291748046876
+              },
+              {
+                "word": "medical ",
+                "start": 30.383291748046876,
+                "end": 30.783291748046874
+              },
+              {
+                "word": "advice, ",
+                "start": 30.783291748046874,
+                "end": 31.183291748046877
+              },
+              {
+                "word": "so ",
+                "start": 31.183291748046877,
+                "end": 31.583291748046875
+              },
+              {
+                "word": "it's ",
+                "start": 31.583291748046875,
+                "end": 31.983291748046874
+              },
+              {
+                "word": "best ",
+                "start": 31.983291748046874,
+                "end": 32.38329174804687
+              },
+              {
+                "word": "to ",
+                "start": 32.38329174804687,
+                "end": 32.78329174804688
+              },
+              {
+                "word": "discuss ",
+                "start": 32.553458251953124,
+                "end": 32.95345825195312
+              },
+              {
+                "word": "this ",
+                "start": 32.553458251953124,
+                "end": 32.95345825195312
+              },
+              {
+                "word": "with ",
+                "start": 32.553458251953124,
+                "end": 32.95345825195312
+              },
+              {
+                "word": "Dr. ",
+                "start": 32.553458251953124,
+                "end": 32.95345825195312
+              },
+              {
+                "word": "Johnson. ",
+                "start": 32.553458251953124,
+                "end": 32.95345825195312
+              },
+              {
+                "word": "Would ",
+                "start": 32.95345825195312,
+                "end": 33.35345825195313
+              },
+              {
+                "word": "you ",
+                "start": 33.35345825195313,
+                "end": 33.75345825195313
+              },
+              {
+                "word": "like ",
+                "start": 33.75345825195313,
+                "end": 34.153458251953126
+              },
+              {
+                "word": "to ",
+                "start": 34.153458251953126,
+                "end": 34.553458251953124
+              },
+              {
+                "word": "schedule ",
+                "start": 34.553458251953124,
+                "end": 34.95345825195312
+              },
+              {
+                "word": "an ",
+                "start": 34.87545825195313,
+                "end": 35.275458251953125
+              },
+              {
+                "word": "appointment ",
+                "start": 34.87545825195313,
+                "end": 35.275458251953125
+              },
+              {
+                "word": "to ",
+                "start": 34.87545825195313,
+                "end": 35.275458251953125
+              },
+              {
+                "word": "see ",
+                "start": 34.87545825195313,
+                "end": 35.275458251953125
+              },
+              {
+                "word": "them?",
+                "start": 34.87545825195313,
+                "end": 35.275458251953125
+              }
+            ],
+            "metadata": {
+              "response_id": 2
+            }
+          },
+          {
+            "role": "user",
+            "content": "Yes, sir. ",
+            "words": [
+              {
+                "word": "Yes, ",
+                "start": 36.166999999999994,
+                "end": 36.647
+              },
+              {
+                "word": "sir. ",
+                "start": 36.647,
+                "end": 36.726997
+              }
+            ]
+          },
+          {
+            "role": "tool_call_invocation",
+            "tool_call_id": "fc59a317e6d3c250",
+            "name": "getavailableslots",
+            "arguments": "{}",
+            "time_sec": 37.65,
+            "type": "custom",
+            "thought_signature": "gemini:EjQKMgEMOdbHNcshKfJ0Lwuy2gGYm7NPpdgffNeHFv6oecb/OvBIOw/zImEEZRlZmrbZcd7c"
+          },
+          {
+            "role": "tool_call_result",
+            "tool_call_id": "fc59a317e6d3c250",
+            "successful": true,
+            "content": "{\"providers\":[{\"provider_name\":\"Dr Johnson\",\"found\":true,\"free_slots\":[{\"weekday\":\"Monday\",\"time\":\"09:00 am\"},{\"weekday\":\"Monday\",\"time\":\"11:00 am\"},{\"weekday\":\"Monday\",\"time\":\"1:00 pm\"},{\"weekday\":\"Monday\",\"time\":\"2:00 pm\"},{\"weekday\":\"Monday\",\"time\":\"3:00 pm\"},{\"weekday\":\"Monday\",\"time\":\"4:00 pm\"},{\"weekday\":\"Monday\",\"time\":\"6:00 pm\"},{\"weekday\":\"Tuesday\",\"time\":\"10:00 am\"},{\"weekday\":\"Tuesday\",\"time\":\"11:00 am\"},{\"weekday\":\"Tuesday\",\"time\":\"2:00 pm\"},{\"weekday\":\"Tuesday\",\"time\":\"3:00 pm\"},{\"weekday\":\"Tuesday\",\"time\":\"5:00 pm\"},{\"weekday\":\"Wednesday\",\"time\":\"09:00 am\"},{\"weekday\":\"Wednesday\",\"time\":\"2:00 pm\"},{\"weekday\":\"Wednesday\",\"time\":\"3:00 pm\"},{\"weekday\":\"Wednesday\",\"time\":\"5:00 pm\"},{\"weekday\":\"Thursday\",\"time\":\"11:00 am\"},{\"weekday\":\"Thursday\",\"time\":\"12:00 pm\"},{\"weekday\":\"Thursday\",\"time\":\"1:00 pm\"},{\"weekday\":\"Thursday\",\"time\":\"4:00 pm\"},{\"weekday\":\"Thursday\",\"time\":\"5:00 pm\"},{\"weekday\":\"Friday\",\"time\":\"09:00 am\"},{\"weekday\":\"Friday\",\"time\":\"12:00 pm\"},{\"weekday\":\"Friday\",\"time\":\"2:00 pm\"},{\"weekday\":\"Friday\",\"time\":\"3:00 pm\"},{\"weekday\":\"Friday\",\"time\":\"6:00 pm\"},{\"weekday\":\"Saturday\",\"time\":\"10:00 am\"},{\"weekday\":\"Saturday\",\"time\":\"1:00 pm\"},{\"weekday\":\"Saturday\",\"time\":\"2:00 pm\"},{\"weekday\":\"Saturday\",\"time\":\"4:00 pm\"},{\"weekday\":\"Saturday\",\"time\":\"5:00 pm\"},{\"weekday\":\"Saturday\",\"time\":\"6:00 pm\"},{\"weekday\":\"Sunday\",\"time\":\"09:00 am\"},{\"weekday\":\"Sunday\",\"time\":\"10:00 am\"},{\"weekday\":\"Sunday\",\"time\":\"11:00 am\"},{\"weekday\":\"Sunday\",\"time\":\"3:00 pm\"},{\"weekday\":\"Sunday\",\"time\":\"5:00 pm\"}],\"message\":\"37 free slot(s) available\"},{\"provider_name\":\"Dr Williams\",\"found\":true,\"free_slots\":[{\"weekday\":\"Monday\",\"time\":\"10:00\"},{\"weekday\":\"Monday\",\"time\":\"12:00\"},{\"weekday\":\"Monday\",\"time\":\"13:00\"},{\"weekday\":\"Monday\",\"time\":\"15:00\"},{\"weekday\":\"Monday\",\"time\":\"18:00\"},{\"weekday\":\"Tuesday\",\"time\":\"09:00\"},{\"weekday\":\"Tuesday\",\"time\":\"11:00\"},{\"weekday\":\"Tuesday\",\"time\":\"14:00\"},{\"weekday\":\"Tuesday\",\"time\":\"16:00\"},{\"weekday\":\"Tuesday\",\"time\":\"17:00\"},{\"weekday\":\"Wednesday\",\"time\":\"11:00\"},{\"weekday\":\"Wednesday\",\"time\":\"12:00\"},{\"weekday\":\"Wednesday\",\"time\":\"14:00\"},{\"weekday\":\"Wednesday\",\"time\":\"15:00\"},{\"weekday\":\"Wednesday\",\"time\":\"18:00\"},{\"weekday\":\"Thursday\",\"time\":\"09:00\"},{\"weekday\":\"Thursday\",\"time\":\"10:00\"},{\"weekday\":\"Thursday\",\"time\":\"13:00\"},{\"weekday\":\"Thursday\",\"time\":\"16:00\"},{\"weekday\":\"Thursday\",\"time\":\"18:00\"},{\"weekday\":\"Friday\",\"time\":\"10:00\"},{\"weekday\":\"Friday\",\"time\":\"11:00\"},{\"weekday\":\"Friday\",\"time\":\"14:00\"},{\"weekday\":\"Friday\",\"time\":\"16:00\"},{\"weekday\":\"Friday\",\"time\":\"17:00\"},{\"weekday\":\"Saturday\",\"time\":\"09:00\"},{\"weekday\":\"Saturday\",\"time\":\"12:00\"},{\"weekday\":\"Saturday\",\"time\":\"13:00\"},{\"weekday\":\"Saturday\",\"time\":\"15:00\"},{\"weekday\":\"Saturday\",\"time\":\"18:00\"},{\"weekday\":\"Sunday\",\"time\":\"10:00\"},{\"weekday\":\"Sunday\",\"time\":\"13:00\"},{\"weekday\":\"Sunday\",\"time\":\"14:00\"},{\"weekday\":\"Sunday\",\"time\":\"16:00\"},{\"weekday\":\"Sunday\",\"time\":\"18:00\"}],\"message\":\"35 free slot(s) available\"}]}",
+            "time_sec": 38.206
+          },
+          {
+            "role": "agent",
+            "content": "Dr. Johnson has several openings. Would Monday at 9:00 am or Tuesday at 10:00 am work for you?",
+            "words": [
+              {
+                "word": "Dr. ",
+                "start": 39.105,
+                "end": 39.505
+              },
+              {
+                "word": "Johnson ",
+                "start": 39.505,
+                "end": 39.905
+              },
+              {
+                "word": "has ",
+                "start": 39.905,
+                "end": 40.305
+              },
+              {
+                "word": "several ",
+                "start": 40.305,
+                "end": 40.705
+              },
+              {
+                "word": "openings. ",
+                "start": 40.705,
+                "end": 41.105
+              },
+              {
+                "word": "Would ",
+                "start": 41.299291748046876,
+                "end": 41.699291748046875
+              },
+              {
+                "word": "Monday ",
+                "start": 41.699291748046875,
+                "end": 42.09929174804687
+              },
+              {
+                "word": "at ",
+                "start": 42.09929174804687,
+                "end": 42.49929174804687
+              },
+              {
+                "word": "9:00 ",
+                "start": 42.49929174804687,
+                "end": 42.89929174804688
+              },
+              {
+                "word": "am ",
+                "start": 42.89929174804688,
+                "end": 43.299291748046876
+              },
+              {
+                "word": "or ",
+                "start": 43.299291748046876,
+                "end": 43.699291748046875
+              },
+              {
+                "word": "Tuesday ",
+                "start": 43.699291748046875,
+                "end": 44.09929174804687
+              },
+              {
+                "word": "at ",
+                "start": 44.09929174804687,
+                "end": 44.49929174804687
+              },
+              {
+                "word": "10:00 ",
+                "start": 44.49929174804687,
+                "end": 44.89929174804688
+              },
+              {
+                "word": "am ",
+                "start": 44.88154174804688,
+                "end": 45.28154174804688
+              },
+              {
+                "word": "work ",
+                "start": 44.88154174804688,
+                "end": 45.28154174804688
+              },
+              {
+                "word": "for ",
+                "start": 44.88154174804688,
+                "end": 45.28154174804688
+              },
+              {
+                "word": "you?",
+                "start": 44.88154174804688,
+                "end": 45.28154174804688
+              }
+            ],
+            "metadata": {
+              "response_id": 3
+            }
+          },
+          {
+            "role": "user",
+            "content": "Who's the name? ",
+            "words": [
+              {
+                "word": "Who's ",
+                "start": 54.367,
+                "end": 54.766999999999996
+              },
+              {
+                "word": "the ",
+                "start": 54.766999999999996,
+                "end": 54.927
+              },
+              {
+                "word": "name? ",
+                "start": 54.927,
+                "end": 55.246998
+              }
+            ]
+          },
+          {
+            "role": "agent",
+            "content": "The provider is Dr. Johnson. Would you like to book the appointment for Monday, June 1st at 9:00 am?",
+            "words": [
+              {
+                "word": "The ",
+                "start": 56.523,
+                "end": 56.923
+              },
+              {
+                "word": "provider ",
+                "start": 56.923,
+                "end": 57.323
+              },
+              {
+                "word": "is ",
+                "start": 57.323,
+                "end": 57.723
+              },
+              {
+                "word": "Dr. ",
+                "start": 57.723,
+                "end": 58.123
+              },
+              {
+                "word": "Johnson. ",
+                "start": 58.10833325195313,
+                "end": 58.508333251953125
+              },
+              {
+                "word": "Would ",
+                "start": 58.508333251953125,
+                "end": 58.908333251953124
+              },
+              {
+                "word": "you ",
+                "start": 58.908333251953124,
+                "end": 59.30833325195312
+              },
+              {
+                "word": "like ",
+                "start": 59.30833325195312,
+                "end": 59.70833325195313
+              },
+              {
+                "word": "to ",
+                "start": 59.70833325195313,
+                "end": 60.10833325195313
+              },
+              {
+                "word": "book ",
+                "start": 60.10833325195313,
+                "end": 60.508333251953125
+              },
+              {
+                "word": "the ",
+                "start": 60.508333251953125,
+                "end": 60.908333251953124
+              },
+              {
+                "word": "appointment ",
+                "start": 60.908333251953124,
+                "end": 61.30833325195312
+              },
+              {
+                "word": "for ",
+                "start": 61.30833325195312,
+                "end": 61.70833325195313
+              },
+              {
+                "word": "Monday, ",
+                "start": 61.70833325195313,
+                "end": 62.10833325195313
+              },
+              {
+                "word": "June ",
+                "start": 61.835125,
+                "end": 62.235125
+              },
+              {
+                "word": "1st ",
+                "start": 61.835125,
+                "end": 62.235125
+              },
+              {
+                "word": "at ",
+                "start": 61.835125,
+                "end": 62.235125
+              },
+              {
+                "word": "9:00 ",
+                "start": 61.835125,
+                "end": 62.235125
+              },
+              {
+                "word": "am?",
+                "start": 61.835125,
+                "end": 62.235125
+              }
+            ],
+            "metadata": {
+              "response_id": 4
+            }
+          },
+          {
+            "role": "user",
+            "content": "Yes. ",
+            "words": [
+              {
+                "word": "Yes. ",
+                "start": 64.447,
+                "end": 64.76700000000001
+              }
+            ]
+          },
+          {
+            "role": "tool_call_invocation",
+            "tool_call_id": "1100fbe2a19c8fc5",
+            "name": "bookslot",
+            "arguments": "{\"slot_time\":\"09:00 AM\",\"patient_name\":\"John Smith\",\"slot_weekday\":\"Monday\",\"provider_name\":\"Dr Johnson\"}",
+            "time_sec": 65.65,
+            "type": "custom",
+            "thought_signature": "gemini:EjQKMgEMOdbHV2YPngDgeRlk1qT8d99e86aNO97lERB2vSaCG7qd0rI6htE+thiOXdb9OJoh"
+          },
+          {
+            "role": "tool_call_result",
+            "tool_call_id": "1100fbe2a19c8fc5",
+            "successful": true,
+            "content": "{\"status\":\"success\",\"appointment_id\":\"APT2709AFBC\",\"message\":\"Appointment confirmed for John Smith with Dr Johnson on Monday at 09:00 AM\",\"appointment\":{\"appointment_id\":\"APT2709AFBC\",\"patient_name\":\"John Smith\",\"provider_name\":\"Dr Johnson\",\"phone\":null,\"slot_weekday\":\"Monday\",\"slot_time\":\"09:00 AM\",\"notes\":null,\"booked_at\":\"2026-05-28T15:50:56.568188\"}}",
+            "time_sec": 66.334
+          },
+          {
+            "role": "agent",
+            "content": "All right, your appointment with Dr. Johnson is confirmed for Monday, June 1st at 9:00 am. Thanks for speaking with me today, ",
+            "words": [
+              {
+                "word": "All ",
+                "start": 67.251,
+                "end": 67.651
+              },
+              {
+                "word": "right, ",
+                "start": 67.651,
+                "end": 68.051
+              },
+              {
+                "word": "your ",
+                "start": 68.051,
+                "end": 68.451
+              },
+              {
+                "word": "appointment ",
+                "start": 68.451,
+                "end": 68.851
+              },
+              {
+                "word": "with ",
+                "start": 68.851,
+                "end": 69.251
+              },
+              {
+                "word": "Dr. ",
+                "start": 69.251,
+                "end": 69.651
+              },
+              {
+                "word": "Johnson ",
+                "start": 69.651,
+                "end": 70.051
+              },
+              {
+                "word": "is ",
+                "start": 70.051,
+                "end": 70.451
+              },
+              {
+                "word": "confirmed ",
+                "start": 70.451,
+                "end": 70.851
+              },
+              {
+                "word": "for ",
+                "start": 70.851,
+                "end": 71.251
+              },
+              {
+                "word": "Monday, ",
+                "start": 71.251,
+                "end": 71.651
+              },
+              {
+                "word": "June ",
+                "start": 71.34408325195312,
+                "end": 71.74408325195313
+              },
+              {
+                "word": "1st ",
+                "start": 71.34408325195312,
+                "end": 71.74408325195313
+              },
+              {
+                "word": "at ",
+                "start": 71.34408325195312,
+                "end": 71.74408325195313
+              },
+              {
+                "word": "9:00 ",
+                "start": 71.34408325195312,
+                "end": 71.74408325195313
+              },
+              {
+                "word": "am. ",
+                "start": 71.34408325195312,
+                "end": 71.74408325195313
+              },
+              {
+                "word": "Thanks ",
+                "start": 71.74408325195313,
+                "end": 72.14408325195312
+              },
+              {
+                "word": "for ",
+                "start": 72.14408325195312,
+                "end": 72.54408325195313
+              },
+              {
+                "word": "speaking ",
+                "start": 72.54408325195313,
+                "end": 72.94408325195313
+              },
+              {
+                "word": "with ",
+                "start": 72.94408325195313,
+                "end": 73.34408325195312
+              },
+              {
+                "word": "me ",
+                "start": 73.34408325195312,
+                "end": 73.74408325195313
+              },
+              {
+                "word": "today, ",
+                "start": 73.74408325195313,
+                "end": 74.14408325195312
+              }
+            ],
+            "metadata": {
+              "response_id": 5
+            }
+          },
+          {
+            "role": "user",
+            "content": "Bye. ",
+            "words": [
+              {
+                "word": "Bye. ",
+                "start": 74.397,
+                "end": 74.717
+              }
+            ]
+          },
+          {
+            "role": "agent",
+            "content": "and I hope you feel better soon. Goodbye!",
+            "words": [
+              {
+                "word": "and ",
+                "start": 74.14408325195312,
+                "end": 74.54408325195313
+              },
+              {
+                "word": "I ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "hope ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "you ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "feel ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "better ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "soon. ",
+                "start": 74.26979174804687,
+                "end": 74.66979174804688
+              },
+              {
+                "word": "Goodbye!",
+                "start": 74.66979174804688,
+                "end": 75.06979174804688
+              }
+            ],
+            "metadata": {
+              "response_id": 5
+            }
+          },
+          {
+            "role": "tool_call_invocation",
+            "tool_call_id": "463039fc91f2754b",
+            "name": "end_call",
+            "arguments": "{\"execution_message\":\"All right, your appointment with Dr. Johnson is confirmed for Monday, June 1st at 9:00 am. Thanks for speaking with me today, and I hope you feel better soon. Goodbye!\"}",
+            "time_sec": 75.504,
+            "type": "end_call",
+            "thought_signature": "gemini:EjQKMgEMOdbHe5r1wdpfFEhmrTJmDPsnNkCAc1MgcDBK6/wAwDbVPitE2ue6d2fvoeATA7wW"
+          }
+        ],
+        "recording_url": "https://dxc03zgurdly9.cloudfront.net/de1d6d36082345179a7cb01d58614b5986869efb03df5b27931f32474211d532/recording.wav",
+        "recording_multi_channel_url": "https://dxc03zgurdly9.cloudfront.net/de1d6d36082345179a7cb01d58614b5986869efb03df5b27931f32474211d532/recording_multichannel.wav",
+        "public_log_url": "https://dxc03zgurdly9.cloudfront.net/de1d6d36082345179a7cb01d58614b5986869efb03df5b27931f32474211d532/public.log",
+        "disconnection_reason": "agent_hangup",
+        "latency": {
+          "llm": {
+            "p50": 1567,
+            "p90": 1940.6,
+            "p95": 1968.8,
+            "p99": 1991.36,
+            "min": 668,
+            "max": 1997,
+            "num": 5,
+            "sum": 6828,
+            "values": [
+              1567,
+              740,
+              1856,
+              668,
+              1997
+            ]
+          },
+          "e2e": {
+            "p50": 1948,
+            "p90": 2441.601171875,
+            "p95": 2462.8005859375,
+            "p99": 2479.7601171875,
+            "min": 826,
+            "max": 2484,
+            "num": 5,
+            "sum": 8912.0048828125,
+            "values": [
+              1948,
+              826,
+              2378.0029296875,
+              1276.001953125,
+              2484
+            ]
+          },
+          "tts": {
+            "p50": 233,
+            "p90": 241.2,
+            "p95": 242.6,
+            "p99": 243.72,
+            "min": 177,
+            "max": 244,
+            "num": 5,
+            "sum": 1085,
+            "values": [
+              233,
+              244,
+              177,
+              194,
+              237
+            ]
+          },
+          "asr": {
+            "p50": 234,
+            "p90": 332.8,
+            "p95": 337.4,
+            "p99": 341.08,
+            "min": 0,
+            "max": 342,
+            "num": 5,
+            "sum": 1015,
+            "values": [
+              120,
+              0,
+              319,
+              342,
+              234
+            ]
+          }
+        },
+        "metadata": {
+          "patient_name": "John Smith",
+          "doctor_name": "Dr Johnson",
+          "provider_name": "Dr Johnson",
+          "exercise_missed_days": "5",
+          "phone": "+918688178501"
+        },
+        "call_cost": {
+          "product_costs": [
+            {
+              "product": "retell_voice_engine",
+              "unit_price": 0.0916667,
+              "cost": 6.9666667
+            },
+            {
+              "product": "platform_tts",
+              "unit_price": 0.025,
+              "cost": 1.9
+            },
+            {
+              "product": "gemini_3_1_flash_lite",
+              "unit_price": 0.0233333,
+              "cost": 1.7733333
+            },
+            {
+              "product": "gpt_4_1_text_testing",
+              "unit_price": 1.5,
+              "cost": 1.5
+            }
+          ],
+          "total_duration_seconds": 76,
+          "total_duration_unit_price": 0.14,
+          "combined_cost": 12.14
+        },
+        "data_storage_setting": "everything",
+        "opt_in_signed_url": false,
+        "llm_token_usage": {
+          "values": [
+            1596,
+            1676,
+            1732,
+            1792,
+            2751,
+            2791,
+            2825,
+            3006
+          ],
+          "average": 2271.125,
+          "num_requests": 8
+        },
+        "tool_calls": [
+          {
+            "tool_call_id": "72820098a406baf4",
+            "name": "getpatientdetails",
+            "type": "custom",
+            "start_time_sec": 2.384,
+            "latency_ms": 276.0000000000002,
+            "success": true
+          },
+          {
+            "tool_call_id": "fc59a317e6d3c250",
+            "name": "getavailableslots",
+            "type": "custom",
+            "start_time_sec": 37.65,
+            "latency_ms": 556.0000000000045,
+            "success": true
+          },
+          {
+            "tool_call_id": "1100fbe2a19c8fc5",
+            "name": "bookslot",
+            "type": "custom",
+            "start_time_sec": 65.65,
+            "latency_ms": 683.9999999999975,
+            "success": true
+          },
+          {
+            "tool_call_id": "463039fc91f2754b",
+            "name": "end_call",
+            "type": "end_call",
+            "start_time_sec": 75.504
+          }
+        ],
+        "from_number": "+12402610848",
+        "to_number": "+918688178501",
+        "direction": "outbound",
+        "telephony_identifier": {
+          "twilio_call_sid": "CAf3b2fa7e04894aa32da1f5f06d50c169"
+        }
+      },
+      "event_timestamp": 1779963666078
+    }
+  },
+  {
+    "call_id": "call_37bdce31a839670fe4324c33290",
+    "phone": "+918688178501",
+    "patient_id": 1,
+    "patient_name": "John Smith",
+    "event": "call_started",
+    "timestamp": "2026-05-28T15:57:20.892157",
+    "mock": false
+  },
+  {
+    "call_id": null,
+    "event": "call_analyzed",
+    "timestamp": "2026-05-28T15:57:49.749032",
+    "data": {
+      "event": "call_analyzed",
+      "call": {
+        "call_id": "call_37bdce31a839670fe4324c33290",
+        "call_type": "phone_call",
+        "agent_id": "agent_8be0d12c6f85c0f3369c6e8742",
+        "agent_version": 14,
+        "agent_name": "Agent_1",
+        "retell_llm_dynamic_variables": {
+          "patient_name": "John Smith",
+          "doctor_name": "Dr Johnson",
+          "provider_name": "Dr Johnson",
+          "exercise_missed_days": "5",
+          "phone": "+918688178501"
+        },
+        "custom_sip_headers": {
+          "X-RetellAI-Direction": "Outbound",
+          "X-RetellAI-CallId": "call_37bdce31a839670fe4324c33290",
+          "X-RetellAI-SipTraceId": "call_37bdce31a839670fe4324c33290",
+          "X-RetellAI-OrgId": "org_5EZmi0BXnigMcyQh",
+          "Route": "<sip:18.98.16.120;lr>"
+        },
+        "call_status": "not_connected",
+        "start_timestamp": 1779964068619,
+        "end_timestamp": 1779964068619,
+        "duration_ms": 0,
+        "transcript": "",
+        "transcript_object": [],
+        "transcript_with_tool_calls": [],
+        "public_log_url": "https://dxc03zgurdly9.cloudfront.net/3df067468e069c124a9945ad25af4f8829686422c4f665afbdfeb4a62695b475/public.log",
+        "disconnection_reason": "dial_busy",
+        "latency": {},
+        "metadata": {
+          "patient_name": "John Smith",
+          "doctor_name": "Dr Johnson",
+          "provider_name": "Dr Johnson",
+          "exercise_missed_days": "5",
+          "phone": "+918688178501"
+        },
+        "call_cost": {
+          "product_costs": [],
+          "total_duration_seconds": 0,
+          "total_duration_unit_price": 0,
+          "combined_cost": 0
+        },
+        "call_analysis": {
+          "call_summary": "",
+          "in_voicemail": false,
+          "user_sentiment": "Unknown",
+          "call_successful": false,
+          "custom_analysis_data": {}
+        },
+        "data_storage_setting": "everything",
+        "opt_in_signed_url": false,
+        "tool_calls": [],
+        "from_number": "+12402610848",
+        "to_number": "+918688178501",
+        "direction": "outbound",
+        "telephony_identifier": {
+          "twilio_call_sid": "CA5272178a1463a1f4b0e37ad352bff7ef"
+        }
+      },
+      "event_timestamp": 1779964069404
+    }
+  },
+  {
+    "call_id": null,
+    "event": "call_ended",
+    "timestamp": "2026-05-28T15:57:50.045791",
+    "data": {
+      "event": "call_ended",
+      "call": {
+        "call_id": "call_37bdce31a839670fe4324c33290",
+        "call_type": "phone_call",
+        "agent_id": "agent_8be0d12c6f85c0f3369c6e8742",
+        "agent_version": 14,
+        "agent_name": "Agent_1",
+        "retell_llm_dynamic_variables": {
+          "patient_name": "John Smith",
+          "doctor_name": "Dr Johnson",
+          "provider_name": "Dr Johnson",
+          "exercise_missed_days": "5",
+          "phone": "+918688178501"
+        },
+        "custom_sip_headers": {
+          "X-RetellAI-Direction": "Outbound",
+          "X-RetellAI-CallId": "call_37bdce31a839670fe4324c33290",
+          "X-RetellAI-SipTraceId": "call_37bdce31a839670fe4324c33290",
+          "X-RetellAI-OrgId": "org_5EZmi0BXnigMcyQh",
+          "Route": "<sip:18.98.16.120;lr>"
+        },
+        "call_status": "not_connected",
+        "start_timestamp": 1779964068619,
+        "end_timestamp": 1779964068619,
+        "duration_ms": 0,
+        "transcript": "",
+        "transcript_object": [],
+        "transcript_with_tool_calls": [],
+        "public_log_url": "https://dxc03zgurdly9.cloudfront.net/3df067468e069c124a9945ad25af4f8829686422c4f665afbdfeb4a62695b475/public.log",
+        "disconnection_reason": "dial_busy",
+        "latency": {},
+        "metadata": {
+          "patient_name": "John Smith",
+          "doctor_name": "Dr Johnson",
+          "provider_name": "Dr Johnson",
+          "exercise_missed_days": "5",
+          "phone": "+918688178501"
+        },
+        "call_cost": {
+          "product_costs": [],
+          "total_duration_seconds": 0,
+          "total_duration_unit_price": 0,
+          "combined_cost": 0
+        },
+        "data_storage_setting": "everything",
+        "opt_in_signed_url": false,
+        "tool_calls": [],
+        "from_number": "+12402610848",
+        "to_number": "+918688178501",
+        "direction": "outbound",
+        "telephony_identifier": {
+          "twilio_call_sid": "CA5272178a1463a1f4b0e37ad352bff7ef"
+        }
+      },
+      "event_timestamp": 1779964068619
+    }
   }
 ]
