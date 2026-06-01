@@ -159,6 +159,57 @@ body {
     box-shadow: none;
 }
 
+/* Booking Status States */
+.booking-status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.booking-status.status-not-booked {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.booking-status.status-in-progress {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.booking-status.status-booked {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.start-call-btn.status-not-booked {
+    background-color: #007bff;
+    color: white;
+}
+
+.start-call-btn.status-not-booked:hover {
+    background-color: #0056b3;
+}
+
+.start-call-btn.status-in-progress {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.start-call-btn.status-in-progress:hover {
+    background-color: #e0a800;
+}
+
+.start-call-btn.status-booked {
+    background-color: #28a745;
+    color: white;
+}
+
+.start-call-btn.status-booked:hover {
+    background-color: #218838;
+}
+
 /* Call Section */
 .call-status-container {
     display: flex;

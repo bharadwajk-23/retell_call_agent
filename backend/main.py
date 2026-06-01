@@ -247,6 +247,19 @@ async def start_call(body: StartCallRequest):
     patient = find_patient_by_id(body.patient_id)
     if not patient:
         raise HTTPException(status_code=404, detail="Patient not found")
+    
+    # Mark patient as "in progress" when call starts
+    try:
+        patients = load_json_file(config.PATIENT_DETAILS_PATH)
+        if isinstance(patients, list):
+            for p in patients:
+                if isinstance(p, dict) and p.get("id") == patient.get("id"):
+                    p["booking_status"] = "in progress"
+                    break
+            save_json_file(config.PATIENT_DETAILS_PATH, patients)
+    except Exception:
+        pass
+    
     return _execute_outbound_call(patient)
 
 
@@ -357,6 +370,32 @@ def _book_appointment_record(
             "slot_time": slot_time,
         }
     )
+
+    # Persist booking status on patient record so frontend shows updated state
+    try:
+        patients = load_json_file(config.PATIENT_DETAILS_PATH)
+        if isinstance(patients, list):
+            updated = False
+            for p in patients:
+                if not isinstance(p, dict):
+                    continue
+                # Prefer matching by phone when available
+                if phone and normalize_phone(str(p.get("phone", ""))) == normalize_phone(str(phone)):
+                    p["booking_status"] = "booked"
+                    p["appointment_id"] = record["appointment_id"]
+                    updated = True
+                    break
+                # Fallback to matching by patient name
+                if str(p.get("patient_name", "")).strip().lower() == patient_name.strip().lower():
+                    p["booking_status"] = "booked"
+                    p["appointment_id"] = record["appointment_id"]
+                    updated = True
+                    break
+            
+            if updated:
+                save_json_file(config.PATIENT_DETAILS_PATH, patients)
+    except Exception:
+        pass
 
     return {
         "status": "success",
