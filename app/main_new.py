@@ -57,6 +57,15 @@ patients_db: List[Dict[str, Any]] = [
         "provider_name": "Dr Johnson",
         "exercise_missed_days": 7,
         "booking_status": "not booked"
+    },
+    {
+        "id": 3,
+        "patient_name": "Robert Brown",
+        "phone": "+919099156582",
+        "dob": "1990-02-05",
+        "provider_name": "Dr Johnson",
+        "exercise_missed_days": 10,
+        "booking_status": "not booked"
     }
 ]
 appointments_db: List[Dict[str, Any]] = []
