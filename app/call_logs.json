@@ -1,0 +1,142 @@
+[
+  {
+    "call_id": "call_9f40bedb400d04377394467e3f6",
+    "phone": "+918688178501",
+    "patient_id": 1,
+    "patient_name": "John Smith",
+    "event": "call_started",
+    "timestamp": "2026-06-01T17:05:18.861575",
+    "mock": false
+  },
+  {
+    "call_id": null,
+    "event": "call_ended",
+    "timestamp": "2026-06-01T17:05:46.245919",
+    "data": {
+      "event": "call_ended",
+      "call": {
+        "call_id": "call_9f40bedb400d04377394467e3f6",
+        "call_type": "phone_call",
+        "agent_id": "agent_8be0d12c6f85c0f3369c6e8742",
+        "agent_version": 14,
+        "agent_name": "Agent_1",
+        "retell_llm_dynamic_variables": {
+          "patient_name": "John Smith",
+          "doctor_name": "Dr Johnson",
+          "provider_name": "Dr Johnson",
+          "exercise_missed_days": "5",
+          "phone": "+918688178501"
+        },
+        "custom_sip_headers": {
+          "X-RetellAI-Direction": "Outbound",
+          "X-RetellAI-CallId": "call_9f40bedb400d04377394467e3f6",
+          "X-RetellAI-SipTraceId": "call_9f40bedb400d04377394467e3f6",
+          "X-RetellAI-OrgId": "org_5EZmi0BXnigMcyQh",
+          "Route": "<sip:18.98.16.122;lr>"
+        },
+        "call_status": "not_connected",
+        "start_timestamp": 1780313745308,
+        "end_timestamp": 1780313745308,
+        "duration_ms": 0,
+        "transcript": "",
+        "transcript_object": [],
+        "transcript_with_tool_calls": [],
+        "public_log_url": "https://dxc03zgurdly9.cloudfront.net/6032968fafd04bba6cd767d9076ba15a5f4cd8884e2badd2cd57f3769f2edbfb/public.log",
+        "disconnection_reason": "dial_busy",
+        "latency": {},
+        "metadata": {
+          "patient_name": "John Smith",
+          "doctor_name": "Dr Johnson",
+          "provider_name": "Dr Johnson",
+          "exercise_missed_days": "5",
+          "phone": "+918688178501"
+        },
+        "call_cost": {
+          "product_costs": [],
+          "total_duration_seconds": 0,
+          "total_duration_unit_price": 0,
+          "combined_cost": 0
+        },
+        "data_storage_setting": "everything",
+        "opt_in_signed_url": false,
+        "tool_calls": [],
+        "from_number": "+12402610848",
+        "to_number": "+918688178501",
+        "direction": "outbound",
+        "telephony_identifier": {
+          "twilio_call_sid": "CAe83b54aa7c604a26bdea6d3b3c3244a7"
+        }
+      },
+      "event_timestamp": 1780313745308
+    }
+  },
+  {
+    "call_id": null,
+    "event": "call_analyzed",
+    "timestamp": "2026-06-01T17:05:46.276312",
+    "data": {
+      "event": "call_analyzed",
+      "call": {
+        "call_id": "call_9f40bedb400d04377394467e3f6",
+        "call_type": "phone_call",
+        "agent_id": "agent_8be0d12c6f85c0f3369c6e8742",
+        "agent_version": 14,
+        "agent_name": "Agent_1",
+        "retell_llm_dynamic_variables": {
+          "patient_name": "John Smith",
+          "doctor_name": "Dr Johnson",
+          "provider_name": "Dr Johnson",
+          "exercise_missed_days": "5",
+          "phone": "+918688178501"
+        },
+        "custom_sip_headers": {
+          "X-RetellAI-Direction": "Outbound",
+          "X-RetellAI-CallId": "call_9f40bedb400d04377394467e3f6",
+          "X-RetellAI-SipTraceId": "call_9f40bedb400d04377394467e3f6",
+          "X-RetellAI-OrgId": "org_5EZmi0BXnigMcyQh",
+          "Route": "<sip:18.98.16.122;lr>"
+        },
+        "call_status": "not_connected",
+        "start_timestamp": 1780313745308,
+        "end_timestamp": 1780313745308,
+        "duration_ms": 0,
+        "transcript": "",
+        "transcript_object": [],
+        "transcript_with_tool_calls": [],
+        "public_log_url": "https://dxc03zgurdly9.cloudfront.net/6032968fafd04bba6cd767d9076ba15a5f4cd8884e2badd2cd57f3769f2edbfb/public.log",
+        "disconnection_reason": "dial_busy",
+        "latency": {},
+        "metadata": {
+          "patient_name": "John Smith",
+          "doctor_name": "Dr Johnson",
+          "provider_name": "Dr Johnson",
+          "exercise_missed_days": "5",
+          "phone": "+918688178501"
+        },
+        "call_cost": {
+          "product_costs": [],
+          "total_duration_seconds": 0,
+          "total_duration_unit_price": 0,
+          "combined_cost": 0
+        },
+        "call_analysis": {
+          "call_summary": "",
+          "in_voicemail": false,
+          "user_sentiment": "Unknown",
+          "call_successful": false,
+          "custom_analysis_data": {}
+        },
+        "data_storage_setting": "everything",
+        "opt_in_signed_url": false,
+        "tool_calls": [],
+        "from_number": "+12402610848",
+        "to_number": "+918688178501",
+        "direction": "outbound",
+        "telephony_identifier": {
+          "twilio_call_sid": "CAe83b54aa7c604a26bdea6d3b3c3244a7"
+        }
+      },
+      "event_timestamp": 1780313745977
+    }
+  }
+]

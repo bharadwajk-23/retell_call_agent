@@ -15,8 +15,8 @@ from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from pathlib import Path
-import config
-from retell_service import trigger_outbound_call
+import app.config as config
+from app.retell_service import trigger_outbound_call
 
 FRONTEND_DIR = Path(__file__).resolve().parent
 

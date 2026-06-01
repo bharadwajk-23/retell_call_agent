@@ -7,7 +7,7 @@ from typing import Any, Dict, Optional
 
 from retell import Retell
 
-import config
+import app.config as config
 
 client = Retell(api_key=config.RETELL_API_KEY)
 
