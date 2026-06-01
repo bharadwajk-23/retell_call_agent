@@ -51,7 +51,7 @@ patients_db: List[Dict[str, Any]] = [
     },
     {
         "id": 2,
-        "patient_name": "Emliey Davis",
+        "patient_name": "Emiley Davis",
         "phone": "+918688178501",
         "dob": "1985-06-20",
         "provider_name": "Dr Johnson",
