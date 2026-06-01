@@ -6,7 +6,7 @@ import json
 import os
 import re
 import uuid
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional
 
 from fastapi import FastAPI, HTTPException, Query, Request
@@ -16,7 +16,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from pathlib import Path
 import app.config as config
-from app.retell_service import trigger_outbound_call
+from app.retell_service import trigger_outbound_call, get_call_details
 
 FRONTEND_DIR = Path(__file__).resolve().parent
 
@@ -96,6 +96,67 @@ def find_patient_by_id(patient_id: int) -> Optional[Dict[str, Any]]:
     return None
 
 
+CALL_STALE_SECONDS = 20
+
+
+def _parse_datetime(value: Optional[str]) -> Optional[datetime]:
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(value)
+    except ValueError:
+        return None
+
+
+def _call_is_stale(call_info: Dict[str, Any]) -> bool:
+    started_at = _parse_datetime(call_info.get("started_at"))
+    if not started_at:
+        return False
+    return (datetime.now() - started_at).total_seconds() >= CALL_STALE_SECONDS
+
+
+def _call_is_inactive(call_info: Dict[str, Any]) -> bool:
+    if call_info.get("status") in {"completed", "ended", "not_connected", "error"}:
+        return True
+
+    call_id = call_info.get("call_id")
+    if call_id:
+        details = get_call_details(call_id)
+        if details:
+            details_status = (
+                details.get("call_status")
+                if isinstance(details, dict)
+                else getattr(details, "call_status", None)
+            )
+            if details_status in {"registered", "ongoing"}:
+                return False
+            if details_status == "mock":
+                return _call_is_stale(call_info)
+            if details_status in {"ended", "not_connected", "error"}:
+                return True
+
+    return _call_is_stale(call_info)
+
+
+def _cleanup_active_calls() -> None:
+    for phone, call_info in list(active_calls.items()):
+        if _call_is_inactive(call_info):
+            patient_id = call_info.get("patient_id")
+            patient = find_patient_by_id(patient_id) if patient_id is not None else None
+            if patient and patient.get("booking_status") == "in progress":
+                patient["booking_status"] = "not booked"
+            active_calls.pop(phone, None)
+
+
+def reset_patient_status(patient_id: Optional[int] = None) -> None:
+    for p in patients_db:
+        if not isinstance(p, dict):
+            continue
+        if patient_id is None or p.get("id") == patient_id:
+            p["booking_status"] = "not booked"
+            p.pop("appointment_id", None)
+
+
 def _call_id_from_response(call_response: Any) -> str:
     cid = getattr(call_response, "call_id", None)
     if cid is None and isinstance(call_response, dict):
@@ -132,9 +193,15 @@ def _execute_outbound_call(patient: Dict[str, Any]) -> Dict[str, Any]:
         raise HTTPException(status_code=500, detail="Failed to trigger call")
 
     call_id = _call_id_from_response(call_response)
+    response_status = None
+    if isinstance(call_response, dict):
+        response_status = call_response.get("call_status")
+    else:
+        response_status = getattr(call_response, "call_status", None)
+
     active_calls[phone] = {
         "call_id": call_id,
-        "status": "calling",
+        "status": response_status or "registered",
         "started_at": datetime.now().isoformat(),
         "phone": phone,
         "patient_name": patient.get("patient_name"),
@@ -245,18 +312,21 @@ async def health_check():
 
 @app.get("/patients")
 async def get_patients():
-    data = [
-            {
-                "id": 1,
-                "patient_name": "John Smith",
-                "phone": "+918688178501",
-                "dob": "1988-03-15",
-                "provider_name": "Dr Johnson",
-                "exercise_missed_days": 5
-            }
-        ]
-    # data = load_json_file(config.PATIENT_DETAILS_PATH)
-    return data if isinstance(data, list) else []
+    _cleanup_active_calls()
+    return patients_db
+
+
+@app.post("/reset-patients")
+async def reset_patients(patient_id: Optional[int] = None):
+    reset_patient_status(patient_id)
+    if patient_id is None:
+        active_calls.clear()
+        appointments_db.clear()
+    return {
+        "status": "reset",
+        "patient_id": patient_id,
+        "reset_all": patient_id is None,
+    }
 
 
 @app.post("/start-call")
@@ -268,8 +338,11 @@ async def start_call(body: StartCallRequest):
     
     # Mark patient as "in progress" when call starts (in-memory)
     patient["booking_status"] = "in progress"
-    
-    return _execute_outbound_call(patient)
+    try:
+        return _execute_outbound_call(patient)
+    except Exception:
+        patient["booking_status"] = "not booked"
+        raise
 
 
 @app.post("/make-call")
@@ -351,8 +424,6 @@ def _book_appointment_record(
     slot_time: Optional[str],
     notes: Optional[str],
 ) -> Dict[str, Any]:
-    appointments = load_json_file(config.APPOINTMENTS_PATH)
-
     record = {
         "appointment_id": f"APT{uuid.uuid4().hex[:8].upper()}",
         "patient_name": patient_name,
@@ -377,7 +448,6 @@ def _book_appointment_record(
         }
     )
 
-    # Persist booking status on patient record so frontend shows updated state
     # Update patient booking status in memory
     for p in patients_db:
         if not isinstance(p, dict):
@@ -406,8 +476,7 @@ def _book_appointment_record(
 
 @app.get("/appointments")
 async def list_appointments():
-    data = load_json_file(config.APPOINTMENTS_PATH)
-    return data if isinstance(data, list) else []
+    return appointments_db
 
 
 @app.post("/retell-webhook")
@@ -443,29 +512,22 @@ async def retell_webhook(request: Request):
                     
                     appointment_booked = False
                     if patient_id and call_start_time:
-                        appointments = load_json_file(config.APPOINTMENTS_PATH)
-                        if isinstance(appointments, list):
-                            for apt in appointments:
-                                if isinstance(apt, dict) and apt.get("appointment_id"):
-                                    apt_time = apt.get("booked_at", "")
-                                    # Check if appointment was booked after this call started
-                                    if apt_time >= call_start_time:
-                                        appointment_booked = True
-                                        break
+                        for apt in appointments_db:
+                            if isinstance(apt, dict) and apt.get("appointment_id"):
+                                apt_time = apt.get("booked_at", "")
+                                # Check if appointment was booked after this call started
+                                if apt_time >= call_start_time:
+                                    appointment_booked = True
+                                    break
                     
                     # Reset patient status if no appointment was booked
                     if not appointment_booked:
-                        try:
-                            patients = load_json_file(config.PATIENT_DETAILS_PATH)
-                            if isinstance(patients, list):
-                                for p in patients:
-                                    if isinstance(p, dict) and p.get("id") == patient_id:
-                                        p["booking_status"] = "not booked"
-                                        break
-                                save_json_file(config.PATIENT_DETAILS_PATH, patients)
-                        except Exception:
-                            pass
+                        for p in patients_db:
+                            if isinstance(p, dict) and p.get("id") == patient_id:
+                                p["booking_status"] = "not booked"
+                                break
                     
+                    active_calls.pop(key, None)
                     break
 
         return {"status": "received"}
@@ -487,10 +549,7 @@ async def get_call_status(phone: str = Query(..., description="Patient phone num
 
 @app.get("/transcripts")
 async def get_transcripts():
-    logs = load_json_file(config.CALL_LOGS_PATH)
-    if not isinstance(logs, list):
-        logs = []
-    return {"transcripts": logs}
+    return {"transcripts": call_logs_db}
 
 
 if __name__ == "__main__":

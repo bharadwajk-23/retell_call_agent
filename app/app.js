@@ -68,6 +68,23 @@ function showError(message) {
     alert(message);
 }
 
+async function resetDemo() {
+    try {
+        const response = await fetch(`${API_BASE}/reset-patients`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+        });
+        if (!response.ok) {
+            const err = await response.json().catch(() => ({}));
+            throw new Error(err.detail || 'Failed to reset demo');
+        }
+        await loadPatients();
+    } catch (error) {
+        console.error('Error resetting demo:', error);
+        showError(error.message || 'Failed to reset demo');
+    }
+}
+
 async function startCall(patientId) {
     try {
         const patient = patients.find((p) => p.id === patientId);

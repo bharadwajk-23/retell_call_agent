@@ -34,7 +34,32 @@ body {
 }
 
 .header-content {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.reset-btn {
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #d1fae5;
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.reset-btn:hover {
+    background: #d1fae5;
+    transform: translateY(-1px);
 }
 
 .clinic-name {

@@ -5,6 +5,7 @@
     "phone": "+918688178501",
     "dob": "1988-03-15",
     "provider_name": "Dr Johnson",
-    "exercise_missed_days": 5
+    "exercise_missed_days": 5,
+    "booking_status": "in progress"
   }
 ]
