@@ -42,7 +42,7 @@ active_calls: Dict[str, Dict[str, Any]] = {}
 patients_db: List[Dict[str, Any]] = [
     {
         "id": 1,
-        "patient_name": "John Smith",
+        "patient_name": "Dave Vipul",
         "phone": "+918147775333",
         "dob": "1988-03-15",
         "provider_name": "Dr Johnson",
