@@ -16,5 +16,5 @@ cd "$PROJECT_DIR/frontend"
 npm install
 npm run build
 
-echo "Deployment preparation complete."
-echo "Start the backend with: ./scripts/start_backend.sh"
+echo "Initialization complete."
+echo "Use ./scripts/start-service.sh to start the app."
