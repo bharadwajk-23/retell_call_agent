@@ -10,4 +10,4 @@ if [ ! -d "$PROJECT_DIR/venv" ]; then
 fi
 
 source "$PROJECT_DIR/venv/bin/activate"
-exec uvicorn main_new:app --host 0.0.0.0 --port 8000
+exec uvicorn main_new:app --host 0.0.0.0 --port 8006
