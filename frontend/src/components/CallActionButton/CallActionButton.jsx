@@ -10,6 +10,8 @@ const VARIANT_CLASS = {
 export function CallActionButton({ bookingStatus, pending, onClick }) {
   const meta = getBookingStatusMeta(bookingStatus)
   const disabled = meta.disabled || pending
+  const label = pending ? 'Starting…' : meta.label
+  const icon = meta.variant === 'not-booked' && !pending ? '📞 ' : ''
 
   return (
     <button
@@ -18,7 +20,7 @@ export function CallActionButton({ bookingStatus, pending, onClick }) {
       disabled={disabled}
       onClick={onClick}
     >
-      {pending ? 'Starting…' : meta.variant === 'not-booked' ? `📞 ${meta.label}` : meta.label}
+      {icon}{label}
     </button>
   )
 }

@@ -3,18 +3,24 @@
 
 const API_BASE = import.meta.env.VITE_API_BASE || window.location.origin
 
-async function request(path, options) {
+async function request(path, options = {}) {
   const response = await fetch(`${API_BASE}${path}`, {
     headers: { 'Content-Type': 'application/json' },
     ...options,
   })
 
+  const contentType = response.headers.get('content-type') || ''
+  const isJson = contentType.includes('application/json')
+  const payload = isJson
+    ? await response.json().catch(() => null)
+    : await response.text().catch(() => '')
+
   if (!response.ok) {
-    const body = await response.json().catch(() => ({}))
-    throw new Error(body.detail || `Request failed (${response.status})`)
+    const message = payload?.detail || payload || `Request failed (${response.status})`
+    throw new Error(message)
   }
 
-  return response.json()
+  return payload ?? {}
 }
 
 export function getPatients() {

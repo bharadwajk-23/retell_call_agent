@@ -19,13 +19,15 @@ export function PatientTable({ patients, pendingId, onStartCall }) {
         <tbody>
           {patients.map((patient) => {
             const severity = getMissedDaysSeverity(patient.exercise_missed_days)
+            const patientName = patient.patient_name || 'Unknown patient'
+
             return (
               <tr key={patient.id}>
                 <td data-label="Patient">
                   <div className={styles.patientCell}>
-                    <span className={styles.avatar}>{getInitials(patient.patient_name)}</span>
+                    <span className={styles.avatar}>{getInitials(patientName)}</span>
                     <div>
-                      <p className={styles.patientName}>{patient.patient_name}</p>
+                      <p className={styles.patientName}>{patientName}</p>
                       <p className={styles.patientCode}>{formatPatientCode(patient.id)}</p>
                     </div>
                   </div>

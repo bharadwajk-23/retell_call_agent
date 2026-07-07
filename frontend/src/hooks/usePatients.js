@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { getPatients, resetDemo, startCall } from '../services/api'
 
 const POLL_INTERVAL_MS = 2000
@@ -8,9 +8,14 @@ export function usePatients() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [pendingId, setPendingId] = useState(null)
-  const hasLoadedOnce = useRef(false)
 
-  const loadPatients = useCallback(async () => {
+  const loadPatients = useCallback(async (options = {}) => {
+    const { skipLoading = false } = options
+
+    if (!skipLoading) {
+      setLoading(true)
+    }
+
     try {
       const data = await getPatients()
       setPatients(Array.isArray(data) ? data : [])
@@ -18,15 +23,30 @@ export function usePatients() {
     } catch (err) {
       setError(err.message || 'Failed to load patients')
     } finally {
-      hasLoadedOnce.current = true
-      setLoading(false)
+      if (!skipLoading) {
+        setLoading(false)
+      }
     }
   }, [])
 
   useEffect(() => {
-    loadPatients()
-    const interval = setInterval(loadPatients, POLL_INTERVAL_MS)
-    return () => clearInterval(interval)
+    let active = true
+
+    const refreshPatients = async () => {
+      await loadPatients({ skipLoading: true })
+      if (!active) {
+        return
+      }
+      setLoading(false)
+    }
+
+    refreshPatients()
+    const interval = window.setInterval(refreshPatients, POLL_INTERVAL_MS)
+
+    return () => {
+      active = false
+      window.clearInterval(interval)
+    }
   }, [loadPatients])
 
   const handleStartCall = useCallback(
@@ -34,7 +54,7 @@ export function usePatients() {
       setPendingId(patientId)
       try {
         await startCall(patientId)
-        await loadPatients()
+        await loadPatients({ skipLoading: true })
       } catch (err) {
         setError(err.message || 'Failed to start call')
       } finally {
@@ -47,7 +67,7 @@ export function usePatients() {
   const handleReset = useCallback(async () => {
     try {
       await resetDemo()
-      await loadPatients()
+      await loadPatients({ skipLoading: true })
     } catch (err) {
       setError(err.message || 'Failed to reset demo')
     }

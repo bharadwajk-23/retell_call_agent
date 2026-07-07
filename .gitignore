@@ -110,7 +110,7 @@ pnpm-lock.yaml
 
 # Local configuration
 *.local
-
+*.md
 # ==========================================
 # Generated assets
 # ==========================================

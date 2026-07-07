@@ -11,6 +11,7 @@ import styles from './Dashboard.module.css'
 
 function matchesSearch(patient, term) {
   if (!term) return true
+
   const haystack = `${patient.patient_name} ${patient.phone} ${patient.provider_name}`.toLowerCase()
   return haystack.includes(term.toLowerCase())
 }
@@ -25,8 +26,8 @@ export function Dashboard() {
     [patients, searchTerm],
   )
 
-  const activeCount = patients.filter((p) => p.booking_status !== 'booked').length
-  const doctorName = patients[0]?.provider_name
+  const activeCount = patients.filter((patient) => patient.booking_status !== 'booked').length
+  const doctorName = patients.find((patient) => patient.provider_name)?.provider_name || 'your care team'
 
   return (
     <div className={styles.page}>
