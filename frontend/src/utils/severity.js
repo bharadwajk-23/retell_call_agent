@@ -1,10 +1,10 @@
 // Missed-exercise-day thresholds used to prioritize outreach.
 // Derived purely from exercise_missed_days already returned by /patients.
-const URGENT_THRESHOLD = 10
+import { URGENT_MISSED_DAYS_THRESHOLD } from '../constants/config'
 
 export function getMissedDaysSeverity(missedDays) {
   const days = Number(missedDays) || 0
-  return days >= URGENT_THRESHOLD
+  return days >= URGENT_MISSED_DAYS_THRESHOLD
     ? { level: 'urgent', label: 'Urgent' }
     : { level: 'follow-up', label: 'Follow-up' }
 }

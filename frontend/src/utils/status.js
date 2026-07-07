@@ -1,11 +1,13 @@
-// Mirrors the booking_status → label/variant mapping from the legacy app.js.
+import { BOOKING_STATUS } from '../constants/config'
+
+// Maps a patient's booking_status (from the API) to button label/variant.
 export function getBookingStatusMeta(bookingStatus) {
-  const status = bookingStatus || 'not booked'
+  const status = bookingStatus || BOOKING_STATUS.NOT_BOOKED
 
   switch (status) {
-    case 'in progress':
+    case BOOKING_STATUS.IN_PROGRESS:
       return { status, label: 'Calling…', variant: 'in-progress', disabled: true }
-    case 'booked':
+    case BOOKING_STATUS.BOOKED:
       return { status, label: 'Booked', variant: 'booked', disabled: true }
     default:
       return { status, label: 'Start Call', variant: 'not-booked', disabled: false }

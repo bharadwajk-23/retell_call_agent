@@ -1,113 +1,224 @@
 # AI Physiotherapy Call Agent
 
-A demo-ready AI voice calling system for physiotherapy clinics that calls patients, uses structured dummy data, and persists appointments to JSON.
+An AI voice-calling system for a physiotherapy clinic. Staff open a
+dashboard, see patients who missed prescribed exercises, and start an
+outbound AI phone call (via [Retell AI](https://www.retellai.com)) that
+checks provider availability and books a follow-up appointment — no human
+on the line required.
+
+The project is split into two fully independent services:
+
+- **`backend/`** — FastAPI REST API (Python). Owns all business logic and
+  in-memory data. Never serves any frontend assets.
+- **`frontend/`** — React + Vite single-page app. Talks to the backend only
+  over HTTP, via `VITE_API_BASE_URL`.
+
+They run on separate ports, can be deployed independently, and communicate
+exclusively through the REST API described below.
+
+## Architecture
+
+```
+┌────────────────────┐   REST (fetch)   ┌───────────────────────┐        ┌────────────┐
+│  React SPA          │ ───────────────▶ │  FastAPI backend       │──────▶ │  Retell AI  │
+│  localhost:5173      │ ◀─────────────── │  localhost:8000        │        │  voice agent│
+└────────────────────┘   JSON responses  └──────────┬────────────┘        └─────┬──────┘
+                                                       ▲                          │ places call
+                                    Custom Functions / │                          ▼
+                                    Webhook callbacks  │                    ┌───────────┐
+                                                        └────────────────── │  Patient   │
+                                                                            └───────────┘
+```
+
+During a call, Retell calls back into the backend as "Custom Functions"
+(`/api/providers/availability`, `/api/appointments/book`) and sends call
+lifecycle events to `/api/webhooks/retell`. See
+[`docs/RETELL_SETUP.md`](docs/RETELL_SETUP.md) for the full dashboard
+configuration.
 
 ## Project structure
 
 ```
-project/
-├── connect_call.py              # Standalone Retell outbound call (run from project root)
-├── frontend/
-│   ├── index.html
-│   ├── style.css
-│   └── app.js
+retell_call_agent/
 ├── backend/
-│   ├── main.py                  # FastAPI app
-│   ├── config.py                # Paths & settings (override via env)
-│   ├── retell_service.py      # Retell AI SDK wrapper
-│   ├── patient_details.json    # Patients (phone, DOB, provider, missed days)
-│   ├── provider_details.json   # Per-weekday hourly grid 09:00–18:00 (0=free, 1=booked)
-│   ├── appointments.json       # Saved appointments (append-only)
-│   ├── call_logs.json          # Call / webhook logs
-│   └── requirements.txt
+│   ├── app/
+│   │   ├── main.py            # FastAPI app factory, middleware, lifespan
+│   │   ├── config/             # Settings (env vars) + path helpers
+│   │   ├── routers/            # HTTP layer only — no business logic
+│   │   ├── services/           # Business logic (calls, patients, appointments, providers, webhooks)
+│   │   ├── repositories/       # In-memory data access (patients, appointments, calls, logs)
+│   │   ├── models/              # Domain dataclasses
+│   │   ├── schemas/             # Pydantic request/response models
+│   │   ├── middleware/          # Centralized error handling + request logging
+│   │   ├── utils/                # Logging, phone normalization, JSON helpers
+│   │   └── data/provider_details.json
+│   ├── requirements.txt
+│   ├── Dockerfile
+│   └── .env.example
+├── frontend/
+│   ├── src/
+│   │   ├── pages/Dashboard/     # The one page in the app today
+│   │   ├── components/           # Navbar, PatientTable, CallActionButton, etc.
+│   │   ├── context/               # PatientsContext — avoids prop drilling
+│   │   ├── hooks/                 # usePatients (context consumer), usePatientsData, useTimeOfDay
+│   │   ├── services/api/          # All fetch() calls live here, nowhere else
+│   │   ├── constants/              # POLL_INTERVAL_MS, thresholds, status enum
+│   │   └── utils/
+│   ├── package.json
+│   ├── vite.config.js
+│   ├── Dockerfile
+│   ├── nginx.conf
+│   └── .env.example
+├── docs/
+│   └── RETELL_SETUP.md          # Retell dashboard configuration (agent prompt, custom functions, webhook)
+├── docker-compose.yml
+├── .env.example
 └── README.md
 ```
 
-## Tech stack
+## Prerequisites
 
-- **Backend**: Python, FastAPI
-- **Frontend**: static HTML/CSS/JS in `frontend/` (served by FastAPI from project root)
-- **Voice**: [Retell AI Python SDK](https://github.com/RetellAI/retell-python-sdk) (`retell-sdk` on PyPI)
-- **Telephony**: Telnyx number configured in the **Retell** dashboard (no Telnyx code in this repo)
+- Python 3.11+
+- Node.js 18+ and npm
+- A [Retell AI](https://www.retellai.com) account with a phone number
+  imported (Telnyx/Twilio underneath — configured in Retell's dashboard,
+  not in this repo)
+- Docker + Docker Compose (optional, for containerized deployment)
 
-## Configuration (environment variables)
+## Environment variables
 
-| Variable | Purpose |
-|----------|---------|
-| `RETELL_API_KEY` | Retell API key (required for real calls) |
-| `RETELL_AGENT_ID` | Agent to use (`override_agent_id`); optional if default is set in Retell |
-| `PATIENT_DETAILS_PATH` | Override path to patient JSON (default: `backend/patient_details.json`) |
-| `PROVIDER_DETAILS_PATH` | Override path to provider availability JSON |
-| `APPOINTMENTS_PATH` | Override path to appointments output JSON |
-| `CALL_LOGS_PATH` | Override path to call logs JSON |
-| `FRONTEND_DIR` | Override path to static frontend (default: `frontend/` next to `backend/`) |
+Every setting is read from the environment — nothing is hardcoded.
 
-## Setup
+**`backend/.env`** (copy from `backend/.env.example`):
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `ENV` | `development` | `development` or `production` |
+| `HOST` / `PORT` | `0.0.0.0` / `8000` | Bind address for uvicorn |
+| `LOG_LEVEL` | `INFO` | Python logging level |
+| `CORS_ORIGINS` | `http://localhost:5173` | Comma-separated list of allowed frontend origins — no wildcard |
+| `RETELL_API_KEY` | *(none)* | Retell API key — required for real calls |
+| `RETELL_AGENT_ID` | *(none)* | Agent used for `override_agent_id` |
+| `RETELL_FROM_NUMBER` | *(none)* | Telnyx/Twilio number provisioned in Retell (E.164) |
+| `RETELL_MOCK_CALLS` | `false` | `true` skips the real Retell API call — for local/demo use without real telephony |
+| `PROVIDER_DETAILS_PATH` | `app/data/provider_details.json` | Override provider availability reference data path |
+
+**`frontend/.env.development` / `.env.production`**:
+
+| Variable | Value |
+|---|---|
+| `VITE_API_BASE_URL` | `http://localhost:8000/api` in dev; your backend's public `/api` URL in production |
+
+**Root `.env`** (only used by `docker-compose.yml`): `BACKEND_PORT`,
+`FRONTEND_PORT`, `CORS_ORIGINS`, `VITE_API_BASE_URL` (see `.env.example`).
+
+## Running locally (without Docker)
+
+**Backend:**
 
 ```bash
 cd backend
+python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
+cp .env.example .env   # fill in your Retell credentials, or set RETELL_MOCK_CALLS=true
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-Set environment variables (PowerShell example):
+API docs are auto-generated at `http://localhost:8000/docs`.
 
-```powershell
-$env:RETELL_API_KEY = "your_key"
-$env:RETELL_AGENT_ID = "your_agent_id"
-```
-
-## Run the API + UI
-
-From `backend/`:
+**Frontend** (separate terminal):
 
 ```bash
-python main.py
+cd frontend
+npm install
+cp .env.example .env.development   # already defaults to http://localhost:8000/api
+npm run dev
 ```
 
-or:
+Open `http://localhost:5173`.
+
+## Running with Docker Compose
 
 ```bash
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
+cp .env.example .env
+cp backend/.env.example backend/.env   # fill in Retell credentials
+docker compose up --build
 ```
 
-Open `http://localhost:8000` — the UI is served from `frontend/`.
+- Frontend: `http://localhost:5173`
+- Backend: `http://localhost:8000` (health check at `/health`, readiness at `/ready`)
 
-## API endpoints
+## API reference
 
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/health` | Health check |
-| GET | `/patients` | List `patient_details.json` |
-| POST | `/make-call` | Body: `{"phone": "+91..."}`. Looks up patient, starts Retell call. Response includes `status: "call generated"`. |
-| GET | `/providers/availability` | Full provider records + weekly slot grids |
-| POST | `/appointments` | Saves one appointment to `appointments.json` |
-| GET | `/appointments` | Lists saved appointments |
-| POST | `/retell-webhook` | Retell webhook receiver |
-| GET | `/call-status?phone=...` | In-memory status for last active call per phone |
-| GET | `/transcripts` | Reads `call_logs.json` |
+All business endpoints are under `/api`. `/health` and `/ready` are
+unprefixed (infra checks only).
 
-## Standalone call script
+| Method | Path | Purpose |
+|---|---|---|
+| GET | `/health` | Liveness probe |
+| GET | `/ready` | Readiness probe (checks Retell config) |
+| GET | `/api/patients` | List patients |
+| POST | `/api/patients/reset` | Reset demo data (`patient_id` query param optional) |
+| POST | `/api/calls/start` | Start outbound call by `patient_id` (dashboard action) |
+| POST | `/api/calls/make` | Start outbound call by `phone` |
+| GET | `/api/calls/status?phone=...` | Current status of the last call for a phone number |
+| GET | `/api/calls/transcripts` | All logged call/webhook events |
+| GET | `/api/providers/availability?provider_name=...` | Free slots for a provider (Retell custom function) |
+| POST | `/api/appointments` | Create an appointment (generic) |
+| POST | `/api/appointments/book` | Book an appointment (Retell custom function) |
+| GET | `/api/appointments` | List booked appointments |
+| POST | `/api/webhooks/retell` | Retell call-lifecycle/transcript webhook |
 
-From the **project root** (same folder as `connect_call.py`):
+Full interactive docs: `http://localhost:8000/docs` (Swagger) or `/redoc`.
 
-```bash
-python connect_call.py +919876543210
-```
+> **If you're migrating from the pre-refactor single-service app:** the
+> Retell dashboard's Custom Function URLs and webhook URL point at the old
+> paths (`/providers/availability`, `/book-appointment`, `/retell-webhook`)
+> and must be updated to the `/api/...` paths above. See
+> [`docs/RETELL_SETUP.md`](docs/RETELL_SETUP.md).
 
-Optional metadata flags: `--patient-name`, `--provider-name`, `--missed-days`.
+## Data & persistence
 
-Requires `RETELL_API_KEY` (and usually `RETELL_AGENT_ID`).
+Patients, active calls, appointments, and call logs live in memory in the
+backend process (matching the original app's behavior) — restarting the
+backend resets them. Provider availability is the only data read from disk
+(`backend/app/data/provider_details.json`). There is no database; swapping
+one in only requires reimplementing the classes in `backend/app/repositories/`.
 
-## Retell + Telnyx
+## Logging & error handling
 
-1. Create an agent in Retell and assign your **Telnyx** number in the Retell dashboard (see Retell/Telnyx docs or your setup video).
-2. Put the API key (and agent id if needed) in the environment as above.
-3. Patient numbers in `patient_details.json` must be callable from your Telnyx/Retell configuration (E.164 recommended).
+- Structured logging (Python `logging`, not `print()`) for every request,
+  call event, and booking event — see `backend/app/utils/logging_config.py`.
+- Centralized exception handlers return consistent `{"detail": ...}` JSON
+  and never leak stack traces (`backend/app/middleware/error_handlers.py`).
+- The Retell webhook endpoint additionally guards itself so a malformed
+  payload from Retell always gets a logged, explicit response.
 
-## Notes
+## Production notes
 
-- Demo UI includes a **simulated transcript** for local testing; production transcripts depend on webhooks and a public URL.
-- This project is for demonstration only: add auth, a real database, and stricter validation before production use.
+- Set `ENV=production`, a real `RETELL_API_KEY`/`RETELL_AGENT_ID`/`RETELL_FROM_NUMBER`,
+  and `CORS_ORIGINS` to your real frontend domain (never `*`).
+- Put a reverse proxy (Nginx, etc.) in front of both services, or run them
+  behind the provided Docker images directly.
+- `docker-compose.yml` includes health checks for both services; wire your
+  orchestrator's readiness checks to `GET /ready` on the backend.
+- Frontend `VITE_API_BASE_URL` is baked in at build time (Vite env vars are
+  static) — rebuild the frontend image if the backend's public URL changes.
+
+## What changed in this refactor
+
+This app was previously a single FastAPI service that also built and
+served the React app's static files (routes lived at `/patients`,
+`/start-call`, `/providers/availability`, etc., with two competing
+`main.py`/`main_new.py` implementations). It has been split into two
+independently deployable services with a layered backend architecture,
+environment-driven configuration (no hardcoded secrets), structured
+logging, centralized error handling, and a `/api`-prefixed REST surface.
+Application behavior — the dashboard, Start Call, Reset, Retell calling,
+availability, booking, webhooks, transcripts, and 2-second polling — is
+unchanged. The only externally-visible change is the endpoint paths, which
+means the Retell dashboard's Custom Function and webhook URLs need a
+one-time update (see above).
 
 ## License
 

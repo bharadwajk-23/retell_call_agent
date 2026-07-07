@@ -1,5 +1,5 @@
 # ==========================================
-# Python
+# Python (backend/)
 # ==========================================
 __pycache__/
 *.py[cod]
@@ -15,7 +15,6 @@ ENV/
 
 # Python packaging
 build/
-dist/
 downloads/
 develop-eggs/
 .eggs/
@@ -50,16 +49,19 @@ hypothesis/
 .pytype/
 .dmypy.json
 
-# Jupyter
-.ipynb_checkpoints/
-
 # ==========================================
-# Environment variables
+# Environment variables (never commit real secrets)
 # ==========================================
 .env
-.env.*
-*.env
+.env.local
+backend/.env
+frontend/.env
+frontend/.env.local
 !.env.example
+!backend/.env.example
+!frontend/.env.example
+!frontend/.env.development
+!frontend/.env.production
 
 # ==========================================
 # Logs
@@ -90,32 +92,13 @@ Thumbs.db
 Desktop.ini
 
 # ==========================================
-# Node.js / React
+# Node.js / React (frontend/)
 # ==========================================
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-
-# Build output
-build/
-dist/
+frontend/dist/
 coverage/
-
-# Package managers
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
-
-# Local configuration
 *.local
-*.md
-# ==========================================
-# Generated assets
-# ==========================================
-retell/
-
-# Uncomment if data files should not be committed
-# *.json
-# data/

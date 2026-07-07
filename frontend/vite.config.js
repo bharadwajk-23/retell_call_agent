@@ -2,22 +2,23 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { fileURLToPath, URL } from 'node:url'
 
-// FastAPI mounts StaticFiles at /index and serves straight out of app/,
-// so the build must land there with asset URLs prefixed accordingly.
+// Standalone SPA: built independently of the backend and served by its own
+// static server (see Dockerfile/nginx.conf). No coupling to FastAPI paths.
 export default defineConfig({
   plugins: [react()],
-  base: '/index/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
   build: {
-    outDir: fileURLToPath(new URL('../app', import.meta.url)),
-    emptyOutDir: false,
+    outDir: 'dist',
     assetsDir: 'assets',
   },
   server: {
+    port: 5173,
+  },
+  preview: {
     port: 5173,
   },
 })
