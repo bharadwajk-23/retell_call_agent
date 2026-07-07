@@ -1,0 +1,38 @@
+.button {
+  border: none;
+  padding: 9px 18px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  white-space: nowrap;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.notBooked {
+  background: var(--color-navy);
+  color: var(--color-on-navy);
+}
+
+.notBooked:hover:not(:disabled) {
+  background: var(--color-navy-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(22, 33, 62, 0.35);
+}
+
+.inProgress {
+  background: var(--color-warning-soft);
+  color: var(--color-warning);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+.booked {
+  background: var(--color-success-soft);
+  color: var(--color-success);
+}

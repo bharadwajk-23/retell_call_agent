@@ -1,0 +1,16 @@
+.wrap {
+  padding: var(--space-6) var(--space-4);
+  text-align: center;
+}
+
+.title {
+  margin: 0 0 4px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.description {
+  margin: 0;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
