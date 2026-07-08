@@ -11,12 +11,12 @@ from typing import List
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-_BACKEND_DIR = Path(__file__).resolve().parent.parent.parent
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=str(_BACKEND_DIR / ".env"),
+        env_file=str(_PROJECT_ROOT / ".env"),
         env_file_encoding="utf-8",
         extra="ignore",
     )

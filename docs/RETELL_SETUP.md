@@ -135,5 +135,5 @@ Set automatically on every outbound call: `{{patient_name}}`,
 ## 6. From-number
 
 The Telnyx/Twilio number used for outbound calls is whatever you set as
-`RETELL_FROM_NUMBER` in `backend/.env` — it must be a number already
+`RETELL_FROM_NUMBER` in the project's `.env` — it must be a number already
 imported into your Retell account.

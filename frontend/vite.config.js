@@ -6,6 +6,9 @@ import { fileURLToPath, URL } from 'node:url'
 // static server (see Dockerfile/nginx.conf). No coupling to FastAPI paths.
 export default defineConfig({
   plugins: [react()],
+  // Read env vars (VITE_*) from the single project-root .env instead of a
+  // frontend-local one — see ../.env / ../.env.example.
+  envDir: fileURLToPath(new URL('..', import.meta.url)),
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

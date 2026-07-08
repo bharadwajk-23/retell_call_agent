@@ -53,8 +53,7 @@ retell_call_agent/
 │   │   ├── utils/                # Logging, phone normalization, JSON helpers
 │   │   └── data/provider_details.json
 │   ├── requirements.txt
-│   ├── Dockerfile
-│   └── .env.example
+│   └── Dockerfile
 ├── frontend/
 │   ├── src/
 │   │   ├── pages/Dashboard/     # The one page in the app today
@@ -67,12 +66,14 @@ retell_call_agent/
 │   ├── package.json
 │   ├── vite.config.js
 │   ├── Dockerfile
-│   ├── nginx.conf
-│   └── .env.example
+│   └── nginx.conf
 ├── docs/
 │   └── RETELL_SETUP.md          # Retell dashboard configuration (agent prompt, custom functions, webhook)
+├── initialize.sh                # installs backend + frontend dependencies
+├── start_backend.sh             # runs the FastAPI backend
+├── start_frontend.sh            # builds + serves the frontend
 ├── docker-compose.yml
-├── .env.example
+├── .env.example                 # single env file for the whole project
 └── README.md
 ```
 
@@ -87,67 +88,49 @@ retell_call_agent/
 
 ## Environment variables
 
-Every setting is read from the environment — nothing is hardcoded.
-
-**`backend/.env`** (copy from `backend/.env.example`):
+Every setting is read from the environment — nothing is hardcoded. There is
+a single `.env` at the project root (copy from `.env.example`); the backend
+(via `pydantic-settings`), the frontend build (via Vite's `envDir`), and
+`docker-compose.yml` all read from that one file — there's no per-service
+`.env`.
 
 | Variable | Default | Purpose |
 |---|---|---|
 | `ENV` | `development` | `development` or `production` |
-| `HOST` / `PORT` | `0.0.0.0` / `8000` | Bind address for uvicorn |
+| `HOST` / `PORT` | `0.0.0.0` / `8006` | Bind address for uvicorn |
 | `LOG_LEVEL` | `INFO` | Python logging level |
-| `CORS_ORIGINS` | `http://localhost:5173` | Comma-separated list of allowed frontend origins — no wildcard |
+| `CORS_ORIGINS` | `http://localhost:8005` | Comma-separated list of allowed frontend origins — no wildcard |
 | `RETELL_API_KEY` | *(none)* | Retell API key — required for real calls |
 | `RETELL_AGENT_ID` | *(none)* | Agent used for `override_agent_id` |
 | `RETELL_FROM_NUMBER` | *(none)* | Telnyx/Twilio number provisioned in Retell (E.164) |
 | `RETELL_MOCK_CALLS` | `false` | `true` skips the real Retell API call — for local/demo use without real telephony |
 | `PROVIDER_DETAILS_PATH` | `app/data/provider_details.json` | Override provider availability reference data path |
-
-**`frontend/.env.development` / `.env.production`**:
-
-| Variable | Value |
-|---|---|
-| `VITE_API_BASE_URL` | `http://localhost:8000/api` in dev; your backend's public `/api` URL in production |
-
-**Root `.env`** (only used by `docker-compose.yml`): `BACKEND_PORT`,
-`FRONTEND_PORT`, `CORS_ORIGINS`, `VITE_API_BASE_URL` (see `.env.example`).
+| `VITE_API_BASE_URL` | `http://localhost:8006/api` | Backend URL baked into the frontend at build time (Vite only exposes `VITE_`-prefixed vars, and only at build time — rebuild if this changes) |
+| `FRONTEND_PORT` | `8005` | Port the built frontend is served on (`start_frontend.sh` / docker-compose) |
+| `BACKEND_PORT` | `8006` | docker-compose only: host-side port mapping for the backend container |
 
 ## Running locally (without Docker)
 
-**Backend:**
-
 ```bash
-cd backend
-python3 -m venv venv 
-venv\Scripts\activate.bat
-pip install -r requirements.txt
 cp .env.example .env   # fill in your Retell credentials, or set RETELL_MOCK_CALLS=true
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+./initialize.sh        # creates backend/venv + installs backend & frontend deps
+./start_backend.sh     # http://localhost:8006 (docs at /docs)
+./start_frontend.sh    # builds frontend/dist on first run, serves on http://localhost:8005
 ```
 
-API docs are auto-generated at `http://localhost:8000/docs`.
-
-**Frontend** (separate terminal):
-
-```bash
-cd frontend
-npm install
-cp .env.example .env.development   # already defaults to http://localhost:8000/api
-npm run dev
-```
-
-Open `http://localhost:5173`.
+Run `start_backend.sh` and `start_frontend.sh` in separate terminals (or under
+a process manager / systemd). Both read their configuration from the single
+root `.env`.
 
 ## Running with Docker Compose
 
 ```bash
-cp .env.example .env
-cp backend/.env.example backend/.env   # fill in Retell credentials
+cp .env.example .env   # fill in Retell credentials
 docker compose up --build
 ```
 
-- Frontend: `http://localhost:5173`
-- Backend: `http://localhost:8000` (health check at `/health`, readiness at `/ready`)
+- Frontend: `http://localhost:8005`
+- Backend: `http://localhost:8006` (health check at `/health`, readiness at `/ready`)
 
 ## API reference
 
