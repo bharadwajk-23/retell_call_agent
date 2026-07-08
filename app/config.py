@@ -29,8 +29,8 @@ APPOINTMENTS_PATH = _path("APPOINTMENTS_PATH", "appointments.json")
 CALL_LOGS_PATH = _path("CALL_LOGS_PATH", "call_logs.json")
 FRONTEND_DIR = os.getenv("FRONTEND_DIR", os.path.join(PROJECT_ROOT, "frontend"))
 
-RETELL_API_KEY = os.getenv("RETELL_API_KEY", "key_45cf11b32416e77d5f4a6d4aa8d2")
-RETELL_AGENT_ID = os.getenv("RETELL_AGENT_ID", "agent_8be0d12c6f85c0f3369c6e8742")
+RETELL_API_KEY = os.getenv("RETELL_API_KEY", "key_62aa3d52cebbe9b927b4c8af54ff")
+RETELL_AGENT_ID = os.getenv("RETELL_AGENT_ID", "agent_731bcdbf4890bdf2c7bba7dbfd")
 RETELL_FROM_NUMBER = os.getenv("RETELL_FROM_NUMBER", "+12402610848").strip()
 RETELL_MOCK_CALLS = _bool_env("RETELL_MOCK_CALLS", False)
 
