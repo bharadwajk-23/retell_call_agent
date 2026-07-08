@@ -1,4 +1,4 @@
-import { PatientsProvider } from './context/PatientsContext'
+import { PatientsProvider } from './context/PatientsContext.jsx'
 import { Dashboard } from './pages/Dashboard/Dashboard'
 
 function App() {

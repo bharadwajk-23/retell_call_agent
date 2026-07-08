@@ -118,7 +118,8 @@ Every setting is read from the environment — nothing is hardcoded.
 
 ```bash
 cd backend
-python3 -m venv .venv && source .venv/bin/activate
+python3 -m venv venv 
+venv\Scripts\activate.bat
 pip install -r requirements.txt
 cp .env.example .env   # fill in your Retell credentials, or set RETELL_MOCK_CALLS=true
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000

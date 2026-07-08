@@ -2,7 +2,7 @@
 // read patient/call state (never call usePatientsData directly).
 
 import { useContext } from 'react'
-import { PatientsContext } from '../context/patientsContext'
+import { PatientsContext } from '../context/patientsContext.js'
 
 export function usePatients() {
   const context = useContext(PatientsContext)

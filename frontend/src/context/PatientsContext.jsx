@@ -3,7 +3,7 @@
 // through every level of the component tree.
 
 import { usePatientsData } from '../hooks/usePatientsData'
-import { PatientsContext } from './patientsContext'
+import { PatientsContext } from './patientsContext.js'
 
 export function PatientsProvider({ children }) {
   const value = usePatientsData()
