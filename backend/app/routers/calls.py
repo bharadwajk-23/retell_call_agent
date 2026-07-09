@@ -12,7 +12,7 @@ from app.schemas.call import (
 )
 from app.services import call_service
 
-router = APIRouter(prefix="/api/calls", tags=["calls"])
+router = APIRouter(prefix="/calls", tags=["calls"])
 
 
 @router.post("/start", response_model=CallResponse)

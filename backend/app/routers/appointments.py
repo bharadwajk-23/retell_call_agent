@@ -12,7 +12,7 @@ from app.schemas.appointment import (
 )
 from app.services import appointment_service
 
-router = APIRouter(prefix="/api/appointments", tags=["appointments"])
+router = APIRouter(prefix="/appointments", tags=["appointments"])
 
 
 @router.post("", response_model=BookAppointmentResponse)

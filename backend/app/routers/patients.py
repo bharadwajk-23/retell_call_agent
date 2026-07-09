@@ -7,7 +7,7 @@ from fastapi import APIRouter, Query
 from app.schemas.patient import PatientOut, ResetPatientsResponse
 from app.services import patient_service
 
-router = APIRouter(prefix="/api/patients", tags=["patients"])
+router = APIRouter(prefix="/patients", tags=["patients"])
 
 
 @router.get("", response_model=List[PatientOut])

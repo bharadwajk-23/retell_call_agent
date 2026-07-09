@@ -6,7 +6,7 @@ from fastapi import APIRouter, Query
 
 from app.services import provider_service
 
-router = APIRouter(prefix="/api/providers", tags=["providers"])
+router = APIRouter(prefix="/providers", tags=["providers"])
 
 
 @router.get("/availability")

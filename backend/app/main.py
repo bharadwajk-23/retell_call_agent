@@ -39,10 +39,7 @@ def create_app() -> FastAPI:
         title="AI Physiotherapy Call Agent API",
         version="2.0.0",
         lifespan=lifespan,
-        root_path="/janus/voice-agent",
-        docs_url="/api/docs",
-        redoc_url="/api/redoc",
-        openapi_url="/api/openapi.json",
+        root_path="/janus/voice-agent/api",
     )
 
     # Trusted host middleware must be added FIRST (outermost) so it processes before other middleware
