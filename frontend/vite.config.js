@@ -9,6 +9,7 @@ export default defineConfig({
   // Read env vars (VITE_*) from the single project-root .env instead of a
   // frontend-local one — see ../.env / ../.env.example.
   envDir: fileURLToPath(new URL('..', import.meta.url)),
+  base: '/janus/voice-agent/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

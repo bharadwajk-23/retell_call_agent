@@ -10,6 +10,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
 
 from app.config.settings import get_settings
 from app.middleware.error_handlers import register_exception_handlers
@@ -38,8 +39,17 @@ def create_app() -> FastAPI:
         title="AI Physiotherapy Call Agent API",
         version="2.0.0",
         lifespan=lifespan,
+        root_path="/janus/voice-agent",
+        docs_url="/api/docs",
+        redoc_url="/api/redoc",
+        openapi_url="/api/openapi.json",
     )
 
+    # Trusted host middleware must be added FIRST (outermost) so it processes before other middleware
+    app.add_middleware(
+        TrustedHostMiddleware,
+        allowed_hosts=["*"],  # Will validate against X-Forwarded-Host if present
+    )
     app.add_middleware(
         CORSMiddleware,
         allow_origins=settings.cors_origins_list,

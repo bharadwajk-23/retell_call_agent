@@ -28,8 +28,11 @@ class Settings(BaseSettings):
     LOG_LEVEL: str = "INFO"
 
     # --- CORS ---
-    # Comma-separated list of allowed origins, e.g. "http://localhost:5173,https://app.example.com"
-    CORS_ORIGINS: str = "http://localhost:5173"
+    # Comma-separated list of allowed origins (frontend URLs)
+    # Production: https://ailabs.youngsoft.com (reverse proxy frontend)
+    # Development: http://localhost:5173
+    # Use both in development/staging: "http://localhost:5173,https://ailabs.youngsoft.com"
+    CORS_ORIGINS: str = "http://localhost:5173,https://ailabs.youngsoft.com"
 
     # --- Retell AI ---
     RETELL_API_KEY: str = ""

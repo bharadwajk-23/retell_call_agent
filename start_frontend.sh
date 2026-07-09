@@ -1,7 +1,7 @@
 #!/bin/bash
 # Builds the frontend (if not already built) and serves frontend/dist as
-# static files. Reads FRONTEND_PORT from the project's single root .env,
-# defaulting to 8005 if it isn't set there.
+# static files, passing the port directly on the command line. Reads
+# FRONTEND_PORT from the project's single root .env, defaulting to 8005.
 set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -19,8 +19,11 @@ fi
 
 cd "$PROJECT_DIR"
 
-FRONTEND_PORT=$(grep -E '^\s*FRONTEND_PORT\s*=' .env 2>/dev/null | head -1 | cut -d'=' -f2 | tr -d ' \r')
-FRONTEND_PORT=${FRONTEND_PORT:-8005}
+if [ -f .env ]; then
+  set -a
+  source .env
+  set +a
+fi
 
-echo "Starting frontend on port ${FRONTEND_PORT}..."
-FRONTEND_PORT="$FRONTEND_PORT" exec python3 frontend/serve.py
+echo "Starting frontend on port ${FRONTEND_PORT:-8005}..."
+exec python3 frontend/serve.py "${FRONTEND_PORT:-8005}"
