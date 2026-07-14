@@ -64,9 +64,9 @@ retell_call_agent/
 │   │   ├── constants/              # POLL_INTERVAL_MS, thresholds, status enum
 │   │   └── utils/
 │   ├── package.json
-│   ├── vite.config.js
-│   ├── Dockerfile
-│   └── nginx.conf
+│   ├── serve.py            # FastAPI/uvicorn static server for dist/ (SPA fallback)
+│   ├── requirements.txt
+│   └── Dockerfile
 ├── docs/
 │   └── RETELL_SETUP.md          # Retell dashboard configuration (agent prompt, custom functions, webhook)
 ├── initialize.sh                # installs backend + frontend dependencies
@@ -113,14 +113,20 @@ a single `.env` at the project root (copy from `.env.example`); the backend
 
 ```bash
 cp .env.example .env   # fill in your Retell credentials, or set RETELL_MOCK_CALLS=true
-./initialize.sh        # creates backend/venv + installs backend & frontend deps
-./start_backend.sh     # http://localhost:8006 (docs at /docs)
-./start_frontend.sh    # builds frontend/dist on first run, serves on http://localhost:8005
+./initialize.sh        # creates backend/venv + frontend/venv, installs backend & frontend deps
+./start_backend.sh     # http://localhost:8006 (docs at /docs), served by uvicorn
+./start_frontend.sh    # serves the existing frontend/dist on http://localhost:8005 via uvicorn
 ```
 
 Run `start_backend.sh` and `start_frontend.sh` in separate terminals (or under
 a process manager / systemd). Both read their configuration from the single
 root `.env`.
+
+`start_frontend.sh` does **not** run `npm run build` — `vite.config.js` was
+removed, so there's currently no supported way to rebuild `frontend/dist`
+with the correct `/janus/voice-agent/` base path and API URL baked in. It
+just serves whatever is already in `dist/`. Restore a `vite.config.js` (base
+path + `envDir`) before the next UI code change that needs a rebuild.
 
 ## Running with Docker Compose
 
@@ -182,12 +188,22 @@ one in only requires reimplementing the classes in `backend/app/repositories/`.
 
 - Set `ENV=production`, a real `RETELL_API_KEY`/`RETELL_AGENT_ID`/`RETELL_FROM_NUMBER`,
   and `CORS_ORIGINS` to your real frontend domain (never `*`).
-- Put a reverse proxy (Nginx, etc.) in front of both services, or run them
-  behind the provided Docker images directly.
+- Both services run on `uvicorn`, each on its own port (backend 8006,
+  frontend 8005 by default). No nginx/reverse proxy is bundled here — this
+  deployment expects IT's own reverse proxy to route
+  `ailabs.youngsoft.com/janus/voice-agent/*` to the frontend and
+  `ailabs.youngsoft.com/janus/voice-agent/api/*` to the backend (see
+  `docs/DEPLOYMENT_REVERSE_PROXY.md`). Whether that proxy strips the
+  `/janus/voice-agent` prefix before forwarding wasn't confirmed at the time
+  `frontend/serve.py` was written, so it's built to handle the path with or
+  without the prefix — check `BASE_PREFIX` there if routing ever needs
+  adjusting.
 - `docker-compose.yml` includes health checks for both services; wire your
   orchestrator's readiness checks to `GET /ready` on the backend.
-- Frontend `VITE_API_BASE_URL` is baked in at build time (Vite env vars are
-  static) — rebuild the frontend image if the backend's public URL changes.
+- Frontend `VITE_API_BASE_URL` is baked in at build time — but `vite.config.js`
+  has been removed, so rebuilding currently won't produce a correctly
+  configured `dist/`. Restore it before the next rebuild (see "Running
+  locally" above).
 
 ## What changed in this refactor
 

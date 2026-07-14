@@ -25,5 +25,15 @@ echo "==> Frontend: npm dependencies"
 cd "$PROJECT_DIR/frontend"
 npm install
 
+echo "==> Frontend: virtual environment + Python dependencies (serves dist/ via uvicorn)"
+if [ ! -d venv ]; then
+  python3 -m venv venv
+fi
+
+source venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+deactivate
+
 echo
 echo "Dependencies installed."
