@@ -6,6 +6,7 @@ import { PatientTable } from '../../components/PatientTable/PatientTable'
 import { EmptyState } from '../../components/EmptyState/EmptyState'
 import { ErrorBanner } from '../../components/ErrorBanner/ErrorBanner'
 import { TableSkeleton } from '../../components/TableSkeleton/TableSkeleton'
+import { useAuth } from '../../hooks/useAuth'
 import { usePatients } from '../../hooks/usePatients'
 import styles from './Dashboard.module.css'
 
@@ -19,6 +20,7 @@ function matchesSearch(patient, term) {
 export function Dashboard() {
   const { patients, loading, error, pendingId, startCall, resetDemo, dismissError } =
     usePatients()
+  const { logout } = useAuth()
   const [searchTerm, setSearchTerm] = useState('')
 
   const filteredPatients = useMemo(
@@ -36,6 +38,7 @@ export function Dashboard() {
         onSearchChange={setSearchTerm}
         onReset={resetDemo}
         resetting={false}
+        onLogout={logout}
       />
 
       <div className={styles.container}>

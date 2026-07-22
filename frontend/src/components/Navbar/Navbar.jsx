@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import styles from './Navbar.module.css'
 
-export function Navbar({ searchTerm, onSearchChange, onReset, resetting }) {
+export function Navbar({ searchTerm, onSearchChange, onReset, resetting, onLogout }) {
   const searchRef = useRef(null)
 
   useEffect(() => {
@@ -57,6 +57,9 @@ export function Navbar({ searchTerm, onSearchChange, onReset, resetting }) {
           title="Reset demo data"
         >
           {resetting ? 'Resetting…' : 'Reset'}
+        </button>
+        <button type="button" className={styles.logoutButton} onClick={onLogout} title="Log out">
+          Logout
         </button>
       </div>
     </header>
