@@ -62,6 +62,30 @@ body {
     transform: translateY(-1px);
 }
 
+.logged-in-user {
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 600;
+    margin-right: 12px;
+}
+
+.logout-btn {
+    background: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-left: 12px;
+}
+
+.logout-btn:hover {
+    background: #fecaca;
+    transform: translateY(-1px);
+}
+
 .clinic-name {
     font-size: 28px;
     font-weight: 700;

@@ -15,7 +15,9 @@
                     <h2 class="assistant-title">AI Call Assistant</h2>
                 </div>
                 <div class="header-actions">
+                    <!-- <span class="logged-in-user" id="logged-in-user"></span> -->
                     <button class="reset-btn" onclick="resetDemo()">Reset</button>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
                 </div>
             </div>
         </header>
@@ -46,6 +48,11 @@
         </footer>
     </div>
 
+    <script src="auth.js"></script>
+    <script>
+        requireAuth();
+        document.getElementById('logged-in-user').textContent = sessionStorage.getItem('username') || '';
+    </script>
     <script src="app.js"></script>
 </body>
 </html>
