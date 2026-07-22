@@ -11,12 +11,9 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.app.core.config import get_settings
-from backend.app.core.constants import API_TITLE, API_VERSION
-from backend.app.core.logging import configure_logging, get_logger
-from backend.app.middleware.error_handlers import register_exception_handlers
-from backend.app.middleware.request_logging import RequestLoggingMiddleware
-from backend.app.routers import appointments, calls, health, patients, providers, webhooks
+from backend.app.core import API_TITLE, API_VERSION, configure_logging, get_logger, get_settings
+from backend.app.middleware import RequestLoggingMiddleware, register_exception_handlers
+from backend.app.routers import router as api_router
 
 configure_logging()
 logger = get_logger(__name__)
@@ -52,12 +49,7 @@ def create_app() -> FastAPI:
 
     register_exception_handlers(app)
 
-    app.include_router(health.router)
-    app.include_router(patients.router)
-    app.include_router(calls.router)
-    app.include_router(providers.router)
-    app.include_router(appointments.router)
-    app.include_router(webhooks.router)
+    app.include_router(api_router)
 
     return app
 

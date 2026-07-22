@@ -13,7 +13,8 @@ from backend.app.schemas.call import (
     StartCallRequest,
     TranscriptsResponse,
 )
-from backend.app.schemas.common import ErrorResponse, HealthResponse, ReadinessResponse
+from backend.app.schemas.common import ErrorResponse
+from backend.app.schemas.health import HealthResponse, ReadinessResponse
 from backend.app.schemas.patient import PatientOut, ResetPatientsResponse
 from backend.app.schemas.provider import FreeSlot, ProviderAvailability, ProvidersAvailabilityResponse
 from backend.app.schemas.webhook import RetellWebhookPayload, WebhookAck

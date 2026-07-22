@@ -4,13 +4,7 @@ from typing import Any, Dict
 
 from fastapi import APIRouter, Query
 
-from backend.app.schemas.call import (
-    ActiveCallStatus,
-    CallResponse,
-    MakeCallRequest,
-    StartCallRequest,
-    TranscriptsResponse,
-)
+from backend.app.schemas import ActiveCallStatus, CallResponse, MakeCallRequest, StartCallRequest, TranscriptsResponse
 from backend.app.services import call_service
 
 router = APIRouter(prefix="/calls", tags=["calls"])

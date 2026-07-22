@@ -8,19 +8,19 @@ a real database later only requires reimplementing this class.
 from threading import Lock
 from typing import List, Optional
 
-from backend.app.models.patient import Patient
-from backend.app.utils.phone import normalize_phone
+from backend.app.models import Patient
+from backend.app.utils import normalize_phone
 
 _SEED_PATIENTS: List[Patient] = [
-    Patient(
-        id=1,
-        patient_name="Dave Vipul",
-        phone="+918147775334",
-        dob="1988-03-15",
-        provider_name="Dr Johnson",
-        exercise_missed_days=5,
-        booking_status="not booked",
-    ),
+    # Patient(
+    #     id=1,
+    #     patient_name="Dave Vipul",
+    #     phone="+918147775334",
+    #     dob="1988-03-15",
+    #     provider_name="Dr Johnson",
+    #     exercise_missed_days=5,
+    #     booking_status="not booked",
+    # ),
     Patient(
         id=2,
         patient_name="Emiley Davis",
@@ -30,15 +30,15 @@ _SEED_PATIENTS: List[Patient] = [
         exercise_missed_days=7,
         booking_status="not booked",
     ),
-    Patient(
-        id=3,
-        patient_name="Robert Brown",
-        phone="+919099156582",
-        dob="1990-02-05",
-        provider_name="Dr Johnson",
-        exercise_missed_days=10,
-        booking_status="not booked",
-    ),
+    # Patient(
+    #     id=3,
+    #     patient_name="Robert Brown",
+    #     phone="+919099156582",
+    #     dob="1990-02-05",
+    #     provider_name="Dr Johnson",
+    #     exercise_missed_days=10,
+    #     booking_status="not booked",
+    # ),
 ]
 
 

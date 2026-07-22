@@ -1,25 +1,21 @@
 """Business logic for placing and tracking outbound Retell calls."""
 
+import uuid
 from datetime import datetime
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 from fastapi import HTTPException
 
-from backend.app.clients.retell_client import retell_client
-from backend.app.core.config import get_settings
-from backend.app.core.constants import ACTIVE_CALL_STATUSES, DETAILS_TERMINAL_STATUSES, TERMINAL_CALL_STATUSES
-from backend.app.core.logging import get_logger
-from backend.app.models.call import ActiveCall
-from backend.app.models.patient import Patient
-from backend.app.repositories.active_call_repository import active_call_repository
-from backend.app.repositories.call_log_repository import call_log_repository
-from backend.app.repositories.patient_repository import patient_repository
-from backend.app.utils.phone import normalize_phone
+from backend.app.clients import retell_client
+from backend.app.core import ACTIVE_CALL_STATUSES, DETAILS_TERMINAL_STATUSES, TERMINAL_CALL_STATUSES, get_logger, get_settings
+from backend.app.models import ActiveCall, Patient
+from backend.app.repositories import active_call_repository, call_log_repository, patient_repository
+from backend.app.utils import get_field, is_stale, normalize_phone
 
 logger = get_logger(__name__)
 
 
-def _require_from_number() -> str:
+def require_from_number() -> str:
     settings = get_settings()
     if not settings.RETELL_FROM_NUMBER:
         raise HTTPException(
@@ -29,27 +25,10 @@ def _require_from_number() -> str:
     return settings.RETELL_FROM_NUMBER
 
 
-def _call_id_from_response(call_response: Any) -> str:
-    cid = getattr(call_response, "call_id", None)
-    if cid is None and isinstance(call_response, dict):
-        cid = call_response.get("call_id")
-    if cid is not None:
-        return cid
-    import uuid
-
-    return str(uuid.uuid4())
-
-
-def _status_from_response(call_response: Any) -> Optional[str]:
-    if isinstance(call_response, dict):
-        return call_response.get("call_status")
-    return getattr(call_response, "call_status", None)
-
-
-def _execute_outbound_call(patient: Patient) -> Dict[str, Any]:
+def execute_outbound_call(patient: Patient) -> Dict[str, Any]:
     settings = get_settings()
     phone = normalize_phone(patient.phone)
-    from_number = _require_from_number()
+    from_number = require_from_number()
 
     call_response = retell_client.trigger_outbound_call(
         phone_number=phone,
@@ -63,14 +42,14 @@ def _execute_outbound_call(patient: Patient) -> Dict[str, Any]:
     if not call_response:
         raise HTTPException(status_code=500, detail="Failed to trigger call")
 
-    call_id = _call_id_from_response(call_response)
+    call_id = get_field(call_response, "call_id") or str(uuid.uuid4())
     started_at = datetime.now().isoformat()
 
     active_call_repository.set(
         phone,
         ActiveCall(
             call_id=call_id,
-            status=_status_from_response(call_response) or "registered",
+            status=get_field(call_response, "call_status") or "registered",
             started_at=started_at,
             phone=phone,
             patient_name=patient.patient_name,
@@ -110,7 +89,7 @@ def start_call(patient_id: int) -> Dict[str, Any]:
 
     patient_repository.set_booking_status(patient_id, "in progress")
     try:
-        return _execute_outbound_call(patient)
+        return execute_outbound_call(patient)
     except Exception:
         patient_repository.set_booking_status(patient_id, "not booked")
         raise
@@ -120,7 +99,7 @@ def make_call(phone: str) -> Dict[str, Any]:
     patient = patient_repository.get_by_phone(phone)
     if not patient:
         raise HTTPException(status_code=404, detail="Patient not found for phone number")
-    return _execute_outbound_call(patient)
+    return execute_outbound_call(patient)
 
 
 def get_call_status(phone: str) -> Dict[str, Any]:
@@ -131,35 +110,25 @@ def get_call_status(phone: str) -> Dict[str, Any]:
     return call.to_dict()
 
 
-def _call_is_stale(call: ActiveCall) -> bool:
-    settings = get_settings()
-    try:
-        started_at = datetime.fromisoformat(call.started_at)
-    except (TypeError, ValueError):
-        return False
-    return (datetime.now() - started_at).total_seconds() >= settings.CALL_STALE_SECONDS
-
-
-def _call_is_inactive(call: ActiveCall) -> bool:
+def call_is_inactive(call: ActiveCall) -> bool:
     if call.status in TERMINAL_CALL_STATUSES:
         return True
 
     details = retell_client.get_call_details(call.call_id) if call.call_id else None
     if details:
-        details_status = (
-            details.get("call_status") if isinstance(details, dict) else getattr(details, "call_status", None)
-        )
+        details_status = get_field(details, "call_status")
         if details_status in ACTIVE_CALL_STATUSES:
             return False
         if details_status in DETAILS_TERMINAL_STATUSES:
             return True
 
-    return _call_is_stale(call)
+    settings = get_settings()
+    return is_stale(call.started_at, settings.CALL_STALE_SECONDS)
 
 
 def cleanup_active_calls() -> None:
     for call in active_call_repository.all_items():
-        if _call_is_inactive(call):
+        if call_is_inactive(call):
             if call.patient_id is not None:
                 patient = patient_repository.get_by_id(call.patient_id)
                 if patient and patient.booking_status == "in progress":

@@ -4,11 +4,9 @@ import uuid
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
-from backend.app.models.appointment import Appointment
-from backend.app.repositories.appointment_repository import appointment_repository
-from backend.app.repositories.call_log_repository import call_log_repository
-from backend.app.repositories.patient_repository import patient_repository
-from backend.app.core.logging import get_logger
+from backend.app.core import get_logger
+from backend.app.models import Appointment
+from backend.app.repositories import appointment_repository, call_log_repository, patient_repository
 
 logger = get_logger(__name__)
 

@@ -1,7 +1,7 @@
 """Business logic for liveness/readiness checks."""
 
-from backend.app.core.config import get_settings
-from backend.app.schemas.common import ReadinessResponse
+from backend.app.core import get_settings
+from backend.app.schemas import ReadinessResponse
 
 
 def check_readiness() -> ReadinessResponse:

@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from backend.app.core.logging import get_logger
+from backend.app.core import get_logger
 
 logger = get_logger(__name__)
 

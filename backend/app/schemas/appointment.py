@@ -2,7 +2,7 @@ from typing import Optional
 
 from pydantic import BaseModel
 
-from backend.app.core.constants import DEFAULT_PROVIDER_NAME, DEFAULT_SLOT_TIME, DEFAULT_SLOT_WEEKDAY
+from backend.app.core import DEFAULT_PROVIDER_NAME, DEFAULT_SLOT_TIME, DEFAULT_SLOT_WEEKDAY
 
 
 class AppointmentRequest(BaseModel):

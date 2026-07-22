@@ -2,11 +2,11 @@
 
 from typing import Any, Dict, List
 
-from backend.app.core.config import get_settings
-from backend.app.repositories.provider_repository import provider_repository
+from backend.app.core import get_settings
+from backend.app.repositories import provider_repository
 
 
-def _free_slots_for_provider(provider_name: str) -> Dict[str, Any]:
+def free_slots_for_provider(provider_name: str) -> Dict[str, Any]:
     settings = get_settings()
     target = provider_repository.get_by_name(provider_name)
 
@@ -39,10 +39,10 @@ def _free_slots_for_provider(provider_name: str) -> Dict[str, Any]:
 
 def get_availability(provider_name: str | None) -> Dict[str, Any]:
     if provider_name:
-        return _free_slots_for_provider(provider_name)
+        return free_slots_for_provider(provider_name)
 
     summaries = [
-        _free_slots_for_provider(str(p.get("provider_name", "")))
+        free_slots_for_provider(str(p.get("provider_name", "")))
         for p in provider_repository.list_all()
         if p.get("provider_name")
     ]

@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter, Request
 
-from backend.app.schemas.webhook import RetellWebhookPayload, WebhookAck
+from backend.app.schemas import RetellWebhookPayload, WebhookAck
 from backend.app.services import webhook_service
 
 router = APIRouter(prefix="/webhooks", tags=["webhooks"])

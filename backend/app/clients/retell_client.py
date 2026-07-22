@@ -8,8 +8,7 @@ from typing import Any, Dict, Optional
 
 from retell import Retell
 
-from backend.app.core.config import get_settings
-from backend.app.core.logging import get_logger
+from backend.app.core import get_logger, get_settings
 
 logger = get_logger(__name__)
 

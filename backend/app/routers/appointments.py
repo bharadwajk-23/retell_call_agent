@@ -4,12 +4,7 @@ from typing import Any, Dict, List
 
 from fastapi import APIRouter
 
-from backend.app.schemas.appointment import (
-    AppointmentOut,
-    AppointmentRequest,
-    BookAppointmentRequest,
-    BookAppointmentResponse,
-)
+from backend.app.schemas import AppointmentOut, AppointmentRequest, BookAppointmentRequest, BookAppointmentResponse
 from backend.app.services import appointment_service
 
 router = APIRouter(prefix="/appointments", tags=["appointments"])

@@ -2,8 +2,8 @@
 
 from typing import Any, Dict, List
 
-from backend.app.core.config import provider_details_path
-from backend.app.utils.json_files import load_json_file
+from backend.app.core import provider_details_path
+from backend.app.utils import load_json_file
 
 
 class ProviderRepository:

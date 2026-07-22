@@ -4,7 +4,7 @@ from typing import Any, Dict, Optional, Union
 
 from fastapi import APIRouter, Query
 
-from backend.app.schemas.provider import ProviderAvailability, ProvidersAvailabilityResponse
+from backend.app.schemas import ProviderAvailability, ProvidersAvailabilityResponse
 from backend.app.services import provider_service
 
 router = APIRouter(prefix="/providers", tags=["providers"])
