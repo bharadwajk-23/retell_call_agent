@@ -10,13 +10,13 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.middleware.trustedhost import TrustedHostMiddleware
 
-from app.config.settings import get_settings
-from app.middleware.error_handlers import register_exception_handlers
-from app.middleware.request_logging import RequestLoggingMiddleware
-from app.routers import appointments, calls, health, patients, providers, webhooks
-from app.utils.logging_config import configure_logging, get_logger
+from backend.app.core.config import get_settings
+from backend.app.core.constants import API_TITLE, API_VERSION
+from backend.app.core.logging import configure_logging, get_logger
+from backend.app.middleware.error_handlers import register_exception_handlers
+from backend.app.middleware.request_logging import RequestLoggingMiddleware
+from backend.app.routers import appointments, calls, health, patients, providers, webhooks
 
 configure_logging()
 logger = get_logger(__name__)
@@ -25,9 +25,9 @@ logger = get_logger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     settings = get_settings()
-    logger.info("Starting AI Physiotherapy Call Agent API (env=%s, mock_calls=%s)", settings.ENV, settings.RETELL_MOCK_CALLS)
-    if settings.is_production and not settings.RETELL_API_KEY:
-        logger.warning("RETELL_API_KEY is not set — outbound calls will fail in production mode")
+    logger.info("Starting AI Physiotherapy Call Agent API")
+    if not settings.RETELL_API_KEY:
+        logger.warning("RETELL_API_KEY is not set — outbound calls will fail")
     yield
     logger.info("Shutting down AI Physiotherapy Call Agent API")
 
@@ -36,26 +36,11 @@ def create_app() -> FastAPI:
     settings = get_settings()
 
     app = FastAPI(
-        title="AI Physiotherapy Call Agent API",
-        version="2.0.0",
+        title=API_TITLE,
+        version=API_VERSION,
         lifespan=lifespan,
-        docs_url="/docs",
-        openapi_url="/openapi.json",
-        swagger_ui_parameters={"url": "/janus/voice-agent/api/openapi.json"},
-        servers=[
-            {
-                "url": "https://ailabs.youngsoft.com/janus/voice-agent/api",
-                "description": "Production",
-            },
-            {"url": "http://localhost:8006", "description": "Local"},
-        ],
     )
 
-    # Trusted host middleware must be added FIRST (outermost) so it processes before other middleware
-    app.add_middleware(
-        TrustedHostMiddleware,
-        allowed_hosts=["*"],  # Will validate against X-Forwarded-Host if present
-    )
     app.add_middleware(
         CORSMiddleware,
         allow_origins=settings.cors_origins_list,
@@ -84,4 +69,4 @@ if __name__ == "__main__":
     import uvicorn
 
     settings = get_settings()
-    uvicorn.run("app.main:app", host=settings.HOST, port=settings.PORT, reload=not settings.is_production)
+    uvicorn.run("backend.app.main:app", host=settings.HOST, port=settings.PORT, reload=True)

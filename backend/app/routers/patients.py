@@ -1,20 +1,20 @@
-"""GET /api/patients, POST /api/patients/reset"""
+"""GET /patients, POST /patients/reset"""
 
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 from fastapi import APIRouter, Query
 
-from app.schemas.patient import PatientOut, ResetPatientsResponse
-from app.services import patient_service
+from backend.app.schemas.patient import PatientOut, ResetPatientsResponse
+from backend.app.services import patient_service
 
 router = APIRouter(prefix="/patients", tags=["patients"])
 
 
 @router.get("", response_model=List[PatientOut])
-async def get_patients():
+def get_patients() -> List[PatientOut]:
     return [PatientOut(**p.to_dict()) for p in patient_service.list_patients()]
 
 
 @router.post("/reset", response_model=ResetPatientsResponse)
-async def reset_patients(patient_id: Optional[int] = Query(default=None)):
+def reset_patients(patient_id: Optional[int] = Query(default=None)) -> Dict[str, Any]:
     return patient_service.reset_patients(patient_id)

@@ -20,7 +20,6 @@ class CallResponse(BaseModel):
     doctor_name: Optional[str] = None
     exercise_missed_days: Optional[int] = None
     phone: str
-    mock: bool
 
 
 class ActiveCallStatus(BaseModel):

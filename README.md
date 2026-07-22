@@ -21,7 +21,7 @@ exclusively through the REST API described below.
 ```
 ┌────────────────────┐   REST (fetch)   ┌───────────────────────┐        ┌────────────┐
 │  React SPA          │ ───────────────▶ │  FastAPI backend       │──────▶ │  Retell AI  │
-│  localhost:5173      │ ◀─────────────── │  localhost:8000        │        │  voice agent│
+│  localhost:8005      │ ◀─────────────── │  localhost:8006        │        │  voice agent│
 └────────────────────┘   JSON responses  └──────────┬────────────┘        └─────┬──────┘
                                                        ▲                          │ places call
                                     Custom Functions / │                          ▼
@@ -31,8 +31,8 @@ exclusively through the REST API described below.
 ```
 
 During a call, Retell calls back into the backend as "Custom Functions"
-(`/api/providers/availability`, `/api/appointments/book`) and sends call
-lifecycle events to `/api/webhooks/retell`. See
+(`/providers/availability`, `/appointments/book`) and sends call
+lifecycle events to `/webhooks/retell`. See
 [`docs/RETELL_SETUP.md`](docs/RETELL_SETUP.md) for the full dashboard
 configuration.
 
@@ -96,37 +96,43 @@ a single `.env` at the project root (copy from `.env.example`); the backend
 
 | Variable | Default | Purpose |
 |---|---|---|
-| `ENV` | `development` | `development` or `production` |
 | `HOST` / `PORT` | `0.0.0.0` / `8006` | Bind address for uvicorn |
 | `LOG_LEVEL` | `INFO` | Python logging level |
 | `CORS_ORIGINS` | `http://localhost:8005` | Comma-separated list of allowed frontend origins — no wildcard |
 | `RETELL_API_KEY` | *(none)* | Retell API key — required for real calls |
 | `RETELL_AGENT_ID` | *(none)* | Agent used for `override_agent_id` |
 | `RETELL_FROM_NUMBER` | *(none)* | Telnyx/Twilio number provisioned in Retell (E.164) |
-| `RETELL_MOCK_CALLS` | `false` | `true` skips the real Retell API call — for local/demo use without real telephony |
 | `PROVIDER_DETAILS_PATH` | `app/data/provider_details.json` | Override provider availability reference data path |
-| `VITE_API_BASE_URL` | `http://localhost:8006/api` | Backend URL baked into the frontend at build time (Vite only exposes `VITE_`-prefixed vars, and only at build time — rebuild if this changes) |
+| `VITE_API_BASE_URL` | `http://localhost:8006` | Backend URL baked into the frontend at build time (Vite only exposes `VITE_`-prefixed vars, and only at build time — rebuild if this changes). No `/api` suffix — backend routes are unprefixed. |
 | `FRONTEND_PORT` | `8005` | Port the built frontend is served on (`start_frontend.sh` / docker-compose) |
 | `BACKEND_PORT` | `8006` | docker-compose only: host-side port mapping for the backend container |
 
 ## Running locally (without Docker)
 
 ```bash
-cp .env.example .env   # fill in your Retell credentials, or set RETELL_MOCK_CALLS=true
+cp .env.example .env   # fill in your Retell credentials
 ./initialize.sh        # creates backend/venv + frontend/venv, installs backend & frontend deps
 ./start_backend.sh     # http://localhost:8006 (docs at /docs), served by uvicorn
-./start_frontend.sh    # serves the existing frontend/dist on http://localhost:8005 via uvicorn
 ```
 
-Run `start_backend.sh` and `start_frontend.sh` in separate terminals (or under
-a process manager / systemd). Both read their configuration from the single
-root `.env`.
+For the frontend, pick one:
 
-`start_frontend.sh` does **not** run `npm run build` — `vite.config.js` was
-removed, so there's currently no supported way to rebuild `frontend/dist`
-with the correct `/janus/voice-agent/` base path and API URL baked in. It
-just serves whatever is already in `dist/`. Restore a `vite.config.js` (base
-path + `envDir`) before the next UI code change that needs a rebuild.
+- **Day-to-day development (hot reload):**
+  ```bash
+  cd frontend && npm run dev   # http://localhost:8005, instant reload on save
+  ```
+- **Production-style (build once, serve the static bundle):**
+  ```bash
+  cd frontend && npm run build   # writes frontend/dist/
+  cd .. && ./start_frontend.sh   # serves frontend/dist on http://localhost:8005 via uvicorn
+  ```
+  `start_frontend.sh` does **not** run the build for you — it only serves
+  whatever is already in `dist/`, so run `npm run build` first (or whenever
+  frontend code changes and you want to check the built output).
+
+Run the backend and frontend commands in separate terminals (or under a
+process manager / systemd). Both read their configuration from the single
+root `.env`.
 
 ## Running with Docker Compose
 
@@ -140,32 +146,26 @@ docker compose up --build
 
 ## API reference
 
-All business endpoints are under `/api`. `/health` and `/ready` are
-unprefixed (infra checks only).
-
 | Method | Path | Purpose |
 |---|---|---|
 | GET | `/health` | Liveness probe |
 | GET | `/ready` | Readiness probe (checks Retell config) |
-| GET | `/api/patients` | List patients |
-| POST | `/api/patients/reset` | Reset demo data (`patient_id` query param optional) |
-| POST | `/api/calls/start` | Start outbound call by `patient_id` (dashboard action) |
-| POST | `/api/calls/make` | Start outbound call by `phone` |
-| GET | `/api/calls/status?phone=...` | Current status of the last call for a phone number |
-| GET | `/api/calls/transcripts` | All logged call/webhook events |
-| GET | `/api/providers/availability?provider_name=...` | Free slots for a provider (Retell custom function) |
-| POST | `/api/appointments` | Create an appointment (generic) |
-| POST | `/api/appointments/book` | Book an appointment (Retell custom function) |
-| GET | `/api/appointments` | List booked appointments |
-| POST | `/api/webhooks/retell` | Retell call-lifecycle/transcript webhook |
+| GET | `/patients` | List patients |
+| POST | `/patients/reset` | Reset demo data (`patient_id` query param optional) |
+| POST | `/calls/start` | Start outbound call by `patient_id` (dashboard action) |
+| POST | `/calls/make` | Start outbound call by `phone` |
+| GET | `/calls/status?phone=...` | Current status of the last call for a phone number |
+| GET | `/calls/transcripts` | All logged call/webhook events |
+| GET | `/providers/availability?provider_name=...` | Free slots for a provider (Retell custom function) |
+| POST | `/appointments` | Create an appointment (generic) |
+| POST | `/appointments/book` | Book an appointment (Retell custom function) |
+| GET | `/appointments` | List booked appointments |
+| POST | `/webhooks/retell` | Retell call-lifecycle/transcript webhook |
 
-Full interactive docs: `http://localhost:8000/docs` (Swagger) or `/redoc`.
+Full interactive docs: `http://localhost:8006/docs` (Swagger) or `/redoc`.
 
-> **If you're migrating from the pre-refactor single-service app:** the
-> Retell dashboard's Custom Function URLs and webhook URL point at the old
-> paths (`/providers/availability`, `/book-appointment`, `/retell-webhook`)
-> and must be updated to the `/api/...` paths above. See
-> [`docs/RETELL_SETUP.md`](docs/RETELL_SETUP.md).
+Configuring the Retell dashboard's Custom Function and webhook URLs against
+these paths is covered in [`docs/RETELL_SETUP.md`](docs/RETELL_SETUP.md).
 
 ## Data & persistence
 
@@ -178,32 +178,11 @@ one in only requires reimplementing the classes in `backend/app/repositories/`.
 ## Logging & error handling
 
 - Structured logging (Python `logging`, not `print()`) for every request,
-  call event, and booking event — see `backend/app/utils/logging_config.py`.
+  call event, and booking event — see `backend/app/core/logging.py`.
 - Centralized exception handlers return consistent `{"detail": ...}` JSON
   and never leak stack traces (`backend/app/middleware/error_handlers.py`).
 - The Retell webhook endpoint additionally guards itself so a malformed
   payload from Retell always gets a logged, explicit response.
-
-## Production notes
-
-- Set `ENV=production`, a real `RETELL_API_KEY`/`RETELL_AGENT_ID`/`RETELL_FROM_NUMBER`,
-  and `CORS_ORIGINS` to your real frontend domain (never `*`).
-- Both services run on `uvicorn`, each on its own port (backend 8006,
-  frontend 8005 by default). No nginx/reverse proxy is bundled here — this
-  deployment expects IT's own reverse proxy to route
-  `ailabs.youngsoft.com/janus/voice-agent/*` to the frontend and
-  `ailabs.youngsoft.com/janus/voice-agent/api/*` to the backend (see
-  `docs/DEPLOYMENT_REVERSE_PROXY.md`). Whether that proxy strips the
-  `/janus/voice-agent` prefix before forwarding wasn't confirmed at the time
-  `frontend/serve.py` was written, so it's built to handle the path with or
-  without the prefix — check `BASE_PREFIX` there if routing ever needs
-  adjusting.
-- `docker-compose.yml` includes health checks for both services; wire your
-  orchestrator's readiness checks to `GET /ready` on the backend.
-- Frontend `VITE_API_BASE_URL` is baked in at build time — but `vite.config.js`
-  has been removed, so rebuilding currently won't produce a correctly
-  configured `dist/`. Restore it before the next rebuild (see "Running
-  locally" above).
 
 ## What changed in this refactor
 
@@ -211,14 +190,10 @@ This app was previously a single FastAPI service that also built and
 served the React app's static files (routes lived at `/patients`,
 `/start-call`, `/providers/availability`, etc., with two competing
 `main.py`/`main_new.py` implementations). It has been split into two
-independently deployable services with a layered backend architecture,
-environment-driven configuration (no hardcoded secrets), structured
-logging, centralized error handling, and a `/api`-prefixed REST surface.
-Application behavior — the dashboard, Start Call, Reset, Retell calling,
-availability, booking, webhooks, transcripts, and 2-second polling — is
-unchanged. The only externally-visible change is the endpoint paths, which
-means the Retell dashboard's Custom Function and webhook URLs need a
-one-time update (see above).
+independently runnable services with a layered backend architecture and
+environment-driven configuration (no hardcoded secrets). Application
+behavior — the dashboard, Start Call, Reset, Retell calling, availability,
+booking, webhooks, transcripts, and 2-second polling — is unchanged.
 
 ## License
 

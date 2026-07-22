@@ -5,23 +5,22 @@ from typing import Any, Dict, Optional
 
 from fastapi import HTTPException
 
-from app.config.settings import get_settings
-from app.models.call import ActiveCall
-from app.models.patient import Patient
-from app.repositories.active_call_repository import active_call_repository
-from app.repositories.call_log_repository import call_log_repository
-from app.repositories.patient_repository import patient_repository
-from app.services.retell_client import retell_client
-from app.utils.logging_config import get_logger
-from app.utils.phone import normalize_phone
+from backend.app.clients.retell_client import retell_client
+from backend.app.core.config import get_settings
+from backend.app.core.constants import ACTIVE_CALL_STATUSES, DETAILS_TERMINAL_STATUSES, TERMINAL_CALL_STATUSES
+from backend.app.core.logging import get_logger
+from backend.app.models.call import ActiveCall
+from backend.app.models.patient import Patient
+from backend.app.repositories.active_call_repository import active_call_repository
+from backend.app.repositories.call_log_repository import call_log_repository
+from backend.app.repositories.patient_repository import patient_repository
+from backend.app.utils.phone import normalize_phone
 
 logger = get_logger(__name__)
 
 
 def _require_from_number() -> str:
     settings = get_settings()
-    if settings.RETELL_MOCK_CALLS:
-        return settings.RETELL_FROM_NUMBER or "+10000000000"
     if not settings.RETELL_FROM_NUMBER:
         raise HTTPException(
             status_code=500,
@@ -87,11 +86,10 @@ def _execute_outbound_call(patient: Patient) -> Dict[str, Any]:
             "phone": phone,
             "patient_id": patient.id,
             "patient_name": patient.patient_name,
-            "mock": settings.RETELL_MOCK_CALLS,
         },
     )
 
-    logger.info("Call started: patient_id=%s call_id=%s mock=%s", patient.id, call_id, settings.RETELL_MOCK_CALLS)
+    logger.info("Call started: patient_id=%s call_id=%s", patient.id, call_id)
 
     return {
         "status": "call generated",
@@ -102,7 +100,6 @@ def _execute_outbound_call(patient: Patient) -> Dict[str, Any]:
         "doctor_name": patient.provider_name,
         "exercise_missed_days": patient.exercise_missed_days,
         "phone": phone,
-        "mock": settings.RETELL_MOCK_CALLS,
     }
 
 
@@ -144,7 +141,7 @@ def _call_is_stale(call: ActiveCall) -> bool:
 
 
 def _call_is_inactive(call: ActiveCall) -> bool:
-    if call.status in {"completed", "ended", "not_connected", "error"}:
+    if call.status in TERMINAL_CALL_STATUSES:
         return True
 
     details = retell_client.get_call_details(call.call_id) if call.call_id else None
@@ -152,11 +149,9 @@ def _call_is_inactive(call: ActiveCall) -> bool:
         details_status = (
             details.get("call_status") if isinstance(details, dict) else getattr(details, "call_status", None)
         )
-        if details_status in {"registered", "ongoing"}:
+        if details_status in ACTIVE_CALL_STATUSES:
             return False
-        if details_status == "mock":
-            return _call_is_stale(call)
-        if details_status in {"ended", "not_connected", "error"}:
+        if details_status in DETAILS_TERMINAL_STATUSES:
             return True
 
     return _call_is_stale(call)
@@ -170,3 +165,7 @@ def cleanup_active_calls() -> None:
                 if patient and patient.booking_status == "in progress":
                     patient_repository.set_booking_status(call.patient_id, "not booked")
             active_call_repository.remove(call.phone)
+
+
+def list_transcripts() -> Dict[str, Any]:
+    return {"transcripts": [entry.to_dict() for entry in call_log_repository.list_all()]}

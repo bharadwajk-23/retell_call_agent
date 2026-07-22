@@ -10,10 +10,6 @@ export default defineConfig({
   // Read env vars (VITE_*) from the single project-root .env instead of a
   // frontend-local one — see ../.env / ../.env.example.
   envDir: fileURLToPath(new URL('..', import.meta.url)),
-  // Public deployment path — must match IT's reverse proxy path prefix.
-  // Without this, built asset URLs are root-absolute (e.g. /assets/x.js)
-  // instead of /janus/voice-agent/assets/x.js, which 404s in production.
-  base: '/janus/voice-agent/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

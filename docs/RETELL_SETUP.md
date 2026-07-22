@@ -85,20 +85,16 @@ Behavior Guidelines:
 ## 2. Expose the backend publicly
 
 Retell needs a public URL to call this backend's custom functions and
-webhook. For local development, tunnel it (e.g. `ngrok http 8000`) and use
-that URL as `{BASE_URL}` below. In production, use your real domain.
+webhook. Tunnel your local backend (e.g. `ngrok http 8006`) and use that
+tunnel URL as `{BASE_URL}` below — the backend itself only ever runs
+locally (`http://localhost:8006`) in this setup.
 
 ## 3. Custom Functions (Response Engine)
 
 | Function name       | Method | URL                                                    | Notes |
 |----------------------|--------|---------------------------------------------------------|-------|
-| `getavailableslots`  | GET    | `{BASE_URL}/api/providers/availability?provider_name={{provider_name}}` | Returns free weekday/time slots for the patient's provider |
-| `bookslot`           | POST   | `{BASE_URL}/api/appointments/book`                      | Body: `patient_name`, `provider_name`, `phone`, `slot_weekday`, `slot_time`, `notes` |
-
-> **Migrating from the pre-refactor backend?** These paths changed from
-> `/providers/availability` and `/book-appointment` to the `/api/...` paths
-> above. Update the two Custom Function URLs in the Retell dashboard —
-> nothing else about their behavior changed.
+| `getavailableslots`  | GET    | `{BASE_URL}/providers/availability?provider_name={{provider_name}}` | Returns free weekday/time slots for the patient's provider |
+| `bookslot`           | POST   | `{BASE_URL}/appointments/book`                      | Body: `patient_name`, `provider_name`, `phone`, `slot_weekday`, `slot_time`, `notes` |
 
 **Example `bookslot` body:**
 
@@ -117,10 +113,8 @@ that URL as `{BASE_URL}` below. In production, use your real domain.
 Settings → Webhooks → set the URL to:
 
 ```
-{BASE_URL}/api/webhooks/retell
+{BASE_URL}/webhooks/retell
 ```
-
-> Changed from `/retell-webhook` in the pre-refactor backend.
 
 The backend logs every event/transcript it receives and, on `call_ended`,
 reconciles the patient's booking status (reverts to "not booked" if no

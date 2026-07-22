@@ -3,8 +3,7 @@
 from threading import Lock
 from typing import Dict, List, Optional
 
-from app.models.call import ActiveCall
-
+from backend.app.models.call import ActiveCall
 
 class ActiveCallRepository:
     def __init__(self) -> None:

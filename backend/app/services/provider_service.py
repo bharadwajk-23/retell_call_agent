@@ -2,8 +2,8 @@
 
 from typing import Any, Dict, List
 
-from app.config.settings import get_settings
-from app.repositories.provider_repository import provider_repository
+from backend.app.core.config import get_settings
+from backend.app.repositories.provider_repository import provider_repository
 
 
 def _free_slots_for_provider(provider_name: str) -> Dict[str, Any]:

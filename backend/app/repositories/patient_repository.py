@@ -8,14 +8,14 @@ a real database later only requires reimplementing this class.
 from threading import Lock
 from typing import List, Optional
 
-from app.models.patient import Patient
-from app.utils.phone import normalize_phone
+from backend.app.models.patient import Patient
+from backend.app.utils.phone import normalize_phone
 
 _SEED_PATIENTS: List[Patient] = [
     Patient(
         id=1,
         patient_name="Dave Vipul",
-        phone="+918147775333",
+        phone="+918147775334",
         dob="1988-03-15",
         provider_name="Dr Johnson",
         exercise_missed_days=5,

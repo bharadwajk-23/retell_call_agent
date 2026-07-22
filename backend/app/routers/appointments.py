@@ -1,22 +1,22 @@
-"""POST/GET /api/appointments, POST /api/appointments/book"""
+"""POST/GET /appointments, POST /appointments/book"""
 
-from typing import List
+from typing import Any, Dict, List
 
 from fastapi import APIRouter
 
-from app.schemas.appointment import (
+from backend.app.schemas.appointment import (
     AppointmentOut,
     AppointmentRequest,
     BookAppointmentRequest,
     BookAppointmentResponse,
 )
-from app.services import appointment_service
+from backend.app.services import appointment_service
 
 router = APIRouter(prefix="/appointments", tags=["appointments"])
 
 
 @router.post("", response_model=BookAppointmentResponse)
-async def create_appointment(appointment: AppointmentRequest):
+def create_appointment(appointment: AppointmentRequest) -> Dict[str, Any]:
     return appointment_service.book_appointment(
         patient_name=appointment.patient_name,
         provider_name=appointment.provider_name,
@@ -28,7 +28,7 @@ async def create_appointment(appointment: AppointmentRequest):
 
 
 @router.post("/book", response_model=BookAppointmentResponse)
-async def book_appointment(body: BookAppointmentRequest):
+def book_appointment(body: BookAppointmentRequest) -> Dict[str, Any]:
     """Retell custom function: books a slot the patient agreed to during the call."""
     return appointment_service.book_appointment(
         patient_name=body.patient_name,
@@ -41,5 +41,5 @@ async def book_appointment(body: BookAppointmentRequest):
 
 
 @router.get("", response_model=List[AppointmentOut])
-async def list_appointments():
+def list_appointments() -> List[Dict[str, Any]]:
     return appointment_service.list_appointments()

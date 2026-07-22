@@ -2,9 +2,11 @@ from typing import Optional
 
 from pydantic import BaseModel
 
+from backend.app.core.constants import DEFAULT_PROVIDER_NAME, DEFAULT_SLOT_TIME, DEFAULT_SLOT_WEEKDAY
+
 
 class AppointmentRequest(BaseModel):
-    """Generic appointment-creation body (used by /api/appointments)."""
+    """Generic appointment-creation body (used by /appointments)."""
 
     patient_name: str
     provider_name: str
@@ -22,10 +24,10 @@ class BookAppointmentRequest(BaseModel):
     """
 
     patient_name: str = ""
-    provider_name: str = "Bharadwaj"
+    provider_name: str = DEFAULT_PROVIDER_NAME
     phone: Optional[str] = None
-    slot_weekday: str = "Monday"
-    slot_time: str = "09:00 am"
+    slot_weekday: str = DEFAULT_SLOT_WEEKDAY
+    slot_time: str = DEFAULT_SLOT_TIME
     notes: Optional[str] = None
 
 

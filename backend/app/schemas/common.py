@@ -11,7 +11,6 @@ class ErrorResponse(BaseModel):
 
 class HealthResponse(BaseModel):
     status: str
-    retell_mock_calls: bool
     from_number_configured: bool
 
 

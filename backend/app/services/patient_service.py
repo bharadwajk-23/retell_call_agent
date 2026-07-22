@@ -1,12 +1,12 @@
 """Business logic for patient listing and demo reset."""
 
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
-from app.models.patient import Patient
-from app.repositories.active_call_repository import active_call_repository
-from app.repositories.appointment_repository import appointment_repository
-from app.repositories.patient_repository import patient_repository
-from app.services.call_service import cleanup_active_calls
+from backend.app.models.patient import Patient
+from backend.app.repositories.active_call_repository import active_call_repository
+from backend.app.repositories.appointment_repository import appointment_repository
+from backend.app.repositories.patient_repository import patient_repository
+from backend.app.services.call_service import cleanup_active_calls
 
 
 def list_patients() -> List[Patient]:
@@ -14,7 +14,7 @@ def list_patients() -> List[Patient]:
     return patient_repository.list_all()
 
 
-def reset_patients(patient_id: Optional[int] = None) -> dict:
+def reset_patients(patient_id: Optional[int] = None) -> Dict[str, Any]:
     patient_repository.reset(patient_id)
     if patient_id is None:
         active_call_repository.clear()
