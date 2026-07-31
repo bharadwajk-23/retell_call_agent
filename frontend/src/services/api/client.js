@@ -1,7 +1,7 @@
 // Base HTTP client. Every API call in the app goes through this — no
 // component ever calls fetch() directly.
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/janus/voice-agent/api'
 
 export async function apiRequest(path, options = {}) {
   const response = await fetch(`${API_BASE_URL}${path}`, {
