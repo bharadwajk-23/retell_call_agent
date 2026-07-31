@@ -1,45 +1,23 @@
 """In-memory patient store.
 
-This mirrors the previous application's behaviour exactly: patient data is
-seeded at process start and lives only in memory (no database). Swapping in
-a real database later only requires reimplementing this class.
+Patient data is seeded at process start from JSON on disk (see
+ProviderRepository for the same pattern) and lives only in memory from then
+on (no database). Swapping in a real database later only requires
+reimplementing this class.
 """
 
 from threading import Lock
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
-from backend.app.models import Patient
-from backend.app.utils import normalize_phone
+from backend.app.core import patient_details_path
+from backend.app.schemas.models import Patient
+from backend.app.utils import load_json_file, normalize_phone
 
-_SEED_PATIENTS: List[Patient] = [
-    # Patient(
-    #     id=1,
-    #     patient_name="Dave Vipul",
-    #     phone="+918147775334",
-    #     dob="1988-03-15",
-    #     provider_name="Dr Johnson",
-    #     exercise_missed_days=5,
-    #     booking_status="not booked",
-    # ),
-    Patient(
-        id=2,
-        patient_name="Emiley Davis",
-        phone="+918688178501",
-        dob="1985-06-20",
-        provider_name="Dr Johnson",
-        exercise_missed_days=7,
-        booking_status="not booked",
-    ),
-    # Patient(
-    #     id=3,
-    #     patient_name="Robert Brown",
-    #     phone="+919099156582",
-    #     dob="1990-02-05",
-    #     provider_name="Dr Johnson",
-    #     exercise_missed_days=10,
-    #     booking_status="not booked",
-    # ),
-]
+
+def _load_seed_patients() -> List[Patient]:
+    data = load_json_file(patient_details_path())
+    rows: List[Dict[str, Any]] = data if isinstance(data, list) else []
+    return [Patient(**row) for row in rows]
 
 
 class PatientRepository:
@@ -47,9 +25,7 @@ class PatientRepository:
 
     def __init__(self) -> None:
         self._lock = Lock()
-        self._patients: List[Patient] = [
-            Patient(**p.__dict__) for p in _SEED_PATIENTS
-        ]
+        self._patients: List[Patient] = _load_seed_patients()
 
     def list_all(self) -> List[Patient]:
         with self._lock:

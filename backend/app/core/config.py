@@ -1,13 +1,14 @@
 """
-Centralized application settings and filesystem paths, sourced directly from
-environment variables via `os.getenv`.
+Centralized application settings, constants, and filesystem paths, sourced
+directly from environment variables via `os.getenv`.
 
 Nothing in this project should call `os.environ`/`os.getenv` directly
 outside this module — every other layer depends on `get_settings()`.
 Settings are split into one class per concern (server, CORS, Retell,
 business rules) and composed into a single `Settings` object via multiple
 inheritance so callers keep using flat attribute access (e.g.
-`settings.RETELL_API_KEY`).
+`settings.RETELL_API_KEY`). Literal constants that were previously hardcoded
+inline across the app live here too.
 """
 
 import os
@@ -78,6 +79,7 @@ class BusinessRuleSettings:
     """Reference-data overrides and call-lifecycle tuning (previously magic numbers)."""
 
     PROVIDER_DETAILS_PATH: str = os.getenv("PROVIDER_DETAILS_PATH", "")  # resolved to app/data/input/provider_details.json if blank
+    PATIENT_DETAILS_PATH: str = os.getenv("PATIENT_DETAILS_PATH", "")  # resolved to app/data/input/patients.json if blank
     CALL_STALE_SECONDS: int = int(os.getenv("CALL_STALE_SECONDS", "20"))
     SLOT_HOUR_LABELS: List[str] = _getenv_list(
         "SLOT_HOUR_LABELS",
@@ -93,9 +95,47 @@ class Settings(ServerSettings, CORSSettings, RetellSettings, BusinessRuleSetting
 def get_settings() -> Settings:
     return Settings()
 
+def _resolve_path(override: str, filename: str) -> Path:
+    return Path(override) if override else INPUT_DIR / filename
+
 
 def provider_details_path() -> Path:
-    settings = get_settings()
-    if settings.PROVIDER_DETAILS_PATH:
-        return Path(settings.PROVIDER_DETAILS_PATH)
-    return INPUT_DIR / "provider_details.json"
+    return _resolve_path(get_settings().PROVIDER_DETAILS_PATH, "provider_details.json")
+
+
+def patient_details_path() -> Path:
+    return _resolve_path(get_settings().PATIENT_DETAILS_PATH, "patients.json")
+
+# def provider_details_path() -> Path:
+#     settings = get_settings()
+#     if settings.PROVIDER_DETAILS_PATH:
+#         return Path(settings.PROVIDER_DETAILS_PATH)
+#     return INPUT_DIR / "provider_details.json"
+
+
+# def patient_details_path() -> Path:
+#     settings = get_settings()
+#     if settings.PATIENT_DETAILS_PATH:
+#         return Path(settings.PATIENT_DETAILS_PATH)
+#     return INPUT_DIR / "patients.json"
+
+
+# --- API metadata (app/main.py) ---
+API_TITLE = "AI Physiotherapy Call Agent API"
+API_VERSION = "2.0.0"
+
+# --- Call lifecycle (app/services/call_service.py) ---
+# Status of our own ActiveCall record that means the call is over.
+TERMINAL_CALL_STATUSES = {"completed", "ended", "not_connected", "error"}
+# Status reported by Retell's call-details API. Deliberately excludes
+# "completed" here (unlike TERMINAL_CALL_STATUSES above) — a "completed"
+# details_status falls through to the staleness check in the original logic.
+DETAILS_TERMINAL_STATUSES = {"ended", "not_connected", "error"}
+ACTIVE_CALL_STATUSES = {"registered", "ongoing"}
+
+# --- Retell custom-function defaults (app/schemas/appointment.py) ---
+# Defaults intentionally mirror the original implementation so the voice
+# agent's existing custom-function configuration keeps working unchanged.
+DEFAULT_PROVIDER_NAME = "Bharadwaj"
+DEFAULT_SLOT_WEEKDAY = "Monday"
+DEFAULT_SLOT_TIME = "09:00 am"

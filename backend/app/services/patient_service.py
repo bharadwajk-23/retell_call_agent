@@ -2,7 +2,7 @@
 
 from typing import Any, Dict, List, Optional
 
-from backend.app.models import Patient
+from backend.app.schemas.models import Patient
 from backend.app.repositories import active_call_repository, appointment_repository, patient_repository
 from backend.app.services.call_service import cleanup_active_calls
 

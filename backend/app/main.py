@@ -12,7 +12,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from backend.app.core import API_TITLE, API_VERSION, configure_logging, get_logger, get_settings
-from backend.app.middleware import RequestLoggingMiddleware, register_exception_handlers
+from backend.app.utils import RequestLoggingMiddleware, register_exception_handlers
 from backend.app.routers import router as api_router
 
 configure_logging()

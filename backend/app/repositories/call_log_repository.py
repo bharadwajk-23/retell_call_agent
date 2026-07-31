@@ -3,7 +3,7 @@
 from threading import Lock
 from typing import Any, Dict, List
 
-from backend.app.models import CallLogEntry
+from backend.app.schemas.models import CallLogEntry
 
 
 class CallLogRepository:

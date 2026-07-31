@@ -5,7 +5,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 
 from backend.app.core import get_logger
-from backend.app.models import Appointment
+from backend.app.schemas.models import Appointment
 from backend.app.repositories import appointment_repository, call_log_repository, patient_repository
 
 logger = get_logger(__name__)

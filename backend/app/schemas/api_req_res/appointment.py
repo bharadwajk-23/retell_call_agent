@@ -5,8 +5,8 @@ from pydantic import BaseModel
 from backend.app.core import DEFAULT_PROVIDER_NAME, DEFAULT_SLOT_TIME, DEFAULT_SLOT_WEEKDAY
 
 
-class AppointmentRequest(BaseModel):
-    """Generic appointment-creation body (used by /appointments)."""
+class CreateAppointmentRequest(BaseModel):
+    """Generic appointment-creation body (used by POST /appointments)."""
 
     patient_name: str
     provider_name: str
@@ -16,8 +16,8 @@ class AppointmentRequest(BaseModel):
     notes: Optional[str] = None
 
 
-class BookAppointmentRequest(BaseModel):
-    """Body shape for the Retell custom function that books a slot.
+class RetellBookAppointmentRequest(BaseModel):
+    """Body shape for the Retell custom function that books a slot (POST /appointments/book).
 
     Defaults intentionally mirror the original implementation so the voice
     agent's existing custom-function configuration keeps working unchanged.
@@ -31,7 +31,9 @@ class BookAppointmentRequest(BaseModel):
     notes: Optional[str] = None
 
 
-class AppointmentOut(BaseModel):
+class AppointmentResponse(BaseModel):
+    """Representation of a booked appointment (used by GET /appointments and nested in AppointmentBookingResponse)."""
+
     appointment_id: str
     patient_name: str
     provider_name: str
@@ -42,8 +44,10 @@ class AppointmentOut(BaseModel):
     booked_at: str
 
 
-class BookAppointmentResponse(BaseModel):
+class AppointmentBookingResponse(BaseModel):
+    """Response returned by both POST /appointments and POST /appointments/book."""
+
     status: str
     appointment_id: str
     message: str
-    appointment: AppointmentOut
+    appointment: AppointmentResponse

@@ -6,9 +6,9 @@ from typing import Any, Dict
 
 from fastapi import HTTPException
 
-from backend.app.clients import retell_client
 from backend.app.core import ACTIVE_CALL_STATUSES, DETAILS_TERMINAL_STATUSES, TERMINAL_CALL_STATUSES, get_logger, get_settings
-from backend.app.models import ActiveCall, Patient
+from backend.app.services.client_services import retell_client
+from backend.app.schemas.models import ActiveCall, Patient
 from backend.app.repositories import active_call_repository, call_log_repository, patient_repository
 from backend.app.utils import get_field, is_stale, normalize_phone
 

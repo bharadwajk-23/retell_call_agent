@@ -3,7 +3,7 @@
 from fastapi import APIRouter
 
 from backend.app.core import get_settings
-from backend.app.schemas import HealthResponse, ReadinessResponse
+from backend.app.schemas.api_req_res import HealthResponse, ReadinessResponse
 from backend.app.services import health_service
 
 router = APIRouter(tags=["health"])

@@ -4,7 +4,7 @@ from typing import Any, Dict, List, Optional
 
 from fastapi import APIRouter, Query
 
-from backend.app.schemas import PatientOut, ResetPatientsResponse
+from backend.app.schemas.api_req_res import PatientOut, ResetPatientsResponse
 from backend.app.services import patient_service
 
 router = APIRouter(prefix="/patients", tags=["patients"])

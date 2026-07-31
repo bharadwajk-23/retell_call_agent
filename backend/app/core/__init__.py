@@ -1,30 +1,28 @@
 """Central configuration layer: settings, constants, logging, security."""
 
 from backend.app.core.config import (
+    ACTIVE_CALL_STATUSES,
+    API_TITLE,
+    API_VERSION,
     BACKEND_DIR,
     DATA_DIR,
+    DEFAULT_PROVIDER_NAME,
+    DEFAULT_SLOT_TIME,
+    DEFAULT_SLOT_WEEKDAY,
+    DETAILS_TERMINAL_STATUSES,
     INPUT_DIR,
     PROJECT_ROOT,
+    TERMINAL_CALL_STATUSES,
     BusinessRuleSettings,
     CORSSettings,
     RetellSettings,
     ServerSettings,
     Settings,
     get_settings,
+    patient_details_path,
     provider_details_path,
 )
-from backend.app.core.constants import (
-    ACTIVE_CALL_STATUSES,
-    API_TITLE,
-    API_VERSION,
-    DEFAULT_PROVIDER_NAME,
-    DEFAULT_SLOT_TIME,
-    DEFAULT_SLOT_WEEKDAY,
-    DETAILS_TERMINAL_STATUSES,
-    TERMINAL_CALL_STATUSES,
-)
 from backend.app.core.logging import configure_logging, get_logger
-from backend.app.core.security import verify_retell_signature
 
 __all__ = [
     "Settings",
@@ -38,6 +36,7 @@ __all__ = [
     "DATA_DIR",
     "INPUT_DIR",
     "provider_details_path",
+    "patient_details_path",
     "API_TITLE",
     "API_VERSION",
     "TERMINAL_CALL_STATUSES",
@@ -48,5 +47,4 @@ __all__ = [
     "DEFAULT_SLOT_TIME",
     "configure_logging",
     "get_logger",
-    "verify_retell_signature",
 ]

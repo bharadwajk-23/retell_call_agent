@@ -5,13 +5,14 @@ from typing import Any, Dict
 
 from fastapi import HTTPException
 
-from backend.app.core import get_logger, get_settings, verify_retell_signature
+from backend.app.core import get_logger, get_settings
 from backend.app.repositories import (
     active_call_repository,
     appointment_repository,
     call_log_repository,
     patient_repository,
 )
+from backend.app.services import verify_retell_signature
 
 logger = get_logger(__name__)
 

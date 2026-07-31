@@ -3,7 +3,7 @@
 from threading import Lock
 from typing import List
 
-from backend.app.models import Appointment
+from backend.app.schemas.models import Appointment
 
 
 class AppointmentRepository:
