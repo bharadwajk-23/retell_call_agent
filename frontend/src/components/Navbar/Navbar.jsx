@@ -1,8 +1,10 @@
 import { useEffect, useRef } from 'react'
+import { useAuth } from '../../context/AuthContext'
 import styles from './Navbar.module.css'
 
 export function Navbar({ searchTerm, onSearchChange, onReset, resetting }) {
   const searchRef = useRef(null)
+  const { username, logout } = useAuth()
 
   useEffect(() => {
     function handleShortcut(event) {
@@ -58,6 +60,17 @@ export function Navbar({ searchTerm, onSearchChange, onReset, resetting }) {
         >
           {resetting ? 'Resetting…' : 'Reset'}
         </button>
+        <div className={styles.userSection}>
+          <span className={styles.username}>{username}</span>
+          <button
+            type="button"
+            className={styles.logoutButton}
+            onClick={logout}
+            title="Logout"
+          >
+            Logout
+          </button>
+        </div>
       </div>
     </header>
   )
