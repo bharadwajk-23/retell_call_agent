@@ -13,7 +13,8 @@ COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 COPY serve.py ./
 COPY --from=build /app/dist ./dist
-EXPOSE 80
+EXPOSE 8005
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
-    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:80/')" || exit 1
-CMD ["uvicorn", "serve:app", "--host", "0.0.0.0", "--port", "80"]
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8005/')" || exit 1
+CMD ["uvicorn", "serve:app", "--host", "0.0.0.0", "--port", "8005"]
+
